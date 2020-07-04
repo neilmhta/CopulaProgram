@@ -4041,6 +4041,12 @@ section {
     background-size: cover;
     background-repeat: no-repeat;
 }
+.mission-img {
+    background-attachment: fixed !important;
+    background: url("hero3.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
 .hero {
     /* Parent of hero-body */
@@ -4066,6 +4072,17 @@ section {
     flex-shrink: 0;
     padding: 3rem 1.5rem;
     align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+}
+.mission-body {
+    -ms-flex-positive: 1;
+    flex-grow: 1; /* Tells the hero-body to take up the entire space */
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    padding: 3rem 1.5rem;
+    align-items: left;
     display: -ms-flexbox;
     display: flex;
     width: 100%;
