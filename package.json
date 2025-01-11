@@ -1,5 +1,11 @@
 {
   "devDependencies": {
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "gh-pages": "^5.0.0"
+  },
+  "scripts": {
+    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist -b gh-pages"
   }
 }
