@@ -250,76 +250,30 @@
       </div>
     </section>
 
-    <!-- Past Mentee Experiences: -->
+    <!-- Past Mentee Experiences -->
     <section
-      id="about"
-      class="pt-20 pb-20 h-screen relative bg-gradient-to-b from-gray-800 to-gray-900 text-white"
+      id="mentees"
+      class="pt-20 pb-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white overflow-hidden"
     >
-      <div class="absolute inset-0 grid grid-cols-3 gap-2 photo-grid">
-        <img
-          src="./static/gallery/img-1.png"
-          alt="Gallery Image 1"
-          class="w-full h-full object-cover"
-        />
-        <img
-          src="./static/gallery/img-2.png"
-          alt="Gallery Image 2"
-          class="w-full h-full object-cover"
-        />
-        <img
-          src="./static/gallery/img-3.png"
-          alt="Gallery Image 3"
-          class="w-full h-full object-cover"
-        />
-        <img
-          src="./static/gallery/img-4.png"
-          alt="Gallery Image 4"
-          class="w-full h-full object-cover"
-        />
-        <img
-          src="./static/gallery/img-5.png"
-          alt="Gallery Image 5"
-          class="w-full h-full object-cover"
-        />
-        <img
-          src="./static/gallery/img-6.png"
-          alt="Gallery Image 6"
-          class="w-full h-full object-cover"
-        />
-        <img
-          src="./static/gallery/img-7.png"
-          alt="Gallery Image 7"
-          class="w-full h-full object-cover"
-        />
-        <img
-          src="./static/gallery/img-8.png"
-          alt="Gallery Image 8"
-          class="w-full h-full object-cover"
-        />
-        <img
-          src="./static/gallery/img-9.png"
-          alt="Gallery Image 9"
-          class="w-full h-full object-cover"
-        />
-      </div>
-      <div
-        class="relative h-screen content-center max-w-4xl mx-auto text-center px-6 fade-in"
-      >
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">
+      <div class="max-w-6xl mx-auto px-6 text-center fade-in mb-10">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
           Past Mentee Experiences
         </h2>
-        <p class="text-lg md:text-xl leading-relaxed">
-          The Copula Program is a six-week remote summer mentorship that
-          connects ambitious high school students from underrepresented
-          backgrounds with academic mentors. Since 2020, we’ve helped nearly 100
-          students explore new fields and create meaningful research projects.
+        <p class="text-lg md:text-xl leading-relaxed max-w-4xl mx-auto">
+          Hear from our alumni about their experiences in The Copula Program
+          and how it shaped their academic journey.
         </p>
-        <p class="mt-6 text-lg md:text-xl leading-relaxed">
-          Our mission is simple: empower students to go beyond the high school
-          curriculum and discover their academic potential. With guidance from
-          experienced mentors, participants gain hands-on research experience
-          and the skills to pursue academic careers.
-        </p>
+      </div>
+
+      <!-- Horizontal scrolling container -->
+      <div class="relative">
+        <div
+          id="mentee-carousel"
+          class="flex gap-6 overflow-x-auto px-6 pb-6 scroll-smooth"
+          style="scrollbar-width: thin; scrollbar-color: #3b82f6 #1f2937;"
+        >
+          <!-- Mentee cards will be dynamically injected here -->
+        </div>
       </div>
     </section>
 
@@ -600,6 +554,59 @@
         <p class="text-sm text-gray-400">${mentor.field}</p>
       `;
         mentorGrid.appendChild(mentorCard);
+      });
+    </script>
+
+    <script>
+      // JSON list of mentees
+      const mentees = [
+        {
+          name: "Sarah Johnson",
+          year: "Class of 2022",
+          project: "Machine Learning in Climate Science",
+          quote: "The Copula Program gave me the confidence to pursue research in college. My mentor helped me explore topics I never thought I could understand.",
+        },
+        {
+          name: "Michael Chen",
+          year: "Class of 2021",
+          project: "Exploring Ancient Greek Philosophy",
+          quote: "Working one-on-one with a graduate student completely changed how I approach learning. I learned how to ask better questions and think critically.",
+        },
+        {
+          name: "Aisha Patel",
+          year: "Class of 2023",
+          project: "Public Health Data Analysis",
+          quote: "I came in with no coding experience, and my mentor patiently guided me through every step. Now I'm majoring in data science!",
+        },
+        {
+          name: "David Rodriguez",
+          year: "Class of 2020",
+          project: "Conservation Bioacoustics Research",
+          quote: "The Copula Program opened doors I didn't even know existed. My project on bird call analysis sparked my passion for environmental science.",
+        },
+        {
+          name: "Emma Williams",
+          year: "Class of 2022",
+          project: "Social Media and Democracy",
+          quote: "Having a mentor who genuinely cared about my ideas made all the difference. The skills I learned helped me in every class afterward.",
+        },
+      ];
+
+      // Select the carousel container
+      const menteeCarousel = document.getElementById("mentee-carousel");
+
+      // Dynamically inject mentee cards
+      mentees.forEach((mentee) => {
+        const menteeCard = document.createElement("div");
+        menteeCard.className =
+          "bg-gray-800 p-8 rounded-lg shadow-lg flex-shrink-0 w-96 border border-gray-700 hover:border-blue-500 transition-all duration-300";
+        menteeCard.innerHTML = `
+          <h4 class="font-bold text-2xl text-blue-400 mb-2">${mentee.name}</h4>
+          <p class="text-sm text-gray-400 mb-1">${mentee.year}</p>
+          <p class="text-md italic text-blue-300 mb-4">${mentee.project}</p>
+          <p class="text-gray-300 leading-relaxed">"${mentee.quote}"</p>
+        `;
+        menteeCarousel.appendChild(menteeCard);
       });
     </script>
   </body>
