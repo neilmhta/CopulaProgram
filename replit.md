@@ -13,6 +13,7 @@ This is the official website for The Copula Program, a six-week remote academic 
 - Configured http-server to serve the static site on port 5000
 - Added deployment configuration for Replit autoscale deployment
 - Updated .gitignore to exclude dist folder
+- Added founders carousel to About section with cards for three program founders
 
 ## Project Architecture
 

@@ -247,6 +247,20 @@
           experienced mentors, participants gain hands-on research experience
           and the skills to pursue academic careers.
         </p>
+
+        <!-- Founders Carousel -->
+        <div class="mt-12">
+          <h3 class="text-3xl md:text-4xl font-bold mb-8 text-center">Meet Our Founders</h3>
+          <div class="relative">
+            <div
+              id="founders-carousel"
+              class="flex gap-6 overflow-x-auto px-6 pb-6 scroll-smooth justify-center"
+              style="scrollbar-width: thin; scrollbar-color: #3b82f6 #1f2937"
+            >
+              <!-- Founder cards will be dynamically injected here -->
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -605,6 +619,48 @@
           <p class="text-gray-300 leading-relaxed">"${mentee.quote}"</p>
         `;
         menteeCarousel.appendChild(menteeCard);
+      });
+    </script>
+
+    <script>
+      // JSON list of founders
+      const founders = [
+        {
+          name: "Founder Name 1",
+          title: "Co-Founder & Director",
+          bio: "Brief description of the founder's background and role in the program."
+        },
+        {
+          name: "Founder Name 2",
+          title: "Co-Founder & Coordinator",
+          bio: "Brief description of the founder's background and role in the program."
+        },
+        {
+          name: "Founder Name 3",
+          title: "Co-Founder & Advisor",
+          bio: "Brief description of the founder's background and role in the program."
+        }
+      ];
+
+      // Select the carousel container
+      const foundersCarousel = document.getElementById("founders-carousel");
+
+      // Dynamically inject founder cards
+      founders.forEach((founder, index) => {
+        const founderCard = document.createElement("div");
+        founderCard.className =
+          "bg-gray-800 bg-opacity-90 p-6 rounded-lg shadow-lg flex-shrink-0 w-80 border border-gray-700 hover:border-blue-500 transition-all duration-300";
+        founderCard.innerHTML = `
+          <div class="w-full h-64 bg-gray-700 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+            <svg class="w-24 h-24 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <h4 class="font-bold text-2xl text-blue-400 mb-2">${founder.name}</h4>
+          <p class="text-md italic text-blue-300 mb-3">${founder.title}</p>
+          <p class="text-gray-300 leading-relaxed text-sm">${founder.bio}</p>
+        `;
+        foundersCarousel.appendChild(founderCard);
       });
     </script>
   </body>
