@@ -30,6 +30,52 @@
     padding: 0 1.5rem;
   }
   
+  /* About section - preserve grid layout but adjust sizing */
+  #about {
+    min-height: 100vh !important;
+    height: auto !important;
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
+  
+  #about .photo-grid {
+    inset: 1.5rem !important;
+    gap: 0.25rem !important;
+  }
+  
+  #about .relative.h-screen {
+    height: auto !important;
+    min-height: 60vh !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  #about h2 {
+    font-size: 1.75rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  #about p {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* Meet Our Founders section - preserve layout */
+  #founders {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  #founders h2 {
+    font-size: 2rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  #founders .max-w-5xl {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+  
   /* Founder cards - make them responsive */
   .founder-card {
     width: 90vw !important;
@@ -48,15 +94,20 @@
     gap: 1rem !important;
   }
   
-  /* Make sections more mobile-friendly */
-  section {
+  /* Make most sections more mobile-friendly, but not About */
+  section:not(#about) {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
   }
   
-  /* Adjust grid layouts for mobile */
-  .grid {
+  /* Adjust grid layouts for mobile, but preserve About section grid */
+  .grid:not(.photo-grid) {
     grid-template-columns: 1fr !important;
+  }
+  
+  /* Keep About section grid as 3 columns */
+  .photo-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
   }
   
   /* Mentee and mentor cards */
@@ -86,11 +137,6 @@
   .founder-card {
     filter: none !important;
   }
-  
-  /* About section images - adjust for mobile */
-  .photo-grid {
-    height: 300px !important;
-  }
 }
 
 /* Small phone screens */
@@ -109,6 +155,30 @@
   /* Hero adjustments */
   header h1 {
     font-size: 1.75rem !important;
+  }
+  
+  /* About section - tighter spacing */
+  #about .photo-grid {
+    inset: 1rem !important;
+    gap: 0.125rem !important;
+  }
+  
+  #about h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  #about p {
+    font-size: 0.875rem !important;
+  }
+  
+  /* Founders section */
+  #founders h2 {
+    font-size: 1.75rem !important;
+  }
+  
+  #founders .max-w-5xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
   
   /* Founder cards - even more compact */
