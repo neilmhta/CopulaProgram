@@ -23,10 +23,11 @@ This is the official website for The Copula Program, a six-week remote academic 
   - Enhanced Intersection Observer with better threshold and margin settings
   - Animations trigger when elements are 10% visible with 100px bottom margin
 - Enhanced About section with dynamic animations:
-  - Rotating background carousel that cycles through 9 gallery images every 3 seconds
+  - Animated gradient background (same as hero section, perfectly synchronized)
+  - Background gradient shifts through dark gray, navy, and blue shades in 15-second cycle
+  - Rotating image carousel overlays the gradient (9 gallery images, 3-second intervals)
   - Smooth fade transitions between background images (1.5s duration)
-  - Animated gradient border around images (same gradient as hero section, in perfect sync)
-  - Border animation creates cohesive visual connection between hero and about sections
+  - Creates cohesive visual connection between hero and about sections
   - Subtle hovering text animation with floating effect (4s cycle, moves up 5px)
   - Synchronized float animations on title and paragraphs for cohesive movement
 - Enhanced Hero section with dynamic animations:
