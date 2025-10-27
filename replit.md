@@ -41,6 +41,7 @@ This is the official website for The Copula Program, a six-week remote academic 
   - Enhanced shadow on hover (increased depth and darkness) for visual feedback
   - 0.3s smooth transition for elegant interaction
   - Automatically returns to original position when mouse leaves
+  - Mentee cards excluded from lift effect - they keep their original border color change animation (gray to blue)
 
 ## Project Architecture
 

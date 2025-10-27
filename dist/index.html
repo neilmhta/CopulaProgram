@@ -150,6 +150,17 @@
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
       }
 
+      /* Exclude mentee cards from lift effect - they have their own border animation */
+      #mentee-carousel > div {
+        transition: border-color 0.3s ease !important;
+        transform: none !important;
+      }
+
+      #mentee-carousel > div:hover {
+        transform: none !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+      }
+
       /* Fade-in animation */
       .fade-in {
         opacity: 0;
