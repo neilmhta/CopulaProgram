@@ -131,21 +131,45 @@
       }
 
       /* Global text shadow for all text, buttons, and frames */
-      h1, h2, h3, h4, h5, h6, p, li, a, button, span {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      li,
+      a,
+      button,
+      span {
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
-      
+
       /* Shadow for cards and frames */
-      div[class*="card"], div[class*="bg-"], div[class*="border"] {
+      div[class*="card"],
+      div[class*="bg-"],
+      div[class*="border"] {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
 
       /* Hover effects for buttons and frames */
-      button, a[class*="bg-"], div[class*="card"], div[class*="border-"], .mentor-card, .founder-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      button,
+      a[class*="bg-"],
+      div[class*="card"],
+      div[class*="border-"],
+      .mentor-card,
+      .founder-card {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
       }
 
-      button:hover, a[class*="bg-"]:hover, div[class*="card"]:hover, div[class*="border-"]:hover, .mentor-card:hover, .founder-card:hover {
+      button:hover,
+      a[class*="bg-"]:hover,
+      div[class*="card"]:hover,
+      div[class*="border-"]:hover,
+      .mentor-card:hover,
+      .founder-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
       }
