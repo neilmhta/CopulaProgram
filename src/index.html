@@ -318,7 +318,9 @@
       id="about"
       class="pt-20 pb-20 h-screen relative animated-gradient text-white"
     >
-      <div class="absolute inset-10 grid grid-cols-3 gap-2 photo-grid rounded-lg overflow-hidden">
+      <div
+        class="absolute inset-10 grid grid-cols-3 gap-2 photo-grid rounded-lg overflow-hidden"
+      >
         <img
           src="./static/gallery/img-1.png"
           alt="Gallery Image 1"
@@ -796,6 +798,13 @@
           quote:
             "The Copula Program opened doors I didn't even know existed, especially doordash.",
         },
+        {
+          name: "John Doe",
+          year: "2025 Cohort",
+          project: "Computer Science",
+          quote:
+            "The Copula Program opened doors I didn't even know existed, especially doordash.",
+        },
       ];
 
       // Select the carousel container
@@ -872,8 +881,10 @@
 
       // Inject founder cards with clones for infinite loop
       // Add clone of last card at beginning
-      foundersCarousel.appendChild(createFounderCard(founders[founders.length - 1], true));
-      
+      foundersCarousel.appendChild(
+        createFounderCard(founders[founders.length - 1], true),
+      );
+
       // Add all real cards
       founders.forEach((founder, index) => {
         const card = createFounderCard(founder);
@@ -892,7 +903,7 @@
         });
         foundersIndicators.appendChild(dot);
       });
-      
+
       // Add clone of first card at end
       foundersCarousel.appendChild(createFounderCard(founders[0], true));
 
@@ -903,14 +914,14 @@
         const containerWidth = foundersCarousel.parentElement.offsetWidth;
         const centerOffset = (containerWidth - cardWidth) / 2;
         const offset = centerOffset - currentFounderIndex * (cardWidth + gap);
-        
+
         // Enable or disable transition
         if (animate) {
           foundersCarousel.style.transition = "transform 0.5s ease-in-out";
         } else {
           foundersCarousel.style.transition = "none";
         }
-        
+
         foundersCarousel.style.transform = `translateX(${offset}px)`;
 
         // Update blur effects on cards
@@ -946,7 +957,7 @@
       // Handle infinite loop reset
       foundersCarousel.addEventListener("transitionend", () => {
         const totalCards = founders.length + 2; // Real cards + 2 clones
-        
+
         // If we're on the first clone (index 0), jump to the real last card
         if (currentFounderIndex === 0) {
           currentFounderIndex = founders.length;
@@ -957,7 +968,7 @@
           currentFounderIndex = 1;
           updateFounderCarousel(false); // No animation
         }
-        
+
         isTransitioning = false;
       });
 
