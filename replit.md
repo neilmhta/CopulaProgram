@@ -26,6 +26,8 @@ This is the official website for The Copula Program, a six-week remote academic 
   - Animated gradient background (same as hero section, perfectly synchronized)
   - Background gradient shifts through dark gray, navy, and blue shades in 15-second cycle
   - Rotating image carousel overlays the gradient (9 gallery images, 3-second intervals)
+  - Image grid has spacing on all edges (~40px) so animated gradient is visible as a frame
+  - Rounded corners on image grid for polished appearance
   - Smooth fade transitions between background images (1.5s duration)
   - Creates cohesive visual connection between hero and about sections
   - Subtle hovering text animation with floating effect (4s cycle, moves up 5px)
