@@ -8,7 +8,7 @@ This is the official website for The Copula Program, a six-week remote academic 
 **Current State**: Fully functional static website, deployed and ready for production.
 
 ## Recent Changes (October 27, 2025)
-- Added "Resources for Past Alumni" link to navigation bar
+- Added "Alumni Resources" link to navigation bar
 - Created dedicated alumni.html page for past program participants
 - Alumni page includes: stay connected section, mentorship opportunities, success story sharing, resources, and contact information
 - Updated build process to copy all HTML files (*.html) to dist folder
