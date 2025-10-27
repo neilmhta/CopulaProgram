@@ -8,10 +8,12 @@ This is the official website for The Copula Program, a six-week remote academic 
 **Current State**: Fully functional static website, deployed and ready for production.
 
 ## Recent Changes (October 27, 2025)
+- Redesigned About section with side-by-side layout: text on left, fading image grid on right
+- Made About section responsive: stacks vertically on mobile, side-by-side on desktop
+- Updated footer with increased padding (py-12) for better visibility
 - Added fade-in animation to Past Mentee Experiences carousel (matching mentor boxes)
 - Added scroll-triggered fade-in animation to About section text
 - Implemented staggered animation delays (0.1s, 0.3s, 0.5s) for heading and paragraphs
-- About section text now animates smoothly when scrolling down the page
 - Added "Alumni Resources" link to navigation bar
 - Created dedicated alumni.html page for past program participants
 - Alumni page includes: stay connected section, mentorship opportunities, success story sharing, resources, and contact information
