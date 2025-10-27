@@ -103,11 +103,24 @@
               entry.target.classList.add("visible");
             }
           });
+        }, {
+          threshold: 0.1,
+          rootMargin: "0px 0px -100px 0px"
         });
 
-        document
-          .querySelectorAll(".fade-in")
-          .forEach((el) => observer.observe(el));
+        // Function to observe all fade-in elements
+        const observeElements = () => {
+          document
+            .querySelectorAll(".fade-in")
+            .forEach((el) => observer.observe(el));
+        };
+
+        // Initial observation
+        observeElements();
+
+        // Re-observe after a short delay to catch dynamically added elements
+        setTimeout(observeElements, 100);
+        setTimeout(observeElements, 500);
       });
     </script>
 
@@ -255,13 +268,13 @@
       id="founders"
       class="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white"
     >
-      <div class="max-w-6xl mx-auto px-6 text-center mb-10">
+      <div class="max-w-6xl mx-auto px-6 text-center mb-10 fade-in">
         <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
           Meet Our Founders
         </h2>
       </div>
 
-      <div class="relative max-w-5xl mx-auto px-12">
+      <div class="relative max-w-5xl mx-auto px-12 fade-in">
         <!-- Carousel Container with Peek -->
         <div class="overflow-hidden relative px-4">
           <div
@@ -418,14 +431,14 @@
       </div>
       <div
         id="mentor-grid"
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-6"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-6 fade-in"
       >
         <!-- Mentor cards will be dynamically injected here -->
       </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-gray-800 text-center py-6">
+    <footer id="contact" class="bg-gray-800 text-center py-6 fade-in">
       <p class="text-gray-400 text-sm">
         © 2025 The Copula Program. All rights reserved.
       </p>
@@ -616,9 +629,10 @@
       const mentorGrid = document.getElementById("mentor-grid");
 
       // Dynamically inject mentor cards
-      mentors.forEach((mentor) => {
+      mentors.forEach((mentor, index) => {
         const mentorCard = document.createElement("div");
-        mentorCard.className = "bg-gray-800 p-6 rounded-lg shadow-lg";
+        mentorCard.className = "bg-gray-800 p-6 rounded-lg shadow-lg fade-in";
+        mentorCard.style.transitionDelay = `${index * 0.05}s`;
         mentorCard.innerHTML = `
         <h4 class="font-bold text-xl text-blue-400">${mentor.name}</h4>
         <p class="text-md italic text-gray-300">${mentor.organization}</p>
@@ -665,10 +679,11 @@
       const menteeCarousel = document.getElementById("mentee-carousel");
 
       // Dynamically inject mentee cards
-      mentees.forEach((mentee) => {
+      mentees.forEach((mentee, index) => {
         const menteeCard = document.createElement("div");
         menteeCard.className =
-          "bg-gray-800 p-8 rounded-lg shadow-lg flex-shrink-0 w-96 border border-gray-700 hover:border-blue-500 transition-all duration-300";
+          "bg-gray-800 p-8 rounded-lg shadow-lg flex-shrink-0 w-96 border border-gray-700 hover:border-blue-500 transition-all duration-300 fade-in";
+        menteeCard.style.transitionDelay = `${index * 0.1}s`;
         menteeCard.innerHTML = `
           <h4 class="font-bold text-2xl text-blue-400 mb-2">${mentee.name}</h4>
           <p class="text-sm text-gray-400 mb-1">${mentee.year}</p>

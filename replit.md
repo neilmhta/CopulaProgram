@@ -16,6 +16,12 @@ This is the official website for The Copula Program, a six-week remote academic 
 - Added founders carousel in dedicated section with peek view layout
 - Carousel features: previous/next buttons, indicator dots, auto-advance, square image placeholders
 - Separated founders section from About section to prevent morphing with mentee experiences section
+- Extended smooth scroll animations across entire website:
+  - Added fade-in animations to all sections (founders, mentor grid, footer)
+  - Implemented staggered animations for mentor cards (50ms delay between each)
+  - Implemented staggered animations for mentee cards (100ms delay between each)
+  - Enhanced Intersection Observer with better threshold and margin settings
+  - Animations trigger when elements are 10% visible with 100px bottom margin
 
 ## Project Architecture
 
