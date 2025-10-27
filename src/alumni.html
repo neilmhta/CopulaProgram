@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPNHDR2ERS"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EPNHDR2ERS");
+    </script>
+
+    <title>Alumni Resources - The Copula Program</title>
+
+    <meta charset="UTF-8" />
+    <meta property="og:title" content="Alumni Resources - The Copula Program" />
+    <meta
+      property="og:description"
+      content="Resources and information for past Copula Program participants."
+    />
+    <meta
+      name="description"
+      content="Resources and information for past Copula Program participants."
+    />
+    <meta property="og:image" content="./static/og-image.png" />
+    <meta property="og:url" content="https://copulaprogram.org/alumni.html" />
+    <meta property="og:type" content="website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://copulaprogram.org/alumni.html" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="The Copula Program" />
+    <meta name="language" content="en" />
+    <link href="./output.css" rel="stylesheet" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="./static/favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link rel="icon" type="image/svg+xml" href="./static/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./static/favicon/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./static/favicon/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="TCP" />
+    <link rel="manifest" href="./static/favicon/site.webmanifest" />
+
+    <style>
+      /* Smooth scrolling for anchor links */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Animated gradient background */
+      @keyframes gradient-shift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .animated-gradient {
+        background: linear-gradient(-45deg, #1f2937, #1e3a8a, #3b82f6, #1e40af);
+        background-size: 400% 400%;
+        animation: gradient-shift 15s ease infinite;
+      }
+
+      .animated-gradient-gray {
+        background: linear-gradient(-45deg, #111827, #1f2937, #374151, #1f2937);
+        background-size: 400% 400%;
+        animation: gradient-shift 15s ease infinite;
+      }
+
+      /* Global text shadow for all text, buttons, and frames */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      li,
+      a,
+      button,
+      span {
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Shadow for cards and frames */
+      div[class*="card"],
+      div[class*="bg-"],
+      div[class*="border"] {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Hover effects for buttons and frames */
+      button,
+      a[class*="bg-"] {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      button:hover,
+      a[class*="bg-"]:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Fade-in animation */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900 text-white font-sans">
+    <script>
+      // Intersection Observer to trigger fade-in animation
+      document.addEventListener("DOMContentLoaded", () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: "0px 0px -100px 0px",
+          },
+        );
+
+        document
+          .querySelectorAll(".fade-in")
+          .forEach((el) => observer.observe(el));
+      });
+    </script>
+
+    <!-- Hero Section -->
+    <header
+      class="min-h-screen flex flex-col justify-center items-center animated-gradient relative"
+    >
+      <!-- Navbar -->
+      <nav
+        class="fixed top-0 left-0 w-full bg-gray-800 bg-opacity-90 text-white py-4 shadow-lg z-50"
+      >
+        <div class="container mx-auto flex justify-between items-center px-6">
+          <a href="index.html" class="text-2xl font-bold">The Copula Program</a>
+          <ul class="flex space-x-6 text-lg">
+            <li><a href="index.html#about" class="hover:text-blue-400">About</a></li>
+            <li><a href="index.html#info" class="hover:text-blue-400">Info</a></li>
+            <li><a href="index.html#apply" class="hover:text-blue-400">Apply</a></li>
+            <li><a href="alumni.html" class="hover:text-blue-400 text-blue-400">Resources for Past Alumni</a></li>
+            <li>
+              <a
+                href="mailto:info@copulaprogram.com"
+                class="hover:text-blue-400"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Hero Content -->
+      <div class="mt-20 max-w-4xl mx-auto text-center px-6 fade-in">
+        <img
+          src="./static/logowhite.svg"
+          alt="The Copula Program Logo"
+          class="w-32 h-32 md:w-48 md:h-48 mb-6 mx-auto"
+        />
+        <h1
+          class="text-4xl md:text-6xl font-extrabold text-center mb-6"
+          style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)"
+        >
+          Resources for Past Alumni
+        </h1>
+        <p class="text-lg md:text-xl text-center">
+          Welcome back! Here you'll find resources, opportunities, and ways to stay connected with The Copula Program community.
+        </p>
+      </div>
+    </header>
+
+    <!-- Stay Connected Section -->
+    <section
+      id="stay-connected"
+      class="py-20 animated-gradient-gray text-white"
+    >
+      <div class="max-w-4xl mx-auto px-6 fade-in">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-10 text-center">
+          Stay Connected
+        </h2>
+        <div class="space-y-6">
+          <div class="bg-gray-800 bg-opacity-90 p-6 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-blue-400">Alumni Network</h3>
+            <p class="text-lg leading-relaxed mb-4">
+              Join our alumni community to connect with fellow past participants, share experiences, and collaborate on future projects.
+            </p>
+            <a
+              href="mailto:info@copulaprogram.org?subject=Alumni%20Network%20Information"
+              class="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600"
+            >
+              Contact Us to Join
+            </a>
+          </div>
+
+          <div class="bg-gray-800 bg-opacity-90 p-6 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-blue-400">Mentorship Opportunities</h3>
+            <p class="text-lg leading-relaxed mb-4">
+              Interested in becoming a mentor for future cohorts? Share your experience and help the next generation of students.
+            </p>
+            <a
+              href="mailto:info@copulaprogram.org?subject=Mentorship%20Opportunity%20Interest"
+              class="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600"
+            >
+              Become a Mentor
+            </a>
+          </div>
+
+          <div class="bg-gray-800 bg-opacity-90 p-6 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-blue-400">Share Your Success</h3>
+            <p class="text-lg leading-relaxed mb-4">
+              We'd love to hear about your academic journey and accomplishments since completing the program. Your story can inspire future participants.
+            </p>
+            <a
+              href="mailto:info@copulaprogram.org?subject=Alumni%20Success%20Story"
+              class="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600"
+            >
+              Share Your Story
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section
+      id="resources"
+      class="py-20 animated-gradient-gray text-white"
+    >
+      <div class="max-w-4xl mx-auto px-6 fade-in">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-10 text-center">
+          Resources
+        </h2>
+        <div class="space-y-6">
+          <div class="bg-gray-800 bg-opacity-90 p-6 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-blue-400">Research & Academic Support</h3>
+            <p class="text-lg leading-relaxed">
+              Continue your academic journey with access to research resources, academic writing guides, and opportunities to publish your work.
+            </p>
+          </div>
+
+          <div class="bg-gray-800 bg-opacity-90 p-6 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-blue-400">College & Career Guidance</h3>
+            <p class="text-lg leading-relaxed">
+              Get support with college applications, career planning, and navigating your next steps in education and professional development.
+            </p>
+          </div>
+
+          <div class="bg-gray-800 bg-opacity-90 p-6 rounded-lg">
+            <h3 class="text-2xl font-bold mb-4 text-blue-400">Networking Events</h3>
+            <p class="text-lg leading-relaxed">
+              Participate in virtual meetups, workshops, and networking events designed specifically for Copula Program alumni.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section
+      id="contact-alumni"
+      class="py-20 animated-gradient text-white"
+    >
+      <div class="max-w-4xl mx-auto px-6 text-center fade-in">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
+          Questions?
+        </h2>
+        <p class="text-lg md:text-xl leading-relaxed mb-8">
+          Have questions about alumni resources or want to get more involved? We'd love to hear from you.
+        </p>
+        <a
+          href="mailto:info@copulaprogram.org"
+          class="inline-block bg-blue-500 text-white px-8 py-4 rounded-lg shadow-lg hover:bg-blue-600 text-xl"
+        >
+          Contact Alumni Relations
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-center py-6">
+      <p class="text-gray-400 text-sm">
+        © 2025 The Copula Program. All rights reserved.
+      </p>
+      <p class="text-gray-400 text-sm">
+        <a href="index.html" class="text-blue-400 hover:underline">Back to Home</a>
+      </p>
+      <p class="text-gray-400 text-sm">
+        Get in touch:
+        <a
+          href="mailto:info@copulaprogram.org"
+          class="text-blue-400 hover:underline"
+          >info@copulaprogram.org</a
+        >
+      </p>
+      <p class="text-gray-400 text-sm">
+        Stay updated:
+        <a
+          href="https://www.instagram.com/copulaprogram/"
+          class="text-blue-400 hover:underline"
+          >Instagram</a
+        >,
+        <a
+          href="https://www.linkedin.com/company/65662788/"
+          class="text-blue-400 hover:underline"
+          >Linkedin.</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>

@@ -6,7 +6,7 @@
   },
   "scripts": {
     "build:css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
-    "copy:html": "copyfiles -u 1 src/index.html dist",
+    "copy:html": "copyfiles -u 1 \"src/*.html\" dist",
     "copy:static": "copyfiles -u 1 \"src/static/**/*\" dist",
     "copy:cname": "copyfiles -u 1 src/CNAME dist",
     "build": "npm run build:css && npm run copy:html && npm run copy:static && npm run copy:cname",
