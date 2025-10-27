@@ -42,9 +42,15 @@ This is the official website for The Copula Program, a six-week remote academic 
   - Implemented staggered animations for mentee cards (100ms delay between each)
   - Enhanced Intersection Observer with better threshold and margin settings
   - Animations trigger when elements are 10% visible with 100px bottom margin
+- Animated gradient backgrounds across ALL sections:
+  - Hero & About: Blue-themed gradient (gray-900, blue-800, blue-500, blue-700) with 15s diagonal shift
+  - Founders, Mentees, Info: Dark gray gradient (gray-900, gray-800, gray-700) with 15s animation
+  - Apply: Blue-gray gradient (blue-800, gray-800, blue-700, gray-900) with 15s animation
+  - Mentors: Dark gray animated gradient overlay (80% opacity) over campus background image
+  - Footer: Gray gradient (gray-800, gray-700) with 15s animation
+  - All gradients use -45deg diagonal motion with 400% background-size for smooth, seamless transitions
 - Enhanced About section with dynamic animations:
-  - Animated gradient background (same as hero section, perfectly synchronized)
-  - Background gradient shifts through dark gray, navy, and blue shades in 15-second cycle
+  - Animated gradient background perfectly synchronized with hero section
   - Rotating image carousel overlays the gradient (9 gallery images, 3-second intervals)
   - Image grid has spacing on all edges (~40px) so animated gradient is visible as a frame
   - Rounded corners on image grid for polished appearance

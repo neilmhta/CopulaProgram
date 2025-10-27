@@ -130,6 +130,27 @@
         animation: gradient-shift 15s ease infinite;
       }
 
+      /* Dark gray animated gradient for sections */
+      .animated-gradient-gray {
+        background: linear-gradient(-45deg, #111827, #1f2937, #374151, #1f2937);
+        background-size: 400% 400%;
+        animation: gradient-shift 15s ease infinite;
+      }
+
+      /* Blue-gray animated gradient for apply section */
+      .animated-gradient-blue-gray {
+        background: linear-gradient(-45deg, #1e3a8a, #1f2937, #1e40af, #111827);
+        background-size: 400% 400%;
+        animation: gradient-shift 15s ease infinite;
+      }
+
+      /* Footer gray animated gradient */
+      .animated-gradient-footer {
+        background: linear-gradient(-45deg, #1f2937, #374151, #1f2937, #111827);
+        background-size: 400% 400%;
+        animation: gradient-shift 15s ease infinite;
+      }
+
       /* Global text shadow for all text, buttons, and frames */
       h1,
       h2,
@@ -391,7 +412,7 @@
     <!-- Founders Carousel Section -->
     <section
       id="founders"
-      class="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white"
+      class="py-20 animated-gradient-gray text-white"
     >
       <div class="max-w-6xl mx-auto px-6 text-center mb-10 fade-in">
         <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
@@ -462,7 +483,7 @@
     <!-- Past Mentee Experiences -->
     <section
       id="mentees"
-      class="pt-20 pb-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white overflow-hidden"
+      class="pt-20 pb-20 animated-gradient-gray text-white overflow-hidden"
     >
       <div class="max-w-6xl mx-auto px-6 text-center fade-in mb-10">
         <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
@@ -489,7 +510,7 @@
     <!-- Info Section -->
     <section
       id="info"
-      class="pt-20 py-20 bg-gradient-to-b from-gray-800 to-gray-900 text-white"
+      class="pt-20 py-20 animated-gradient-gray text-white"
     >
       <div class="max-w-6xl mx-auto px-6 text-center fade-in">
         <h2 class="text-4xl md:text-5xl font-extrabold mb-10">
@@ -514,7 +535,7 @@
     <!-- Apply Section -->
     <section
       id="apply"
-      class="pt-20 h-screen flex flex-col justify-center items-center bg-gradient-to-t from-gray-900 to-blue-900 text-white px-6 fade-in"
+      class="pt-20 h-screen flex flex-col justify-center items-center animated-gradient-blue-gray text-white px-6 fade-in"
     >
       <div class="max-w-4xl text-center">
         <h2 class="text-4xl md:text-5xl font-bold mb-6">
@@ -547,23 +568,29 @@
     <!-- Mentor Grid Section -->
     <section
       id="mentors"
-      class="pt-20 pb-20 text-white bg-[url('./static/campus.jpg')] bg-cover bg-center"
+      class="pt-20 pb-20 text-white bg-[url('./static/campus.jpg')] bg-cover bg-center relative"
     >
-      <div class="max-w-6xl mx-auto px-6 text-center fade-in">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-10">
-          Our Past Mentors
-        </h2>
-      </div>
-      <div
-        id="mentor-grid"
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-6 fade-in"
-      >
-        <!-- Mentor cards will be dynamically injected here -->
+      <!-- Animated gradient overlay -->
+      <div class="absolute inset-0 animated-gradient-gray opacity-80"></div>
+      
+      <!-- Content -->
+      <div class="relative z-10">
+        <div class="max-w-6xl mx-auto px-6 text-center fade-in">
+          <h2 class="text-4xl md:text-5xl font-extrabold mb-10">
+            Our Past Mentors
+          </h2>
+        </div>
+        <div
+          id="mentor-grid"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-6 fade-in"
+        >
+          <!-- Mentor cards will be dynamically injected here -->
+        </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-gray-800 text-center py-6 fade-in">
+    <footer id="contact" class="animated-gradient-footer text-center py-6 fade-in">
       <p class="text-gray-400 text-sm">
         © 2025 The Copula Program. All rights reserved.
       </p>
