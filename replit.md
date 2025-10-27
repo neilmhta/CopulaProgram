@@ -31,6 +31,8 @@ This is the official website for The Copula Program, a six-week remote academic 
   - Animated gradient background that shifts between dark gray, navy, and blue shades
   - Gradient animation completes full cycle in 15 seconds with smooth transitions
   - Copula logo floating animation (3s cycle, moves up 8px) for visual appeal
+  - Title text "The Copula Program" floats in sync with the logo
+  - Light text shadow on title (subtle 8px blur with 30% opacity) for depth and readability
 
 ## Project Architecture
 
