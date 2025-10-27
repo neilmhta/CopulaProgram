@@ -802,8 +802,19 @@
           name: "John Doe",
           year: "2025 Cohort",
           project: "Computer Science",
-          quote:
-            "The Copula Program opened doors I didn't even know existed, especially doordash.",
+          quote: "The Copula Program was so fun.",
+        },
+        {
+          name: "John Doe",
+          year: "2025 Cohort",
+          project: "Computer Science",
+          quote: "The Copula Program was so fun.",
+        },
+        {
+          name: "John Doe",
+          year: "2025 Cohort",
+          project: "Computer Science",
+          quote: "The Copula Program was so fun.",
         },
       ];
 
@@ -909,8 +920,20 @@
 
       // Function to update carousel position and blur effects
       function updateFounderCarousel(animate = true) {
-        const cardWidth = 420;
-        const gap = 24;
+        // Responsive card width based on screen size
+        const isMobile = window.innerWidth <= 768;
+        const isSmallMobile = window.innerWidth <= 480;
+        
+        let cardWidth;
+        if (isSmallMobile) {
+          cardWidth = Math.min(320, window.innerWidth * 0.95);
+        } else if (isMobile) {
+          cardWidth = Math.min(350, window.innerWidth * 0.9);
+        } else {
+          cardWidth = 420;
+        }
+        
+        const gap = isMobile ? 16 : 24;
         const containerWidth = foundersCarousel.parentElement.offsetWidth;
         const centerOffset = (containerWidth - cardWidth) / 2;
         const offset = centerOffset - currentFounderIndex * (cardWidth + gap);
@@ -924,19 +947,19 @@
 
         foundersCarousel.style.transform = `translateX(${offset}px)`;
 
-        // Update blur effects on cards
+        // Update blur effects on cards (disable on mobile for performance)
         const allCards = foundersCarousel.querySelectorAll(".founder-card");
         allCards.forEach((card, index) => {
           if (index === currentFounderIndex) {
             // Active card: sharp and full opacity
             card.style.filter = "blur(0px)";
             card.style.opacity = "1";
-            card.style.transform = "scale(1)";
+            card.style.transform = isMobile ? "scale(1)" : "scale(1)";
           } else {
-            // Peripheral cards: blurred and semi-transparent
-            card.style.filter = "blur(4px)";
-            card.style.opacity = "0.5";
-            card.style.transform = "scale(0.95)";
+            // Peripheral cards: blurred and semi-transparent (no blur on mobile)
+            card.style.filter = isMobile ? "blur(0px)" : "blur(4px)";
+            card.style.opacity = isMobile ? "0.6" : "0.5";
+            card.style.transform = isMobile ? "scale(0.9)" : "scale(0.95)";
           }
         });
 
