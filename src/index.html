@@ -96,6 +96,39 @@
         animation: float 4s ease-in-out infinite;
       }
 
+      /* Logo hover animation */
+      @keyframes logo-float {
+        0%, 100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      .logo-hover {
+        animation: logo-float 3s ease-in-out infinite;
+      }
+
+      /* Animated gradient background */
+      @keyframes gradient-shift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .animated-gradient {
+        background: linear-gradient(-45deg, #1f2937, #1e3a8a, #3b82f6, #1e40af);
+        background-size: 400% 400%;
+        animation: gradient-shift 15s ease infinite;
+      }
+
       /* Fade-in animation */
       .fade-in {
         opacity: 0;
@@ -147,7 +180,7 @@
 
     <!-- Hero Section -->
     <header
-      class="h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-800 to-blue-900 relative"
+      class="h-screen flex flex-col justify-center items-center animated-gradient relative"
     >
       <!-- Navbar -->
       <nav
@@ -175,7 +208,7 @@
         <img
           src="./static/logowhite.svg"
           alt="The Copula Program Logo"
-          class="w-32 h-32 md:w-48 md:h-48 mb-6"
+          class="w-32 h-32 md:w-48 md:h-48 mb-6 logo-hover"
         />
         <h1 class="text-4xl md:text-6xl font-extrabold text-center">
           The Copula Program

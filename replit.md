@@ -27,6 +27,10 @@ This is the official website for The Copula Program, a six-week remote academic 
   - Smooth fade transitions between background images (1.5s duration)
   - Subtle hovering text animation with floating effect (4s cycle, moves up 5px)
   - Synchronized float animations on title and paragraphs for cohesive movement
+- Enhanced Hero section with dynamic animations:
+  - Animated gradient background that shifts between dark gray, navy, and blue shades
+  - Gradient animation completes full cycle in 15 seconds with smooth transitions
+  - Copula logo floating animation (3s cycle, moves up 8px) for visual appeal
 
 ## Project Architecture
 
