@@ -98,11 +98,12 @@
 
       /* Logo hover animation */
       @keyframes logo-float {
-        0%, 100% {
+        0%,
+        100% {
           transform: translateY(0px);
         }
         50% {
-          transform: translateY(-8px);
+          transform: translateY(-5px);
         }
       }
 
@@ -127,6 +128,16 @@
         background: linear-gradient(-45deg, #1f2937, #1e3a8a, #3b82f6, #1e40af);
         background-size: 400% 400%;
         animation: gradient-shift 15s ease infinite;
+      }
+
+      /* Global text shadow for all text, buttons, and frames */
+      h1, h2, h3, h4, h5, h6, p, li, a, button, span {
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+      
+      /* Shadow for cards and frames */
+      div[class*="card"], div[class*="bg-"], div[class*="border"] {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
 
       /* Fade-in animation */
@@ -210,7 +221,10 @@
           alt="The Copula Program Logo"
           class="w-32 h-32 md:w-48 md:h-48 mb-6 logo-hover"
         />
-        <h1 class="text-4xl md:text-6xl font-extrabold text-center logo-hover" style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">
+        <h1
+          class="text-4xl md:text-6xl font-extrabold text-center logo-hover"
+          style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)"
+        >
           The Copula Program
         </h1>
         <p class="mt-4 text-lg md:text-xl text-center max-w-2xl">

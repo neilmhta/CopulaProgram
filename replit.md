@@ -32,7 +32,10 @@ This is the official website for The Copula Program, a six-week remote academic 
   - Gradient animation completes full cycle in 15 seconds with smooth transitions
   - Copula logo floating animation (5s cycle, moves up 8px) for gentle visual appeal
   - Title text "The Copula Program" floats in sync with the logo (5s cycle)
-  - Light text shadow on title (subtle 8px blur with 30% opacity) for depth and readability
+- Applied consistent light shadow across entire website:
+  - Text shadow (2px vertical offset, 8px blur, 30% opacity) on all text elements (headings, paragraphs, links, buttons, spans)
+  - Box shadow on all cards and frames for depth and visual hierarchy
+  - Creates cohesive, polished look throughout the site with enhanced readability
 
 ## Project Architecture
 
