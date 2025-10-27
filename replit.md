@@ -7,13 +7,15 @@ This is the official website for The Copula Program, a six-week remote academic 
 
 **Current State**: Fully functional static website, deployed and ready for production.
 
-## Recent Changes (October 26, 2025)
+## Recent Changes (October 27, 2025)
 - Imported project from GitHub
 - Set up build process for Tailwind CSS
 - Configured http-server to serve the static site on port 5000
 - Added deployment configuration for Replit autoscale deployment
 - Updated .gitignore to exclude dist folder
-- Added founders carousel to About section with cards for three program founders
+- Added founders carousel in dedicated section with peek view layout
+- Carousel features: previous/next buttons, indicator dots, auto-advance, square image placeholders
+- Separated founders section from About section to prevent morphing with mentee experiences section
 
 ## Project Architecture
 

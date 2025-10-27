@@ -247,50 +247,56 @@
           experienced mentors, participants gain hands-on research experience
           and the skills to pursue academic careers.
         </p>
+      </div>
+    </section>
 
-        <!-- Founders Carousel -->
-        <div class="mt-12 max-w-4xl mx-auto">
-          <h3 class="text-3xl md:text-4xl font-bold mb-8 text-center">
-            Meet Our Founders
-          </h3>
-          <div class="relative">
-            <!-- Carousel Container -->
-            <div class="overflow-hidden relative">
-              <div
-                id="founders-carousel"
-                class="flex transition-transform duration-500 ease-in-out"
-              >
-                <!-- Founder cards will be dynamically injected here -->
-              </div>
-            </div>
-            
-            <!-- Previous Button -->
-            <button
-              id="founders-prev"
-              class="absolute left-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-10"
-              aria-label="Previous founder"
-            >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-              </svg>
-            </button>
-            
-            <!-- Next Button -->
-            <button
-              id="founders-next"
-              class="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-10"
-              aria-label="Next founder"
-            >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </button>
-            
-            <!-- Indicator Dots -->
-            <div id="founders-indicators" class="flex justify-center gap-2 mt-6">
-              <!-- Dots will be dynamically injected here -->
-            </div>
+    <!-- Founders Carousel Section -->
+    <section
+      id="founders"
+      class="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white"
+    >
+      <div class="max-w-6xl mx-auto px-6 text-center mb-10">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
+          Meet Our Founders
+        </h2>
+      </div>
+
+      <div class="relative max-w-5xl mx-auto px-12">
+        <!-- Carousel Container with Peek -->
+        <div class="overflow-hidden relative px-4">
+          <div
+            id="founders-carousel"
+            class="flex transition-transform duration-500 ease-in-out gap-6"
+          >
+            <!-- Founder cards will be dynamically injected here -->
           </div>
+        </div>
+        
+        <!-- Previous Button -->
+        <button
+          id="founders-prev"
+          class="absolute left-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-10"
+          aria-label="Previous founder"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        
+        <!-- Next Button -->
+        <button
+          id="founders-next"
+          class="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-10"
+          aria-label="Next founder"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+        
+        <!-- Indicator Dots -->
+        <div id="founders-indicators" class="flex justify-center gap-2 mt-8">
+          <!-- Dots will be dynamically injected here -->
         </div>
       </div>
     </section>
@@ -685,16 +691,17 @@
       founders.forEach((founder, index) => {
         const founderCard = document.createElement("div");
         founderCard.className =
-          "bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg flex-shrink-0 w-full border border-gray-700";
+          "bg-gray-800 bg-opacity-90 p-6 rounded-lg shadow-lg flex-shrink-0 border border-gray-700 transition-all duration-300";
+        founderCard.style.width = "350px";
         founderCard.innerHTML = `
-          <div class="w-full h-64 bg-gray-700 rounded-lg mb-6 flex items-center justify-center overflow-hidden">
-            <svg class="w-32 h-32 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <div class="w-64 h-64 bg-gray-700 rounded-lg mb-4 flex items-center justify-center overflow-hidden mx-auto">
+            <svg class="w-24 h-24 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
             </svg>
           </div>
-          <h4 class="font-bold text-3xl text-blue-400 mb-3 text-center">${founder.name}</h4>
-          <p class="text-lg italic text-blue-300 mb-4 text-center">${founder.title}</p>
-          <p class="text-gray-300 leading-relaxed text-center">${founder.bio}</p>
+          <h4 class="font-bold text-2xl text-blue-400 mb-2 text-center">${founder.name}</h4>
+          <p class="text-md italic text-blue-300 mb-3 text-center">${founder.title}</p>
+          <p class="text-gray-300 leading-relaxed text-sm text-center">${founder.bio}</p>
         `;
         foundersCarousel.appendChild(founderCard);
 
@@ -708,10 +715,14 @@
         foundersIndicators.appendChild(dot);
       });
 
-      // Function to update carousel position
+      // Function to update carousel position for peek effect
       function updateFounderCarousel() {
-        const offset = -currentFounderIndex * 100;
-        foundersCarousel.style.transform = `translateX(${offset}%)`;
+        const cardWidth = 350;
+        const gap = 24;
+        const containerWidth = foundersCarousel.parentElement.offsetWidth;
+        const centerOffset = (containerWidth - cardWidth) / 2;
+        const offset = centerOffset - (currentFounderIndex * (cardWidth + gap));
+        foundersCarousel.style.transform = `translateX(${offset}px)`;
 
         // Update indicator dots
         const dots = foundersIndicators.children;
@@ -747,6 +758,10 @@
         currentFounderIndex = (currentFounderIndex + 1) % founders.length;
         updateFounderCarousel();
       }, 5000);
+
+      // Initialize carousel position on page load
+      window.addEventListener('load', updateFounderCarousel);
+      window.addEventListener('resize', updateFounderCarousel);
     </script>
   </body>
 </html>
