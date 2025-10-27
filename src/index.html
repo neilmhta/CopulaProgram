@@ -843,15 +843,20 @@
       const prevBtn = document.getElementById("founders-prev");
       const nextBtn = document.getElementById("founders-next");
 
-      let currentFounderIndex = 0;
+      let currentFounderIndex = 1; // Start at 1 because we'll add a clone before
+      let isTransitioning = false;
+      let autoAdvanceTimer;
 
-      // Dynamically inject founder cards
-      founders.forEach((founder, index) => {
+      // Helper function to create a founder card
+      function createFounderCard(founder, isClone = false) {
         const founderCard = document.createElement("div");
         founderCard.className =
-          "bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg flex-shrink-0 border border-gray-700 transition-all duration-300";
+          "founder-card bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg flex-shrink-0 border border-gray-700";
         founderCard.style.width = "420px";
         founderCard.style.minHeight = "550px";
+        if (isClone) {
+          founderCard.setAttribute("data-clone", "true");
+        }
         founderCard.innerHTML = `
           <div class="w-64 h-64 bg-gray-700 rounded-lg mb-6 flex items-center justify-center overflow-hidden mx-auto">
             <svg class="w-24 h-24 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -862,7 +867,17 @@
           <p class="text-md italic text-blue-300 mb-4 text-center">${founder.title}</p>
           <p class="text-gray-300 leading-relaxed text-sm text-center">${founder.bio}</p>
         `;
-        foundersCarousel.appendChild(founderCard);
+        return founderCard;
+      }
+
+      // Inject founder cards with clones for infinite loop
+      // Add clone of last card at beginning
+      foundersCarousel.appendChild(createFounderCard(founders[founders.length - 1], true));
+      
+      // Add all real cards
+      founders.forEach((founder, index) => {
+        const card = createFounderCard(founder);
+        foundersCarousel.appendChild(card);
 
         // Create indicator dot
         const dot = document.createElement("button");
@@ -870,23 +885,55 @@
           index === 0 ? "bg-blue-500 w-8" : "bg-gray-500"
         }`;
         dot.setAttribute("aria-label", `Go to founder ${index + 1}`);
-        dot.addEventListener("click", () => goToFounderSlide(index));
+        dot.addEventListener("click", () => {
+          clearTimeout(autoAdvanceTimer);
+          goToFounderSlide(index + 1); // +1 because of leading clone
+          startAutoAdvance();
+        });
         foundersIndicators.appendChild(dot);
       });
+      
+      // Add clone of first card at end
+      foundersCarousel.appendChild(createFounderCard(founders[0], true));
 
-      // Function to update carousel position for peek effect
-      function updateFounderCarousel() {
-        const cardWidth = 350;
+      // Function to update carousel position and blur effects
+      function updateFounderCarousel(animate = true) {
+        const cardWidth = 420;
         const gap = 24;
         const containerWidth = foundersCarousel.parentElement.offsetWidth;
         const centerOffset = (containerWidth - cardWidth) / 2;
         const offset = centerOffset - currentFounderIndex * (cardWidth + gap);
+        
+        // Enable or disable transition
+        if (animate) {
+          foundersCarousel.style.transition = "transform 0.5s ease-in-out";
+        } else {
+          foundersCarousel.style.transition = "none";
+        }
+        
         foundersCarousel.style.transform = `translateX(${offset}px)`;
 
-        // Update indicator dots
-        const dots = foundersIndicators.children;
-        Array.from(dots).forEach((dot, index) => {
+        // Update blur effects on cards
+        const allCards = foundersCarousel.querySelectorAll(".founder-card");
+        allCards.forEach((card, index) => {
           if (index === currentFounderIndex) {
+            // Active card: sharp and full opacity
+            card.style.filter = "blur(0px)";
+            card.style.opacity = "1";
+            card.style.transform = "scale(1)";
+          } else {
+            // Peripheral cards: blurred and semi-transparent
+            card.style.filter = "blur(4px)";
+            card.style.opacity = "0.5";
+            card.style.transform = "scale(0.95)";
+          }
+        });
+
+        // Update indicator dots (only for real cards, not clones)
+        const dots = foundersIndicators.children;
+        const realIndex = currentFounderIndex - 1; // Adjust for leading clone
+        Array.from(dots).forEach((dot, index) => {
+          if (index === realIndex % founders.length) {
             dot.className =
               "w-8 h-3 rounded-full bg-blue-500 transition-all duration-300";
           } else {
@@ -896,34 +943,71 @@
         });
       }
 
+      // Handle infinite loop reset
+      foundersCarousel.addEventListener("transitionend", () => {
+        const totalCards = founders.length + 2; // Real cards + 2 clones
+        
+        // If we're on the first clone (index 0), jump to the real last card
+        if (currentFounderIndex === 0) {
+          currentFounderIndex = founders.length;
+          updateFounderCarousel(false); // No animation
+        }
+        // If we're on the last clone, jump to the real first card
+        else if (currentFounderIndex === totalCards - 1) {
+          currentFounderIndex = 1;
+          updateFounderCarousel(false); // No animation
+        }
+        
+        isTransitioning = false;
+      });
+
       // Go to specific slide
       function goToFounderSlide(index) {
+        if (isTransitioning) return;
+        isTransitioning = true;
         currentFounderIndex = index;
-        updateFounderCarousel();
+        updateFounderCarousel(true);
       }
 
       // Next button
       nextBtn.addEventListener("click", () => {
-        currentFounderIndex = (currentFounderIndex + 1) % founders.length;
-        updateFounderCarousel();
+        if (isTransitioning) return;
+        isTransitioning = true;
+        clearTimeout(autoAdvanceTimer);
+        currentFounderIndex++;
+        updateFounderCarousel(true);
+        startAutoAdvance();
       });
 
       // Previous button
       prevBtn.addEventListener("click", () => {
-        currentFounderIndex =
-          (currentFounderIndex - 1 + founders.length) % founders.length;
-        updateFounderCarousel();
+        if (isTransitioning) return;
+        isTransitioning = true;
+        clearTimeout(autoAdvanceTimer);
+        currentFounderIndex--;
+        updateFounderCarousel(true);
+        startAutoAdvance();
       });
 
-      // Auto-advance carousel every 5 seconds
-      setInterval(() => {
-        currentFounderIndex = (currentFounderIndex + 1) % founders.length;
-        updateFounderCarousel();
-      }, 5000);
+      // Auto-advance function
+      function startAutoAdvance() {
+        clearTimeout(autoAdvanceTimer);
+        autoAdvanceTimer = setTimeout(() => {
+          if (!isTransitioning) {
+            isTransitioning = true;
+            currentFounderIndex++;
+            updateFounderCarousel(true);
+          }
+          startAutoAdvance();
+        }, 5000);
+      }
 
       // Initialize carousel position on page load
-      window.addEventListener("load", updateFounderCarousel);
-      window.addEventListener("resize", updateFounderCarousel);
+      window.addEventListener("load", () => {
+        updateFounderCarousel(false);
+        startAutoAdvance();
+      });
+      window.addEventListener("resize", () => updateFounderCarousel(false));
     </script>
 
     <script>
