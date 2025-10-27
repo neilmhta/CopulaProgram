@@ -849,16 +849,17 @@
       founders.forEach((founder, index) => {
         const founderCard = document.createElement("div");
         founderCard.className =
-          "bg-gray-800 bg-opacity-90 p-6 rounded-lg shadow-lg flex-shrink-0 border border-gray-700 transition-all duration-300";
+          "bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg flex-shrink-0 border border-gray-700 transition-all duration-300";
         founderCard.style.width = "350px";
+        founderCard.style.minHeight = "550px";
         founderCard.innerHTML = `
-          <div class="w-64 h-64 bg-gray-700 rounded-lg mb-4 flex items-center justify-center overflow-hidden mx-auto">
+          <div class="w-64 h-64 bg-gray-700 rounded-lg mb-6 flex items-center justify-center overflow-hidden mx-auto">
             <svg class="w-24 h-24 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
             </svg>
           </div>
-          <h4 class="font-bold text-2xl text-blue-400 mb-2 text-center">${founder.name}</h4>
-          <p class="text-md italic text-blue-300 mb-3 text-center">${founder.title}</p>
+          <h4 class="font-bold text-2xl text-blue-400 mb-3 text-center">${founder.name}</h4>
+          <p class="text-md italic text-blue-300 mb-4 text-center">${founder.title}</p>
           <p class="text-gray-300 leading-relaxed text-sm text-center">${founder.bio}</p>
         `;
         foundersCarousel.appendChild(founderCard);

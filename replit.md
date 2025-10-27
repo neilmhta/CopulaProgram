@@ -16,6 +16,7 @@ This is the official website for The Copula Program, a six-week remote academic 
 - Added founders carousel in dedicated section with peek view layout
 - Carousel features: previous/next buttons, indicator dots, auto-advance, square image placeholders
 - Separated founders section from About section to prevent morphing with mentee experiences section
+- Founder cards dimensions: 350px wide, 550px minimum height with increased padding and spacing for better vertical presence
 - Extended smooth scroll animations across entire website:
   - Added fade-in animations to all sections (founders, mentor grid, footer)
   - Implemented staggered animations for mentor cards (50ms delay between each)
