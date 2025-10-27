@@ -249,15 +249,46 @@
         </p>
 
         <!-- Founders Carousel -->
-        <div class="mt-12">
-          <h3 class="text-3xl md:text-4xl font-bold mb-8 text-center">Meet Our Founders</h3>
+        <div class="mt-12 max-w-4xl mx-auto">
+          <h3 class="text-3xl md:text-4xl font-bold mb-8 text-center">
+            Meet Our Founders
+          </h3>
           <div class="relative">
-            <div
-              id="founders-carousel"
-              class="flex gap-6 overflow-x-auto px-6 pb-6 scroll-smooth justify-center"
-              style="scrollbar-width: thin; scrollbar-color: #3b82f6 #1f2937"
+            <!-- Carousel Container -->
+            <div class="overflow-hidden relative">
+              <div
+                id="founders-carousel"
+                class="flex transition-transform duration-500 ease-in-out"
+              >
+                <!-- Founder cards will be dynamically injected here -->
+              </div>
+            </div>
+            
+            <!-- Previous Button -->
+            <button
+              id="founders-prev"
+              class="absolute left-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-10"
+              aria-label="Previous founder"
             >
-              <!-- Founder cards will be dynamically injected here -->
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+            
+            <!-- Next Button -->
+            <button
+              id="founders-next"
+              class="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-10"
+              aria-label="Next founder"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+            
+            <!-- Indicator Dots -->
+            <div id="founders-indicators" class="flex justify-center gap-2 mt-6">
+              <!-- Dots will be dynamically injected here -->
             </div>
           </div>
         </div>
@@ -591,9 +622,9 @@
         {
           name: "Sofia Sofia",
           year: "2025 Cohort",
-          project: "Found the cure TB and also global warming",
+          project: "Found the cure for TB and also global warming",
           quote:
-            "Without the Copula Program, the world would be a giant ball of flames with TB probably!",
+            "Without the Copula Program, the world would be a giant ball of flames with TB probably! My mentor allowed me access to the greatest lab on earth and I got to meet obama.",
         },
         {
           name: "Cemantha Hearing",
@@ -626,42 +657,96 @@
       // JSON list of founders
       const founders = [
         {
-          name: "Founder Name 1",
-          title: "Co-Founder & Director",
-          bio: "Brief description of the founder's background and role in the program."
+          name: "Rebecca Monge",
+          title: "Co-Founder",
+          bio: " 5 star student at the big Stan.",
         },
         {
-          name: "Founder Name 2",
-          title: "Co-Founder & Coordinator",
-          bio: "Brief description of the founder's background and role in the program."
+          name: "Shruti Gautam",
+          title: "Co-Founder",
+          bio: "Harvard is calling.",
         },
         {
-          name: "Founder Name 3",
-          title: "Co-Founder & Advisor",
-          bio: "Brief description of the founder's background and role in the program."
-        }
+          name: "Neil Mehta",
+          title: "Co-Founder",
+          bio: "2nd most famous Neil after Neil Armstrong.",
+        },
       ];
 
-      // Select the carousel container
+      // Select the carousel container and controls
       const foundersCarousel = document.getElementById("founders-carousel");
+      const foundersIndicators = document.getElementById("founders-indicators");
+      const prevBtn = document.getElementById("founders-prev");
+      const nextBtn = document.getElementById("founders-next");
+      
+      let currentFounderIndex = 0;
 
       // Dynamically inject founder cards
       founders.forEach((founder, index) => {
         const founderCard = document.createElement("div");
         founderCard.className =
-          "bg-gray-800 bg-opacity-90 p-6 rounded-lg shadow-lg flex-shrink-0 w-80 border border-gray-700 hover:border-blue-500 transition-all duration-300";
+          "bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg flex-shrink-0 w-full border border-gray-700";
         founderCard.innerHTML = `
-          <div class="w-full h-64 bg-gray-700 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-            <svg class="w-24 h-24 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <div class="w-full h-64 bg-gray-700 rounded-lg mb-6 flex items-center justify-center overflow-hidden">
+            <svg class="w-32 h-32 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
             </svg>
           </div>
-          <h4 class="font-bold text-2xl text-blue-400 mb-2">${founder.name}</h4>
-          <p class="text-md italic text-blue-300 mb-3">${founder.title}</p>
-          <p class="text-gray-300 leading-relaxed text-sm">${founder.bio}</p>
+          <h4 class="font-bold text-3xl text-blue-400 mb-3 text-center">${founder.name}</h4>
+          <p class="text-lg italic text-blue-300 mb-4 text-center">${founder.title}</p>
+          <p class="text-gray-300 leading-relaxed text-center">${founder.bio}</p>
         `;
         foundersCarousel.appendChild(founderCard);
+
+        // Create indicator dot
+        const dot = document.createElement("button");
+        dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${
+          index === 0 ? 'bg-blue-500 w-8' : 'bg-gray-500'
+        }`;
+        dot.setAttribute('aria-label', `Go to founder ${index + 1}`);
+        dot.addEventListener('click', () => goToFounderSlide(index));
+        foundersIndicators.appendChild(dot);
       });
+
+      // Function to update carousel position
+      function updateFounderCarousel() {
+        const offset = -currentFounderIndex * 100;
+        foundersCarousel.style.transform = `translateX(${offset}%)`;
+
+        // Update indicator dots
+        const dots = foundersIndicators.children;
+        Array.from(dots).forEach((dot, index) => {
+          if (index === currentFounderIndex) {
+            dot.className = 'w-8 h-3 rounded-full bg-blue-500 transition-all duration-300';
+          } else {
+            dot.className = 'w-3 h-3 rounded-full bg-gray-500 transition-all duration-300';
+          }
+        });
+      }
+
+      // Go to specific slide
+      function goToFounderSlide(index) {
+        currentFounderIndex = index;
+        updateFounderCarousel();
+      }
+
+      // Next button
+      nextBtn.addEventListener('click', () => {
+        currentFounderIndex = (currentFounderIndex + 1) % founders.length;
+        updateFounderCarousel();
+      });
+
+      // Previous button
+      prevBtn.addEventListener('click', () => {
+        currentFounderIndex = (currentFounderIndex - 1 + founders.length) % founders.length;
+        updateFounderCarousel();
+      });
+
+      // Auto-advance carousel every 5 seconds
+      setInterval(() => {
+        currentFounderIndex = (currentFounderIndex + 1) % founders.length;
+        updateFounderCarousel();
+      }, 5000);
     </script>
   </body>
 </html>
