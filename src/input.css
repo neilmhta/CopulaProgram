@@ -7,6 +7,16 @@
   transition: filter 0.5s ease-in-out, opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
+/* Fix indicator dots to prevent vertical stretching */
+#founders-indicators {
+  align-items: center;
+}
+
+#founders-indicators button {
+  flex-shrink: 0;
+  display: inline-block;
+}
+
 /* Mobile responsive styles */
 @media (max-width: 768px) {
   /* Responsive navigation */
