@@ -62,8 +62,9 @@
 
       /* Rotating carousel background */
       .photo-grid {
-        position: absolute;
-        inset: 0;
+        position: relative;
+        width: 100%;
+        height: 100%;
         overflow: hidden;
       }
 
@@ -131,21 +132,45 @@
       }
 
       /* Global text shadow for all text, buttons, and frames */
-      h1, h2, h3, h4, h5, h6, p, li, a, button, span {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      li,
+      a,
+      button,
+      span {
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
-      
+
       /* Shadow for cards and frames */
-      div[class*="card"], div[class*="bg-"], div[class*="border"] {
+      div[class*="card"],
+      div[class*="bg-"],
+      div[class*="border"] {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
 
       /* Hover effects for buttons and frames */
-      button, a[class*="bg-"], div[class*="card"], div[class*="border-"], .mentor-card, .founder-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      button,
+      a[class*="bg-"],
+      div[class*="card"],
+      div[class*="border-"],
+      .mentor-card,
+      .founder-card {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
       }
 
-      button:hover, a[class*="bg-"]:hover, div[class*="card"]:hover, div[class*="border-"]:hover, .mentor-card:hover, .founder-card:hover {
+      button:hover,
+      a[class*="bg-"]:hover,
+      div[class*="card"]:hover,
+      div[class*="border-"]:hover,
+      .mentor-card:hover,
+      .founder-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
       }
@@ -294,7 +319,9 @@
       id="about"
       class="pt-20 pb-20 h-screen relative bg-gradient-to-b from-gray-800 to-gray-900 text-white"
     >
-      <div class="absolute inset-0 grid grid-cols-3 gap-2 photo-grid">
+      <!-- Animated gradient border container -->
+      <div class="absolute inset-8 animated-gradient rounded-lg p-1">
+        <div class="absolute inset-0 grid grid-cols-3 gap-2 photo-grid rounded-lg overflow-hidden">
         <img
           src="./static/gallery/img-1.png"
           alt="Gallery Image 1"
@@ -340,6 +367,7 @@
           alt="Gallery Image 9"
           class="w-full h-full object-cover"
         />
+        </div>
       </div>
       <div
         class="relative h-screen content-center max-w-4xl mx-auto text-center px-6 fade-in"
