@@ -36,6 +36,11 @@ This is the official website for The Copula Program, a six-week remote academic 
   - Text shadow (2px vertical offset, 8px blur, 30% opacity) on all text elements (headings, paragraphs, links, buttons, spans)
   - Box shadow on all cards and frames for depth and visual hierarchy
   - Creates cohesive, polished look throughout the site with enhanced readability
+- Added interactive hover effects to all buttons and frames:
+  - Smooth lift animation (5px upward movement) when mouse hovers over elements
+  - Enhanced shadow on hover (increased depth and darkness) for visual feedback
+  - 0.3s smooth transition for elegant interaction
+  - Automatically returns to original position when mouse leaves
 
 ## Project Architecture
 

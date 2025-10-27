@@ -140,6 +140,16 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
 
+      /* Hover effects for buttons and frames */
+      button, a[class*="bg-"], div[class*="card"], div[class*="border-"], .mentor-card, .founder-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      button:hover, a[class*="bg-"]:hover, div[class*="card"]:hover, div[class*="border-"]:hover, .mentor-card:hover, .founder-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+      }
+
       /* Fade-in animation */
       .fade-in {
         opacity: 0;
