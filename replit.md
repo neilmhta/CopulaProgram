@@ -22,6 +22,11 @@ This is the official website for The Copula Program, a six-week remote academic 
   - Implemented staggered animations for mentee cards (100ms delay between each)
   - Enhanced Intersection Observer with better threshold and margin settings
   - Animations trigger when elements are 10% visible with 100px bottom margin
+- Enhanced About section with dynamic animations:
+  - Rotating background carousel that cycles through 9 gallery images every 3 seconds
+  - Smooth fade transitions between background images (1.5s duration)
+  - Hovering text animation with floating effect (3s cycle, moves up 10px)
+  - Staggered float animations on title and paragraphs for visual depth
 
 ## Project Architecture
 
