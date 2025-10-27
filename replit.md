@@ -25,8 +25,8 @@ This is the official website for The Copula Program, a six-week remote academic 
 - Enhanced About section with dynamic animations:
   - Rotating background carousel that cycles through 9 gallery images every 3 seconds
   - Smooth fade transitions between background images (1.5s duration)
-  - Hovering text animation with floating effect (3s cycle, moves up 10px)
-  - Staggered float animations on title and paragraphs for visual depth
+  - Subtle hovering text animation with floating effect (4s cycle, moves up 5px)
+  - Synchronized float animations on title and paragraphs for cohesive movement
 
 ## Project Architecture
 
