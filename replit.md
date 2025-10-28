@@ -8,6 +8,7 @@ This is the official website for The Copula Program, a six-week remote academic 
 **Current State**: Fully functional static website, deployed and ready for production.
 
 ## Recent Changes (October 28, 2025)
+- Made the blue gradient darker for hero and about sections (using slate-900, blue-800, blue-700, blue-900)
 - Added white ember/bubble particle effect on all gradient backgrounds
   - Simplified to blurry white circles using blur filter (4px)
   - Particles float upward from bottom with random horizontal drift
