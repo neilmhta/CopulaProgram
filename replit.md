@@ -8,6 +8,10 @@ This is the official website for The Copula Program, a six-week remote academic 
 **Current State**: Fully functional static website, deployed and ready for production.
 
 ## Recent Changes (October 28, 2025)
+- Extended ember/bubble effects and gradient text to Alumni Resources page
+  - White ember particles floating on all gradient backgrounds
+  - Animated gradient on "Alumni" text in page title
+  - Darker blue gradient matching main site
 - Added animated gradient effect to blue text ("Copula" on title screen, "Copula Program", "Academic Professional", "This February")
   - Smooth flowing gradient animation (blue-500 → blue-400 → blue-300 → blue-400 → blue-500)
   - 3-second animation cycle with seamless loop

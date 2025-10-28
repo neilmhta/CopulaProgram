@@ -74,7 +74,7 @@
       }
 
       .animated-gradient {
-        background: linear-gradient(-45deg, #1f2937, #1e3a8a, #3b82f6, #1e40af);
+        background: linear-gradient(-45deg, #0f172a, #1e3a8a, #1e40af, #172554);
         background-size: 400% 400%;
         animation: gradient-shift 15s ease infinite;
       }
@@ -83,6 +83,60 @@
         background: linear-gradient(-45deg, #111827, #1f2937, #374151, #1f2937);
         background-size: 400% 400%;
         animation: gradient-shift 15s ease infinite;
+      }
+
+      /* Animated gradient text for blue text elements */
+      .gradient-text {
+        background: linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd, #60a5fa, #3b82f6);
+        background-size: 200% auto;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradient-text-shift 3s ease infinite;
+      }
+
+      @keyframes gradient-text-shift {
+        0% {
+          background-position: 0% center;
+        }
+        50% {
+          background-position: 100% center;
+        }
+        100% {
+          background-position: 0% center;
+        }
+      }
+
+      /* Ember/Bubble effect container */
+      .ember-container {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ember {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        filter: blur(4px);
+        pointer-events: none;
+        animation: float-up linear infinite;
+      }
+
+      @keyframes float-up {
+        0% {
+          transform: translateY(0) translateX(0) scale(1);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 0.4;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(var(--drift)) scale(0.3);
+          opacity: 0;
+        }
       }
 
       /* Global text shadow for all text, buttons, and frames */
@@ -197,7 +251,7 @@
           class="text-4xl md:text-6xl font-extrabold text-center mb-6"
           style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)"
         >
-          Alumni Resources
+          <span class="gradient-text">Alumni</span> Resources
         </h1>
         <p class="text-lg md:text-xl text-center">
           Welcome back! Here you'll find resources, opportunities, and ways to stay connected with The Copula Program.
@@ -309,5 +363,65 @@
         >
       </p>
     </footer>
+
+    <script>
+      // White ember/bubble effect for gradient backgrounds
+      document.addEventListener("DOMContentLoaded", () => {
+        // Find all gradient background sections
+        const gradientSections = document.querySelectorAll(
+          '.animated-gradient, .animated-gradient-gray'
+        );
+
+        gradientSections.forEach((section) => {
+          // Add ember-container class
+          section.classList.add('ember-container');
+
+          // Create embers periodically
+          function createEmber() {
+            const ember = document.createElement('div');
+            ember.classList.add('ember');
+
+            // Random size between 3px and 12px
+            const size = Math.random() * 9 + 3;
+            ember.style.width = `${size}px`;
+            ember.style.height = `${size}px`;
+
+            // Random horizontal position
+            const leftPosition = Math.random() * 100;
+            ember.style.left = `${leftPosition}%`;
+
+            // Start from bottom
+            ember.style.bottom = '-20px';
+
+            // Random drift (horizontal movement during float)
+            const drift = (Math.random() - 0.5) * 100;
+            ember.style.setProperty('--drift', `${drift}px`);
+
+            // Random animation duration between 8 and 15 seconds
+            const duration = Math.random() * 7 + 8;
+            ember.style.animationDuration = `${duration}s`;
+
+            // Random delay before starting
+            const delay = Math.random() * 2;
+            ember.style.animationDelay = `${delay}s`;
+
+            section.appendChild(ember);
+
+            // Remove ember after animation completes
+            setTimeout(() => {
+              ember.remove();
+            }, (duration + delay) * 1000);
+          }
+
+          // Create initial batch of embers
+          for (let i = 0; i < 15; i++) {
+            setTimeout(createEmber, Math.random() * 2000);
+          }
+
+          // Continuously create new embers
+          setInterval(createEmber, 800);
+        });
+      });
+    </script>
   </body>
 </html>
