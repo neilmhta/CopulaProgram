@@ -154,6 +154,28 @@
         animation: gradient-shift 15s ease infinite;
       }
 
+      /* Animated gradient text for blue text elements */
+      .gradient-text {
+        background: linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd, #60a5fa, #3b82f6);
+        background-size: 200% auto;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradient-text-shift 3s ease infinite;
+      }
+
+      @keyframes gradient-text-shift {
+        0% {
+          background-position: 0% center;
+        }
+        50% {
+          background-position: 100% center;
+        }
+        100% {
+          background-position: 0% center;
+        }
+      }
+
       /* Ember/Bubble effect container */
       .ember-container {
         position: relative;
@@ -406,7 +428,7 @@
         <!-- Text Content (Left Side) -->
         <div class="lg:w-1/3 lg:pr-8">
           <h2 class="text-4xl md:text-5xl font-bold mb-6 hover-float scroll-fade-in">
-            About The <span class="text-blue-400">Copula Program</span>
+            About The <span class="text-blue-400 gradient-text">Copula Program</span>
           </h2>
           <p class="text-lg md:text-xl leading-relaxed mb-6 hover-float scroll-fade-in">
             The Copula Program is a six-week remote summer mentorship that
@@ -653,7 +675,7 @@
     >
       <div class="max-w-6xl mx-auto px-6 text-center fade-in">
         <h2 class="text-4xl md:text-5xl font-extrabold mb-10">
-          Work With an <span class="text-blue-400">Academic Professional</span>
+          Work With an <span class="text-blue-400 gradient-text">Academic Professional</span>
         </h2>
         <p class="text-lg md:text-xl leading-relaxed mb-12">
           Over six weeks, students plan and create a capstone project alongside
@@ -678,7 +700,7 @@
     >
       <div class="max-w-4xl text-center">
         <h2 class="text-4xl md:text-5xl font-bold mb-6">
-          Application Opens <span class="text-blue-400">This February</span>
+          Application Opens <span class="text-blue-400 gradient-text">This February</span>
         </h2>
         <p class="text-lg md:text-xl leading-relaxed mb-8">
           Applications for the Summer 2026 cohort have not yet opened.
