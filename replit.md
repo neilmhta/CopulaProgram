@@ -8,10 +8,12 @@ This is the official website for The Copula Program, a six-week remote academic 
 **Current State**: Fully functional static website, deployed and ready for production.
 
 ## Recent Changes (October 28, 2025)
-- Converted About section image display to vertical carousel with navigation arrows
-- Replaced 3x3 fading grid with single-image vertical carousel (400px height)
+- Converted About section to vertical carousel with blurred preview images
+- Main image displays at 400px height with blurred previews visible above/below
+- Adjacent slides show with blur (8px), reduced opacity (40%), and scale (85%)
+- Smooth transitions between slides with vertical sliding animation
 - Added up/down arrow buttons for manual navigation between 9 gallery images
-- Carousel auto-advances every 4 seconds with smooth vertical slide transitions
+- Carousel auto-advances every 4 seconds with visual transitions
 - Maintained thick dark blue border (8px) around carousel
 - Centered image carousel on mobile devices with max-width constraint
 - Made "Copula Program" text blue-400 to match "Academic Professional" styling
