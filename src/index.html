@@ -394,7 +394,7 @@
         <div class="lg:w-2/3 relative w-full flex justify-center">
           <div class="relative w-full max-w-md lg:max-w-none mx-auto">
             <!-- Carousel Container -->
-            <div class="overflow-hidden rounded-lg border-8 border-blue-900 relative" style="height: 500px;">
+            <div class="overflow-hidden rounded-lg relative" style="height: 600px;">
               <div class="absolute inset-0">
                 <div
                   id="photo-carousel"
@@ -472,7 +472,7 @@
             <button
               id="photo-prev"
               class="absolute left-1/2 -translate-x-1/2 bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-lg transition-all duration-300 z-10"
-              style="top: 20px;"
+              style="top: 40px;"
               aria-label="Previous image"
             >
               <svg
@@ -494,7 +494,7 @@
             <button
               id="photo-next"
               class="absolute left-1/2 -translate-x-1/2 bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-lg transition-all duration-300 z-10"
-              style="bottom: 20px;"
+              style="bottom: 40px;"
               aria-label="Next image"
             >
               <svg
@@ -1188,10 +1188,10 @@
         let currentPhotoIndex = 0;
 
         function updatePhotoCarousel() {
-          // Center the current slide in the 500px container
-          // Container is 500px, slide is 400px, so we want 50px padding at top
-          // Offset to center: 50px (top padding) - (currentIndex * 400px)
-          const centerOffset = 50 - (currentPhotoIndex * 400);
+          // Center the current slide in the 600px container
+          // Container is 600px, slide is 400px, so we want 100px padding at top
+          // Offset to center: 100px (top padding) - (currentIndex * 400px)
+          const centerOffset = 100 - (currentPhotoIndex * 400);
           carousel.style.transform = `translateY(${centerOffset}px)`;
 
           // Update blur classes
