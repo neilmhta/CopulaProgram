@@ -8,12 +8,13 @@ This is the official website for The Copula Program, a six-week remote academic 
 **Current State**: Fully functional static website, deployed and ready for production.
 
 ## Recent Changes (October 28, 2025)
+- Fixed carousel positioning issues - now working correctly with smooth vertical sliding
 - Converted About section to vertical carousel with blurred preview images
-- Current image perfectly centered in 500px frame with previews peeking at top/bottom
+- Current image centered in 500px frame (50px padding top/bottom) with previews visible
 - Center/active image displays crystal clear with NO blur (filter: none !important)
 - Main image displays at 400px height, full opacity and normal scale
-- Adjacent/preview slides show with blur (8px), reduced opacity (40%), and scale (85%)
-- Smooth vertical sliding transitions with centered current image
+- Preview slides show with blur (8px), reduced opacity (40%), and scale (85%)
+- Smooth vertical sliding transitions with proper centering (50px offset calculation)
 - Added up/down arrow buttons for manual navigation between 9 gallery images
 - Carousel auto-advances every 4 seconds with visual transitions
 - Maintained thick dark blue border (8px) around carousel
