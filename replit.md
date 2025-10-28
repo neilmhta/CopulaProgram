@@ -9,7 +9,7 @@ This is the official website for The Copula Program, a six-week remote academic 
 
 ## Recent Changes (October 28, 2025)
 - Redesigned About section with side-by-side layout: text (1/3 width) on left, fading image grid (2/3 width) on right
-- Added thick grey border (8px, border-gray-700) around the image grid
+- Added thick dark blue border (8px, border-blue-900) around the image grid
 - Changed image grid to 3:2 aspect ratio (landscape) for shorter vertical height
 - Made "Copula Program" text blue-400 to match "Academic Professional" styling
 - Made hover-float animation more subtle (reduced from 5px to 2px movement)
