@@ -9,9 +9,10 @@ This is the official website for The Copula Program, a six-week remote academic 
 
 ## Recent Changes (October 28, 2025)
 - Added white ember/bubble particle effect on all gradient backgrounds
+  - Simplified to blurry white circles using blur filter (4px)
   - Particles float upward from bottom with random horizontal drift
   - Random sizes (3-12px), durations (8-15s), and positions for organic feel
-  - Radial gradient creates soft, glowing appearance
+  - Clean, minimalist aesthetic with soft edges
   - Auto-generates continuously across all gradient sections
 - Fixed carousel positioning issues - now working correctly with smooth vertical sliding
 - Converted About section to vertical carousel with blurred preview images
