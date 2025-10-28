@@ -154,6 +154,37 @@
         animation: gradient-shift 15s ease infinite;
       }
 
+      /* Ember/Bubble effect container */
+      .ember-container {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ember {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0) 70%);
+        pointer-events: none;
+        animation: float-up linear infinite;
+      }
+
+      @keyframes float-up {
+        0% {
+          transform: translateY(0) translateX(0) scale(1);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 0.4;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(var(--drift)) scale(0.3);
+          opacity: 0;
+        }
+      }
+
       /* Global text shadow for all text, buttons, and frames */
       h1,
       h2,
@@ -1224,6 +1255,66 @@
 
         // Auto-advance every 4 seconds
         setInterval(nextImage, 4000);
+      });
+    </script>
+
+    <script>
+      // White ember/bubble effect for gradient backgrounds
+      document.addEventListener("DOMContentLoaded", () => {
+        // Find all gradient background sections
+        const gradientSections = document.querySelectorAll(
+          '.animated-gradient, .animated-gradient-gray, .animated-gradient-blue-gray, .animated-gradient-footer'
+        );
+
+        gradientSections.forEach((section) => {
+          // Add ember-container class
+          section.classList.add('ember-container');
+
+          // Create embers periodically
+          function createEmber() {
+            const ember = document.createElement('div');
+            ember.classList.add('ember');
+
+            // Random size between 3px and 12px
+            const size = Math.random() * 9 + 3;
+            ember.style.width = `${size}px`;
+            ember.style.height = `${size}px`;
+
+            // Random horizontal position
+            const leftPosition = Math.random() * 100;
+            ember.style.left = `${leftPosition}%`;
+
+            // Start from bottom
+            ember.style.bottom = '-20px';
+
+            // Random drift (horizontal movement during float)
+            const drift = (Math.random() - 0.5) * 100;
+            ember.style.setProperty('--drift', `${drift}px`);
+
+            // Random animation duration between 8 and 15 seconds
+            const duration = Math.random() * 7 + 8;
+            ember.style.animationDuration = `${duration}s`;
+
+            // Random delay before starting
+            const delay = Math.random() * 2;
+            ember.style.animationDelay = `${delay}s`;
+
+            section.appendChild(ember);
+
+            // Remove ember after animation completes
+            setTimeout(() => {
+              ember.remove();
+            }, (duration + delay) * 1000);
+          }
+
+          // Create initial batch of embers
+          for (let i = 0; i < 15; i++) {
+            setTimeout(createEmber, Math.random() * 2000);
+          }
+
+          // Continuously create new embers
+          setInterval(createEmber, 800);
+        });
       });
     </script>
   </body>
