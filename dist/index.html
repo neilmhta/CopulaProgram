@@ -1,268 +1,1847 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-
+  <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EPNHDR2ERS"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EPNHDR2ERS"
+    ></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag('config', 'G-EPNHDR2ERS');
+      gtag("config", "G-EPNHDR2ERS");
     </script>
 
-<title>The Copula Program</title>
+    <title>The Copula Program</title>
 
-  <meta charset="UTF-8">
-  <meta property="og:title" content="The Copula Program">
-  <meta property="og:description" content="A free, virtual research program for high schoolers.">
-  <meta name="description" content="A free, virtual research program for high schoolers.">
-  <meta property="og:image" content="./static/og-image.png">
-  <meta property="og:url" content="https://copulaprogram.org">
-  <meta property="og:type" content="website">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="canonical" href="https://copulaprogram.org">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="The Copula Program">
-  <meta name="language" content="en">
-  <link href="./output.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta property="og:title" content="The Copula Program" />
+    <meta
+      property="og:description"
+      content="A free, virtual research program for high schoolers."
+    />
+    <meta
+      name="description"
+      content="A free, virtual research program for high schoolers."
+    />
+    <meta property="og:image" content="./static/og-image.png" />
+    <meta property="og:url" content="https://copulaprogram.org" />
+    <meta property="og:type" content="website" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://copulaprogram.org" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="The Copula Program" />
+    <meta name="language" content="en" />
+    <link href="./output.css" rel="stylesheet" />
 
-
-    <link rel="icon" type="image/png" href="./static/favicon/favicon-96x96.png" sizes="96x96" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="./static/favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
     <link rel="icon" type="image/svg+xml" href="./static/favicon/favicon.svg" />
     <link rel="shortcut icon" href="./static/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./static/favicon/apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./static/favicon/apple-touch-icon.png"
+    />
     <meta name="apple-mobile-web-app-title" content="TCP" />
     <link rel="manifest" href="./static/favicon/site.webmanifest" />
 
+    <style>
+      /* Smooth scrolling for anchor links */
+      html {
+        scroll-behavior: smooth;
+      }
 
+      /* Vertical photo carousel */
+      #photo-carousel {
+        transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
 
-  <style>
-    /* Smooth scrolling for anchor links */
-    html {
-      scroll-behavior: smooth;
-    }
+      .photo-slide {
+        transition: filter 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        filter: blur(8px);
+        opacity: 0.4;
+        transform: scale(0.85);
+      }
 
-        /* Darker and blurred effect */
-    .photo-grid img {
-      filter: brightness(0.3) blur(2px);
-      transition: filter 0.5s ease-in-out;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+      .photo-slide.active {
+        filter: none !important;
+        opacity: 1 !important;
+        transform: scale(1) !important;
+      }
 
-    /* Ensure grid doesn't overflow */
-    .photo-grid {
-      height: 100%;
-      display: grid;
-      grid-template-rows: repeat(3, 1fr);
-      grid-template-columns: repeat(3, 1fr);
-      overflow: hidden;
-    }
+      .photo-slide.blurred {
+        filter: blur(8px);
+        opacity: 0.4;
+        transform: scale(0.85);
+      }
 
-    /* Fade-in animation */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
+      /* Hovering text animation - subtle and gentle */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-4px);
+        }
+      }
 
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
-</head>
-<body class="bg-gray-900 text-white font-sans">
-  <script>
-    // Intersection Observer to trigger fade-in animation
-    document.addEventListener("DOMContentLoaded", () => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
+      .hover-float {
+        animation: float 4s ease-in-out infinite !important;
+        transition: none !important;
+      }
+
+      /* Logo hover animation */
+      @keyframes logo-float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      .logo-hover {
+        animation: logo-float 5s ease-in-out infinite;
+      }
+
+      /* Animated gradient background */
+      @keyframes gradient-shift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .animated-gradient {
+        background: linear-gradient(-45deg, #0f172a, #1e3a8a, #1e40af, #172554, #0f172a);
+        background-size: 500% 500%;
+        animation: gradient-shift 15s ease infinite;
+        animation-delay: 0s; /* Synchronized start */
+      }
+
+      /* Slightly different gradient for about section to create visual separation */
+      .animated-gradient-about {
+        background: linear-gradient(-45deg, #172554, #1e40af, #1e3a8a, #0f172a, #172554);
+        background-size: 500% 500%;
+        animation: gradient-shift 15s ease infinite;
+        animation-delay: 0s; /* Synchronized start */
+      }
+
+      /* Dark gray animated gradient for sections */
+      .animated-gradient-gray {
+        background: linear-gradient(-45deg, #111827, #1f2937, #374151, #1f2937, #111827);
+        background-size: 500% 500%;
+        animation: gradient-shift 15s ease infinite;
+        animation-delay: 0s; /* Synchronized with main gradient */
+      }
+
+      /* Blue-gray animated gradient for apply section */
+      .animated-gradient-blue-gray {
+        background: linear-gradient(-45deg, #1e3a8a, #1f2937, #1e40af, #111827, #1e3a8a);
+        background-size: 500% 500%;
+        animation: gradient-shift 15s ease infinite;
+        animation-delay: 0s; /* Synchronized with main gradient */
+      }
+
+      /* Footer gray animated gradient */
+      .animated-gradient-footer {
+        background: linear-gradient(-45deg, #1f2937, #374151, #1f2937, #111827, #1f2937);
+        background-size: 500% 500%;
+        animation: gradient-shift 15s ease infinite;
+        animation-delay: 0s; /* Synchronized with main gradient */
+      }
+
+      /* Animated gradient text for blue text elements */
+      .gradient-text {
+        background: linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd, #60a5fa, #3b82f6);
+        background-size: 200% auto;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradient-text-shift 3s ease infinite;
+      }
+
+      @keyframes gradient-text-shift {
+        0% {
+          background-position: 0% center;
+        }
+        50% {
+          background-position: 100% center;
+        }
+        100% {
+          background-position: 0% center;
+        }
+      }
+
+      /* US Map Styles */
+      .map-container {
+        position: relative;
+      }
+
+      .state-circle {
+        fill: #93c5fd;
+        stroke: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .state-circle:hover {
+        fill: #60a5fa;
+        filter: drop-shadow(0 0 12px rgba(147, 197, 253, 0.8));
+        transform: scale(1.15);
+        transform-origin: center;
+      }
+
+      #map-tooltip {
+        transform: translate(-50%, -120%);
+        white-space: nowrap;
+        max-width: 250px;
+        z-index: 1000;
+      }
+
+      #map-tooltip::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: #374151;
+      }
+
+      /* Ember/Bubble effect container */
+      .ember-container {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ember {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        filter: blur(4px);
+        pointer-events: none;
+        animation: float-up linear infinite;
+      }
+
+      @keyframes float-up {
+        0% {
+          transform: translateY(0) translateX(0) scale(1);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 0.4;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(var(--drift)) scale(0.3);
+          opacity: 0;
+        }
+      }
+
+      /* Global text shadow for all text, buttons, and frames */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      li,
+      a,
+      button,
+      span {
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Shadow for cards and frames */
+      div[class*="card"],
+      div[class*="bg-"],
+      div[class*="border"] {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Hover effects for buttons and frames */
+      button,
+      a[class*="bg-"],
+      div[class*="card"],
+      div[class*="border-"],
+      .mentor-card,
+      .founder-card {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      button:hover,
+      a[class*="bg-"]:hover,
+      div[class*="card"]:hover,
+      div[class*="border-"]:hover,
+      .mentor-card:hover,
+      .founder-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Exclude mentee cards from lift effect - they have their own border animation */
+      #mentee-carousel > div {
+        transition: border-color 0.3s ease !important;
+        transform: none !important;
+      }
+
+      #mentee-carousel > div:hover {
+        transform: none !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      /* Exclude founder cards from lift effect */
+      .founder-card {
+        transform: none !important;
+      }
+
+      .founder-card:hover {
+        transform: none !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      /* Founder card smooth transitions for carousel preview */
+      .founder-card {
+        transition: filter 0.5s ease-in-out, opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      }
+
+      /* Fade-in animation */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Scroll-triggered fade-in for about section */
+      .scroll-fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 1s ease-out,
+          transform 1s ease-out;
+      }
+
+      .scroll-fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Allow hover-float animation to work after scroll fade-in completes */
+      .scroll-fade-in.visible.hover-float {
+        animation: float 4s ease-in-out infinite !important;
+        transition: opacity 1s ease-out !important;
+      }
+
+      /* Staggered delays for about section elements */
+      .scroll-fade-in:nth-child(1) {
+        transition-delay: 0.1s;
+      }
+
+      .scroll-fade-in:nth-child(2) {
+        transition-delay: 0.3s;
+      }
+
+      .scroll-fade-in:nth-child(3) {
+        transition-delay: 0.5s;
+      }
+
+      /* Slideshow styles */
+      .slideshow-container {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+        visibility: hidden;
+      }
+
+      .slide.active {
+        opacity: 1;
+        transform: translateX(0);
+        visibility: visible;
+        position: relative;
+      }
+
+      .slide.prev {
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .slide.entering {
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: visible;
+      }
+
+      .slide.exiting {
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: visible;
+      }
+
+      /* Slide navigation buttons */
+      .slide-nav-container {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 10;
+      }
+
+      .slide-nav-btn {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+      }
+
+      .slide-nav-btn.active {
+        background: #3b82f6;
+        border-color: #3b82f6;
+        transform: scale(1.2);
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+      }
+
+      .slide-nav-btn:hover {
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(1.1);
+      }
+
+      /* Slide content positioning */
+      .slide-content {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+      }
+
+      /* Side arrow for slide navigation */
+      .slide-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background: rgba(59, 130, 246, 0.8);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .slide-arrow:hover {
+        background: rgba(59, 130, 246, 1);
+        transform: translateY(-50%) scale(1.15);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      }
+
+      .slide-arrow:active {
+        transform: translateY(-50%) scale(1.05);
+      }
+
+      .slide-arrow.right {
+        right: 20px;
+      }
+
+      .slide-arrow svg {
+        width: 20px;
+        height: 20px;
+        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      .slide-arrow:hover svg {
+        transform: translateX(2px);
+      }
+
+      /* Smooth scroll behavior for content within slides */
+      .slide .scroll-fade-in.visible {
+        animation: slideInUp 0.8s ease-out forwards;
+      }
+
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900 text-white font-sans">
+    <script>
+      // Intersection Observer to trigger fade-in animation
+      document.addEventListener("DOMContentLoaded", () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: "0px 0px -100px 0px",
+          },
+        );
+
+        // Function to observe all fade-in elements
+        const observeElements = () => {
+          document
+            .querySelectorAll(".fade-in, .scroll-fade-in")
+            .forEach((el) => observer.observe(el));
+        };
+
+        // Initial observation
+        observeElements();
+
+        // Re-observe after a short delay to catch dynamically added elements
+        setTimeout(observeElements, 100);
+        setTimeout(observeElements, 500);
       });
+    </script>
 
-      document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
-    });
-  </script>
+    <script>
+      // Synchronize gradient animations across all sections
+      document.addEventListener("DOMContentLoaded", () => {
+        const gradientElements = document.querySelectorAll(
+          '.animated-gradient, .animated-gradient-about, .animated-gradient-gray, .animated-gradient-blue-gray, .animated-gradient-footer'
+        );
+        
+        // Force restart all gradient animations at the same time
+        gradientElements.forEach(element => {
+          element.style.animationPlayState = 'paused';
+        });
+        
+        // Small delay to ensure all elements are paused, then restart synchronously
+        setTimeout(() => {
+          gradientElements.forEach(element => {
+            element.style.animation = 'none';
+            element.offsetHeight; // Trigger reflow
+            element.style.animation = 'gradient-shift 15s ease infinite';
+          });
+        }, 50);
+      });
+    </script>
 
-  <!-- Hero Section -->
-  <header class="h-screen flex flex-col justify-center items-center bg-gradient-to-br from-gray-800 to-blue-900 relative">
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 w-full bg-gray-800 bg-opacity-90 text-white py-4 shadow-lg z-50">
-      <div class="container mx-auto flex justify-between items-center px-6">
-        <a href="#" class="text-2xl font-bold">The Copula Program</a>
-        <ul class="flex space-x-6 text-lg">
-          <li><a href="#about" class="hover:text-blue-400">About</a></li>
-          <li><a href="#info" class="hover:text-blue-400">Info</a></li>
-          <li><a href="#apply" class="hover:text-blue-400">Apply</a></li>
-          <li><a href="mailto:info@copulaprogram.com" class="hover:text-blue-400">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
+    <!-- Hero Section -->
+    <header
+      class="h-screen flex flex-col justify-center items-center animated-gradient relative"
+    >
+      <!-- Navbar -->
+      <nav
+        class="fixed top-0 left-0 w-full bg-gray-800 bg-opacity-90 text-white py-4 shadow-lg z-50"
+      >
+        <div class="container mx-auto flex justify-between items-center px-6">
+          <a href="#" class="text-2xl font-bold">The <span class="gradient-text">Copula</span> Program</a>
+          <ul class="flex space-x-6 text-lg">
+            <li><a href="#about" class="hover:text-blue-400">About</a></li>
+            <li><a href="#info" class="hover:text-blue-400">Info</a></li>
+            <li><a href="#apply" class="gradient-text">Apply</a></li>
+            <li><a href="alumni.html" class="hover:text-blue-400">Alumni Resources</a></li>
+            <li>
+              <a
+                href="mailto:info@copulaprogram.com"
+                class="hover:text-blue-400"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    <!-- Hero Content -->
-    <div class="mt-20 flex flex-col justify-center items-center fade-in">
-      <img src="./static/logowhite.svg" alt="The Copula Program Logo" class="w-32 h-32 md:w-48 md:h-48 mb-6">
-      <h1 class="text-4xl md:text-6xl font-extrabold text-center">The Copula Program</h1>
-      <p class="mt-4 text-lg md:text-xl text-center max-w-2xl">
-        A six-week, remote academic mentorship for high school students.
-      </p>
-      <!-- Notification Banner -->
-      <div class="mt-4 bg-blue-500 text-white text-center py-3 px-4 shadow-lg rounded-lg">
-        <p class="text-lg">
-          Want to become an academic mentor this summer? Email 
-          <a href="mailto:info@copulaprogram.org" class="underline hover:text-blue-200">info@copulaprogram.org</a>.
+      <!-- Hero Content -->
+      <div class="mt-20 flex flex-col justify-center items-center fade-in">
+        <img
+          src="./static/logowhite.svg"
+          alt="The Copula Program Logo"
+          class="w-32 h-32 md:w-48 md:h-48 mb-6 logo-hover"
+        />
+        <h1
+          class="text-4xl md:text-6xl font-extrabold text-center logo-hover"
+          style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)"
+        >
+          The <span class="gradient-text">Copula</span> Program
+        </h1>
+        <p class="mt-4 text-lg md:text-xl text-center max-w-2xl">
+          A six-week, remote academic mentorship for high school students.
         </p>
+        <!-- Notification Banner -->
+        <div
+          class="mt-4 bg-blue-500 text-white text-center py-3 px-4 shadow-lg rounded-lg"
+        >
+          <p class="text-lg">
+            Want to become an academic mentor this summer? Email
+            <a
+              href="mailto:info@copulaprogram.org"
+              class="underline hover:text-blue-200"
+              >info@copulaprogram.org</a
+            >.
+          </p>
+        </div>
+        <div class="mt-8 flex space-x-4">
+          <a
+            href="#info"
+            class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600"
+            >Info</a
+          >
+          <a
+            href="#apply"
+            class="bg-gray-100 text-gray-900 px-6 py-3 rounded-lg shadow-lg hover:bg-gray-200"
+            >Apply</a
+          >
+        </div>
       </div>
-      <div class="mt-8 flex space-x-4">
-        <a href="#info" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600">Info</a>
-        <a href="#apply" class="bg-gray-100 text-gray-900 px-6 py-3 rounded-lg shadow-lg hover:bg-gray-200">Apply</a>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- About Section -->
-  <section id="about" class="pt-20 pb-20 h-screen relative bg-gradient-to-b from-gray-800 to-gray-900 text-white">
-    <div class="absolute inset-0 grid grid-cols-3 gap-2 photo-grid">
-      <img src="./static/gallery/img-1.png" alt="Gallery Image 1" class="w-full h-full object-cover">
-      <img src="./static/gallery/img-2.png" alt="Gallery Image 2" class="w-full h-full object-cover">
-      <img src="./static/gallery/img-3.png" alt="Gallery Image 3" class="w-full h-full object-cover">
-      <img src="./static/gallery/img-4.png" alt="Gallery Image 4" class="w-full h-full object-cover">
-      <img src="./static/gallery/img-5.png" alt="Gallery Image 5" class="w-full h-full object-cover">
-      <img src="./static/gallery/img-6.png" alt="Gallery Image 6" class="w-full h-full object-cover">
-      <img src="./static/gallery/img-7.png" alt="Gallery Image 7" class="w-full h-full object-cover">
-      <img src="./static/gallery/img-8.png" alt="Gallery Image 8" class="w-full h-full object-cover">
-      <img src="./static/gallery/img-9.png" alt="Gallery Image 9" class="w-full h-full object-cover">
-    </div>
-    <div class="relative h-screen content-center max-w-4xl mx-auto text-center px-6 fade-in">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6">About The Copula Program</h2>
-      <p class="text-lg md:text-xl leading-relaxed">
-        The Copula Program is a six-week remote summer mentorship that connects ambitious high school students from underrepresented backgrounds with academic mentors. Since 2020, we’ve helped nearly 100 students explore new fields and create meaningful research projects.
-      </p>
-      <p class="mt-6 text-lg md:text-xl leading-relaxed">
-        Our mission is simple: empower students to go beyond the high school curriculum and discover their academic potential. With guidance from experienced mentors, participants gain hands-on research experience and the skills to pursue academic careers.
-      </p>
-    </div>
-  </section>
-  
-  <!-- Info Section -->
-  <section id="info" class="pt-20 py-20 bg-gradient-to-b from-gray-800 to-gray-900 text-white">
-    <div class="max-w-6xl mx-auto px-6 text-center fade-in">
-      <h2 class="text-4xl md:text-5xl font-extrabold mb-10">
-        Work With an <span class="text-blue-400">Academic Professional</span>
-      </h2>
-      <p class="text-lg md:text-xl leading-relaxed mb-12">
-        Over six weeks, students plan and create a capstone project alongside seasoned academic mentors. Along the way, students enjoy guest lectures, masterclasses from academic professionals, and skill-building workshops.
-      </p>
-      <div class="relative">
-        <img src="./static/timeline.svg" alt="Copula Program Timeline" class="rounded-lg shadow-lg mx-auto max-w-full">
+    <!-- About & Info Slideshow Section -->
+    <section
+      id="about"
+      class="pt-48 pb-8 min-h-screen animated-gradient-about text-white slideshow-container ember-container"
+    >
+      <!-- Slide 1: About -->
+      <div class="slide active">
+        <div class="slide-content w-full px-6 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+          <!-- Text Content (Left Side) -->
+          <div class="lg:w-1/3 lg:pr-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 mt-8 hover-float scroll-fade-in">
+              About The <span class="text-blue-400 gradient-text">Copula Program</span>
+            </h2>
+            <p class="text-lg md:text-xl leading-relaxed mb-6 hover-float scroll-fade-in">
+              The Copula Program is a six-week remote summer mentorship that
+              connects ambitious high school students from underrepresented
+              backgrounds with academic mentors. Since 2020, we've helped nearly 100
+              students explore new fields and create meaningful research projects.
+            </p>
+            <p class="text-lg md:text-xl leading-relaxed hover-float scroll-fade-in">
+              Our mission is simple: empower students to go beyond the high school
+              curriculum and discover their academic potential. With guidance from
+              experienced mentors, participants gain hands-on research experience
+              and the skills to pursue academic careers.
+            </p>
+          </div>
+
+          <!-- Image Carousel (Right Side) -->
+          <div class="lg:w-2/3 relative w-full flex justify-center">
+            <div class="relative w-full max-w-md lg:max-w-none mx-auto">
+              <!-- Carousel Container -->
+              <div class="overflow-hidden rounded-lg relative" style="height: 600px;">
+                <div class="absolute inset-0">
+                  <div
+                    id="photo-carousel"
+                    class="flex flex-col transition-transform duration-500 ease-in-out"
+                    style="position: absolute; top: 0; left: 0; right: 0; width: 100%;"
+                  >
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-1.png"
+                      alt="TCP Image 1"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-2.png"
+                      alt="TCP Image 2"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-3.png"
+                      alt="TCP Image 3"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-4.png"
+                      alt="TCP Image 4"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-5.png"
+                      alt="TCP Image 5"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-6.png"
+                      alt="TCP Image 6"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-7.png"
+                      alt="TCP Image 7"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-8.png"
+                      alt="TCP Image 8"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-9.png"
+                      alt="TCP Image 9"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-10.png"
+                      alt="TCP Image 10"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-11.png"
+                      alt="TCP Image 11"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-12.png"
+                      alt="TCP Image 12"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-13.png"
+                      alt="TCP Image 13"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-14.png"
+                      alt="TCP Image 14"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-15.png"
+                      alt="TCP Image 15"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-16.png"
+                      alt="TCP Image 16"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-17.png"
+                      alt="TCP Image 17"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-18.png"
+                      alt="TCP Image 18"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-19.png"
+                      alt="TCP Image 19"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-20.png"
+                      alt="TCP Image 20"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-21.png"
+                      alt="TCP Image 21"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-22.png"
+                      alt="TCP Image 22"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-23.png"
+                      alt="TCP Image 23"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-24.png"
+                      alt="TCP Image 24"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-25.png"
+                      alt="TCP Image 25"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-26.png"
+                      alt="TCP Image 26"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-27.png"
+                      alt="TCP Image 27"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-28.png"
+                      alt="TCP Image 28"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-29.png"
+                      alt="TCP Image 29"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-30.png"
+                      alt="TCP Image 30"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-31.png"
+                      alt="TCP Image 31"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img
+                      src="./static/TCP image/img-32.png"
+                      alt="TCP Image 32"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <!-- Slide 2: Work with Academic Professional -->
+      <div class="slide">
+        <div class="slide-content w-full px-6 pt-20 py-20">
+          <div class="max-w-6xl mx-auto text-center fade-in">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-10 hover-float">
+              Work With an <span class="text-blue-400 gradient-text">Academic Professional</span>
+            </h2>
+            <p class="text-lg md:text-xl leading-relaxed mb-12 hover-float">
+              Over six weeks, students plan and create a capstone project alongside
+              seasoned academic mentors. Along the way, students enjoy guest
+              lectures, masterclasses from academic professionals, and
+              skill-building workshops.
+            </p>
+            <div class="relative">
+              <img
+                src="./static/timeline.svg"
+                alt="Copula Program Timeline"
+                class="rounded-lg shadow-lg mx-auto max-w-full"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Side Arrow -->
+      <button class="slide-arrow right" id="slide-next-arrow" aria-label="Next slide">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+
+      <!-- Slide Navigation -->
+      <div class="slide-nav-container">
+        <div class="slide-nav-btn active" data-slide="0"></div>
+        <div class="slide-nav-btn" data-slide="1"></div>
+      </div>
     </section>
 
-            
-            
-  <!-- Apply Section -->
-  <section id="apply" class="pt-20 h-screen flex flex-col justify-center items-center bg-gradient-to-t from-gray-900 to-blue-900 text-white px-6 fade-in">
-    <div class="max-w-4xl text-center">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6">Application Opens <span class="text-blue-400">This February</span> </h2>
-      <p class="text-lg md:text-xl leading-relaxed mb-8">
-        Ready to take the next step? Submit your application to our Summer 2025 cohort. Applications open in mid-February 2025.
-      </p>
-      <a href="#apply" class="mb-8 inline-block bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600">
-        Application Opening Soon
-      </a>
-      <p class="text-lg md:text-xl leading-relaxed mb-8">
-        Applicants to the Copula Program should currently be enrolled in high school. Priority will be given to current 10th and 11th grade students, though we have previously accepted 9th and 12th grade students.
-      </p>
-      <p class="text-lg md:text-xl leading-relaxed">
-        We encourage students with no prior research experience to apply. There is no application fee.
-      </p>
+    <!-- Past Mentee Experiences -->
+    <section
+      id="mentees"
+      class="pt-20 pb-20 animated-gradient-gray text-white overflow-hidden"
+    >
+      <div class="max-w-6xl mx-auto px-6 text-center fade-in mb-10">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
+          Past Mentee Experiences
+        </h2>
+        <p class="text-lg md:text-xl leading-relaxed max-w-4xl mx-auto">
+          Hear from our alumni about their experiences in The Copula Program and
+          how it shaped their academic journey.
+        </p>
+      </div>
 
-    </div>
-  </section>
-
-    <!-- Mentor Grid Section -->
-    <section id="mentors" class="pt-20 pb-20 text-white bg-[url('./static/campus.jpg')] bg-cover bg-center">
-        <div class="max-w-6xl mx-auto px-6 text-center fade-in">
-          <h2 class="text-4xl md:text-5xl font-extrabold mb-10">Our Past Mentors</h2>
+      <!-- Horizontal scrolling container -->
+      <div class="relative fade-in">
+        <div
+          id="mentee-carousel"
+          class="flex gap-6 overflow-x-auto px-6 pb-6 scroll-smooth"
+          style="scrollbar-width: thin; scrollbar-color: #3b82f6 #1f2937"
+        >
+          <!-- Mentee cards will be dynamically injected here -->
         </div>
-        <div id="mentor-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-6">
+      </div>
+    </section>
+
+    <!-- Apply Section -->
+    <section
+      id="apply"
+      class="pt-20 h-screen flex flex-col justify-center items-center animated-gradient-blue-gray text-white px-6 fade-in"
+    >
+      <div class="max-w-4xl text-center">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">
+          Application Opens <span class="text-blue-400 gradient-text">This February</span>
+        </h2>
+        <p class="text-lg md:text-xl leading-relaxed mb-8">
+          Applications for the Summer 2026 cohort have not yet opened.
+          Applications open in February 2026 and decisions will be released in
+          June 2026.
+        </p>
+        <a
+          href="#apply"
+          class="mb-8 inline-block bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600"
+        >
+          Application Opening Soon
+        </a>
+        <p class="text-lg md:text-xl leading-relaxed mb-8">
+          Applicants to the Copula Program should currently be enrolled in high
+          school. Priority will be given to current 10th and 11th grade
+          students, though we have previously accepted 9th and 12th grade
+          students.
+        </p>
+        <p class="text-lg md:text-xl leading-relaxed">
+          We encourage students with no prior research experience to apply.
+          There is no application fee.
+        </p>
+      </div>
+    </section>
+    <!-- Founders Carousel Section -->
+    <section
+      id="founders"
+      class="py-20 animated-gradient-gray text-white"
+    >
+      <div class="max-w-6xl mx-auto px-6 text-center mb-10 fade-in">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
+          Meet Our Founders
+        </h2>
+      </div>
+
+      <div class="relative max-w-5xl mx-auto px-12 fade-in">
+        <!-- Carousel Container with Peek -->
+        <div class="overflow-hidden relative px-4">
+          <div
+            id="founders-carousel"
+            class="flex transition-transform duration-500 ease-in-out gap-6"
+          >
+            <!-- Founder cards will be dynamically injected here -->
+          </div>
+        </div>
+
+        <!-- Previous Button -->
+        <button
+          id="founders-prev"
+          class="absolute left-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-10"
+          aria-label="Previous founder"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            ></path>
+          </svg>
+        </button>
+
+        <!-- Next Button -->
+        <button
+          id="founders-next"
+          class="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-10"
+          aria-label="Next founder"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            ></path>
+          </svg>
+        </button>
+
+        <!-- Indicator Dots -->
+        <div id="founders-indicators" class="flex justify-center gap-2 mt-8">
+          <!-- Dots will be dynamically injected here -->
+        </div>
+      </div>
+    </section>
+    <!-- Mentor Grid Section -->
+    <section
+      id="mentors"
+      class="pt-20 pb-20 text-white bg-[url('./static/campus.jpg')] bg-cover bg-center relative"
+    >
+      <!-- Animated gradient overlay -->
+      <div class="absolute inset-0 animated-gradient-gray opacity-80"></div>
+      
+      <!-- Content -->
+      <div class="relative z-10">
+        <div class="max-w-6xl mx-auto px-6 text-center fade-in">
+          <h2 class="text-4xl md:text-5xl font-extrabold mb-10">
+            Our Past Mentors
+          </h2>
+        </div>
+        <div
+          id="mentor-grid"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-6 fade-in"
+        >
           <!-- Mentor cards will be dynamically injected here -->
         </div>
-      </section>
-            
+      </div>
+    </section>
 
-  <!-- Footer -->
-  <footer id="contact" class="bg-gray-800 text-center py-6">
-    <p class="text-gray-400 text-sm">
-      © 2025 The Copula Program. All rights reserved.
-    </p>
-    <p class="text-gray-400 text-sm">
-      Get in touch: <a href="mailto:info@copulaprogram.org" class="text-blue-400 hover:underline">info@copulaprogram.org</a>
-    </p>
-    <p class="text-gray-400 text-sm">
-        Stay updated: <a href="https://www.instagram.com/copulaprogram/" class="text-blue-400 hover:underline">Instagram</a>, <a href="https://www.linkedin.com/company/65662788/" class="text-blue-400 hover:underline">Linkedin.</a>
-    </p>
-  </footer>
+    <!-- Footer -->
+    <footer id="contact" class="animated-gradient-footer text-center py-12 fade-in">
+      <p class="text-gray-400 text-sm">
+        © 2025 The Copula Program. All rights reserved.
+      </p>
+      <p class="text-gray-400 text-sm">
+        Get in touch:
+        <a
+          href="mailto:info@copulaprogram.org"
+          class="text-blue-400 hover:underline"
+          >info@copulaprogram.org</a
+        >
+      </p>
+      <p class="text-gray-400 text-sm">
+        Stay updated:
+        <a
+          href="https://www.instagram.com/copulaprogram/"
+          class="text-blue-400 hover:underline"
+          >Instagram</a
+        >,
+        <a
+          href="https://www.linkedin.com/company/65662788/"
+          class="text-blue-400 hover:underline"
+          >Linkedin.</a
+        >
+      </p>
+    </footer>
 
-  <script>
-    // JSON list of mentors
-    const mentors = [
-    { name: "Dr. Amittai Aviram", organization: "Boston College", field: "Dept. of Computer Science"},
-    { name: "Ms. Fazena Bacchus", organization: "Mott MacDonald", field: "Engineering" },
-    { name: "Dr. Leila Brammer", organization: "University of Chicago", field: "Public Discourse" },
-    { name: "Ms. Rebecca Chung", organization: "Claremont McKenna College/Global Health Strategies", field: "Project Specialist" },
-    { name: "Mr. Anotida Chikumbu", organization: "University of Massachusetts Amherst", field: "History"} ,
-    { name: "Dr. Dena Clink", organization: "Cornell University", field: "Center for Conservation Bioacoustics" },
-    { name: "Dr. Salvatore D'Oro", organization:" Northeastern University", field: "Dept. of Electrical and Computer Engineering"},
-    { name: "Ms. Bobbi Estabrook", organization: "Cornell University", field: "Center for Conservation Bioacoustics"},
-    { name: "Mr. Santiago Forero", organization: "Cornell University", field: "Dept. of Psychology" },
-    { name: "Dr. Melissa Gilliam", organization: "University of Chicago", field: "Dept. of Adolescent Health" },
-    { name: "Dr. Fiona Greenland", organization: "University of Virginia", field: "Dept. of Sociology"},
-    { name: "Dr. Guoqiang Gu", organization: "Vanderbilt University", field: "Diabetes Research" },
-    { name: "Dr. Sarah Hansen", organization: "Columbia University", field: "Chemistry" },
-    { name: "Dr. Daniela Hedwig", organization: "Cornell University", field: "Center for Conservation Bioacoustics" },
-    { name: "Dr. Cathy Keane", organization: "Washington University", field: "Dept. of Classics" },
-    { name: "Ms. Rikki Laser", organization: "Cornell University", field: "Dept. of Psychology" },
-    { name: "Dr. Ying-Hsuan Lin", organization: "University of California Riverside", field: "Dept. of Environmental Sciences"},
-    { name: "Dr. Timothy Moore", organization: "Washington University", field: "Dept. of Classics" },
-    { name: "Dr. Krishna Mudumbi", organization: "Yale University", field: "Dept. of Pharmacology"},
-    { name: "Dr. David Muñoz", organization: "Penn State University", field: "Independent Contractor, Environmental Science/Ecology" },
-    { name: "Dr. Adriana Reyes", organization: "Cornell University", field: "Policy Analysis and Management" },
-    { name: "Dr. Noah Sandstrom", organization: "Williams University", field: "Psychology & Neuroscience" },
-    { name: "Dr. Eitan Schechtman", organization: "University of California Irvine", field: "Dept. of Neurobiology and Behavior"},
-    { name: "Dr. Rebecca Sears", organization: "Washington University", field: "Dept. of Classics" },
-    { name: "Dr. Katherine Tschida", organization: "Cornell University", field: "Dept. of Psychology" },
-    { name: "Mr. Haarish Venkitachalam", organization: "Cummins Inc.", field: "Manufacturing, Engineering, Business Management" },
-    { name: "Dr. Celeste Wells", organization: "Boston College", field: "Communication" },
-    { name: "Dr. Daphney-Stavroula Zois", organization: "SUNY Albany", field: "Electrical and Computer Engineering" },
-    { name: "Dr. Brett Nava-Coulter", organization: "Tufts University", field: "Sociology" },
-    { name: "Dr. Paul Stevenson", organization: "Northeastern University", field: "Physics" },
-    { name: "Ms. Shae Omonijo", organization: "Harvard University", field: "History" }
-    ];
-    
-    // Select the grid container by its unique ID
-    const mentorGrid = document.getElementById("mentor-grid");
-    
-    // Dynamically inject mentor cards
-    mentors.forEach((mentor) => {
-      const mentorCard = document.createElement("div");
-      mentorCard.className = "bg-gray-800 p-6 rounded-lg shadow-lg";
-      mentorCard.innerHTML = `
+    <script>
+      // JSON list of mentors
+      const mentors = [
+        {
+          name: "Dr. Amittai Aviram",
+          organization: "Boston College",
+          field: "Dept. of Computer Science",
+        },
+        {
+          name: "Ms. Fazena Bacchus",
+          organization: "Mott MacDonald",
+          field: "Engineering",
+        },
+        {
+          name: "Dr. Leila Brammer",
+          organization: "University of Chicago",
+          field: "Public Discourse",
+        },
+        {
+          name: "Ms. Rebecca Chung",
+          organization: "Claremont McKenna College/Global Health Strategies",
+          field: "Project Specialist",
+        },
+        {
+          name: "Mr. Anotida Chikumbu",
+          organization: "University of Massachusetts Amherst",
+          field: "History",
+        },
+        {
+          name: "Dr. Dena Clink",
+          organization: "Cornell University",
+          field: "Center for Conservation Bioacoustics",
+        },
+        {
+          name: "Dr. Salvatore D'Oro",
+          organization: " Northeastern University",
+          field: "Dept. of Electrical and Computer Engineering",
+        },
+        {
+          name: "Ms. Bobbi Estabrook",
+          organization: "Cornell University",
+          field: "Center for Conservation Bioacoustics",
+        },
+        {
+          name: "Mr. Santiago Forero",
+          organization: "Cornell University",
+          field: "Dept. of Psychology",
+        },
+        {
+          name: "Dr. Melissa Gilliam",
+          organization: "University of Chicago",
+          field: "Dept. of Adolescent Health",
+        },
+        {
+          name: "Dr. Fiona Greenland",
+          organization: "University of Virginia",
+          field: "Dept. of Sociology",
+        },
+        {
+          name: "Dr. Guoqiang Gu",
+          organization: "Vanderbilt University",
+          field: "Diabetes Research",
+        },
+        {
+          name: "Dr. Sarah Hansen",
+          organization: "Columbia University",
+          field: "Chemistry",
+        },
+        {
+          name: "Dr. Daniela Hedwig",
+          organization: "Cornell University",
+          field: "Center for Conservation Bioacoustics",
+        },
+        {
+          name: "Dr. Cathy Keane",
+          organization: "Washington University",
+          field: "Dept. of Classics",
+        },
+        {
+          name: "Ms. Rikki Laser",
+          organization: "Cornell University",
+          field: "Dept. of Psychology",
+        },
+        {
+          name: "Dr. Ying-Hsuan Lin",
+          organization: "University of California Riverside",
+          field: "Dept. of Environmental Sciences",
+        },
+        {
+          name: "Dr. Timothy Moore",
+          organization: "Washington University",
+          field: "Dept. of Classics",
+        },
+        {
+          name: "Dr. Krishna Mudumbi",
+          organization: "Yale University",
+          field: "Dept. of Pharmacology",
+        },
+        {
+          name: "Dr. David Muñoz",
+          organization: "Penn State University",
+          field: "Independent Contractor, Environmental Science/Ecology",
+        },
+        {
+          name: "Dr. Adriana Reyes",
+          organization: "Cornell University",
+          field: "Policy Analysis and Management",
+        },
+        {
+          name: "Dr. Noah Sandstrom",
+          organization: "Williams University",
+          field: "Psychology & Neuroscience",
+        },
+        {
+          name: "Dr. Eitan Schechtman",
+          organization: "University of California Irvine",
+          field: "Dept. of Neurobiology and Behavior",
+        },
+        {
+          name: "Dr. Rebecca Sears",
+          organization: "Washington University",
+          field: "Dept. of Classics",
+        },
+        {
+          name: "Dr. Katherine Tschida",
+          organization: "Cornell University",
+          field: "Dept. of Psychology",
+        },
+        {
+          name: "Mr. Haarish Venkitachalam",
+          organization: "Cummins Inc.",
+          field: "Manufacturing, Engineering, Business Management",
+        },
+        {
+          name: "Dr. Celeste Wells",
+          organization: "Boston College",
+          field: "Communication",
+        },
+        {
+          name: "Dr. Daphney-Stavroula Zois",
+          organization: "SUNY Albany",
+          field: "Electrical and Computer Engineering",
+        },
+        {
+          name: "Dr. Brett Nava-Coulter",
+          organization: "Tufts University",
+          field: "Sociology",
+        },
+        {
+          name: "Dr. Paul Stevenson",
+          organization: "Northeastern University",
+          field: "Physics",
+        },
+        {
+          name: "Ms. Shae Omonijo",
+          organization: "Harvard University",
+          field: "History",
+        },
+      ];
+
+      // Select the grid container by its unique ID
+      const mentorGrid = document.getElementById("mentor-grid");
+
+      // Dynamically inject mentor cards
+      mentors.forEach((mentor, index) => {
+        const mentorCard = document.createElement("div");
+        mentorCard.className = "bg-gray-800 p-6 rounded-lg shadow-lg fade-in";
+        mentorCard.style.transitionDelay = `${index * 0.05}s`;
+        mentorCard.innerHTML = `
         <h4 class="font-bold text-xl text-blue-400">${mentor.name}</h4>
         <p class="text-md italic text-gray-300">${mentor.organization}</p>
         <p class="text-sm text-gray-400">${mentor.field}</p>
       `;
-      mentorGrid.appendChild(mentorCard);
-    });
-  </script>
-  
+        mentorGrid.appendChild(mentorCard);
+      });
+    </script>
+
+    <script>
+      // JSON list of mentees
+      const mentees = [
+        {
+          name: "Tina Osman",
+          year: "2025 Cohort",
+          project: "Women's Activism and Resistance in Sudan",
+          quote:
+            "The Copula Program was an incredible experience in which I was able to dive into a deeply personal research project. Through the program, I learned to channel my questioning nature into creating a tangible impact and articulate my ideas into action. The environment of passionate peers and organizers pushed me to practive a level of critical thinking and evaluation I had not yet engaged with.",
+        },
+        {
+          name: "Thea Fletcher",
+          year: "2025 Cohort",
+          project: "The Effects of U.S Infastructure on Indigenous Lands and Communities",
+          quote:
+            "During the Copula program, I worked with Ms. Keziah Anderson, a PhD student at Harvard! She gave me copious academic resources on indigenous tribes and how they have been affected by U.S. infastructure throughout history. I gained more insight on how to conduct humanities research, and I absolutely loved my time in the program!",
+        },
+        {
+          name: "Sofia Zambrano",
+          year: "2025 Cohort",
+          project: "The Oil Industry and The Ecuadorian State's Subversive Relationship with Amazonian Indigeonous Policy",
+          quote:
+            "My time at TCP allowed me to learn about the people and places I care most about. I was given access to information and support I never would have gotten before, and I used it to create a project I was proud to share. I had fun learning about and researching my interests, and expanded my world view in the process.",
+        },
+        {
+          name: "Cemantha Hearing",
+          year: "2025 Cohort",
+          project: "Optical Coherence Tomography and Photon Interaction",
+          quote:
+            "Going into the Copula Program, my intrests lied specifically within high beam physics. However, after being paired with a mentor who specialized in medical imaging technology, I was able to open my eyes to the countless number of possibilities the fields of physics and engineering offered.",
+        },
+       
+      ];
+
+      // Select the carousel container
+      const menteeCarousel = document.getElementById("mentee-carousel");
+
+      // Dynamically inject mentee cards
+      mentees.forEach((mentee, index) => {
+        const menteeCard = document.createElement("div");
+        menteeCard.className =
+          "bg-gray-800 p-8 rounded-lg shadow-lg flex-shrink-0 w-96 border border-gray-700 hover:border-blue-500 transition-all duration-300 fade-in";
+        menteeCard.style.transitionDelay = `${index * 0.1}s`;
+        menteeCard.innerHTML = `
+          <h4 class="font-bold text-2xl text-blue-400 mb-2">${mentee.name}</h4>
+          <p class="text-sm text-gray-400 mb-1">${mentee.year}</p>
+          <p class="text-md italic text-blue-300 mb-4">${mentee.project}</p>
+          <p class="text-gray-300 leading-relaxed">"${mentee.quote}"</p>
+        `;
+        menteeCarousel.appendChild(menteeCard);
+      });
+    </script>
+
+    <script>
+      // JSON list of founders
+      const founders = [
+        {
+          name: "Rebecca Monge",
+          title: "Co-Founder",
+          bio: "“My co-directors and I founded TCP as a way to make professional mentorship accessible to high school students across the US, a cause that I believe in profoundly.”",
+          image: "./static/founders/rebecca.jpg"
+        },
+        {
+          name: "Shruti Gautam",
+          title: "Co-Founder",
+          bio: "“We started TCP out of a desire to share our institutional knowledge, making more students aware of what academia can offer. But, it's also been an opportunity to introduce education in of itself, focusing not on an end product but the learning process itself.”",
+          image: "./static/founders/shruti.jpg"
+        },
+        {
+          name: "Neil Mehta",
+          title: "Co-Founder",
+          bio: "“The Copula Program is the best way for students to gain real research experience and meet a community of like-minded students.”",
+          image: "./static/founders/neil.jpg"
+        },
+      ];
+
+      // Select the carousel container and controls
+      const foundersCarousel = document.getElementById("founders-carousel");
+      const foundersIndicators = document.getElementById("founders-indicators");
+      const prevBtn = document.getElementById("founders-prev");
+      const nextBtn = document.getElementById("founders-next");
+
+      let currentFounderIndex = 1; // Start at 1 because we'll add a clone before
+      let isTransitioning = false;
+      let autoAdvanceTimer;
+
+      // Helper function to create a founder card
+      function createFounderCard(founder, isClone = false) {
+        const founderCard = document.createElement("div");
+        founderCard.className =
+          "founder-card bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg flex-shrink-0 border border-gray-700";
+        founderCard.style.width = "420px";
+        founderCard.style.minHeight = "550px";
+        if (isClone) {
+          founderCard.setAttribute("data-clone", "true");
+        }
+        founderCard.innerHTML = `
+          <div class="w-64 h-64 bg-gray-700 rounded-lg mb-6 flex items-center justify-center overflow-hidden mx-auto">
+            ${founder.image ? 
+              `<img src="${founder.image}" alt="${founder.name}" class="w-full h-full object-cover rounded-lg">` :
+              `<svg class="w-24 h-24 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+              </svg>`
+            }
+          </div>
+          <h4 class="font-bold text-2xl text-blue-400 mb-3 text-center">${founder.name}</h4>
+          <p class="text-md italic text-blue-300 mb-4 text-center">${founder.title}</p>
+          <p class="text-gray-300 leading-relaxed text-sm text-center">${founder.bio}</p>
+        `;
+        return founderCard;
+      }
+
+      // Inject founder cards with clones for infinite loop
+      // Add clone of last card at beginning
+      foundersCarousel.appendChild(
+        createFounderCard(founders[founders.length - 1], true),
+      );
+
+      // Add all real cards
+      founders.forEach((founder, index) => {
+        const card = createFounderCard(founder);
+        foundersCarousel.appendChild(card);
+
+        // Create indicator dot
+        const dot = document.createElement("button");
+        dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${
+          index === 0 ? "bg-blue-500 w-8" : "bg-gray-500"
+        }`;
+        dot.setAttribute("aria-label", `Go to founder ${index + 1}`);
+        dot.addEventListener("click", () => {
+          clearTimeout(autoAdvanceTimer);
+          goToFounderSlide(index + 1); // +1 because of leading clone
+          startAutoAdvance();
+        });
+        foundersIndicators.appendChild(dot);
+      });
+
+      // Add clone of first card at end
+      foundersCarousel.appendChild(createFounderCard(founders[0], true));
+
+      // Function to update carousel position and blur effects
+      function updateFounderCarousel(animate = true) {
+        // Responsive card width based on screen size
+        const isMobile = window.innerWidth <= 768;
+        const isSmallMobile = window.innerWidth <= 480;
+        
+        let cardWidth;
+        if (isSmallMobile) {
+          cardWidth = Math.min(320, window.innerWidth * 0.95);
+        } else if (isMobile) {
+          cardWidth = Math.min(350, window.innerWidth * 0.9);
+        } else {
+          cardWidth = 420;
+        }
+        
+        const gap = isMobile ? 16 : 24;
+        const containerWidth = foundersCarousel.parentElement.offsetWidth;
+        const centerOffset = (containerWidth - cardWidth) / 2;
+        const offset = centerOffset - currentFounderIndex * (cardWidth + gap);
+
+        // Enable or disable transition
+        if (animate) {
+          foundersCarousel.style.transition = "transform 0.5s ease-in-out";
+        } else {
+          foundersCarousel.style.transition = "none";
+        }
+
+        foundersCarousel.style.transform = `translateX(${offset}px)`;
+
+        // Update blur effects on cards - always show preview cards with blur
+        const allCards = foundersCarousel.querySelectorAll(".founder-card");
+        allCards.forEach((card, index) => {
+          if (index === currentFounderIndex) {
+            // Active card: sharp and full opacity
+            card.style.filter = "blur(0px)";
+            card.style.opacity = "1";
+            card.style.transform = "scale(1)";
+          } else {
+            // Peripheral cards: blurred and semi-transparent - show as previews
+            card.style.filter = "blur(3px)";
+            card.style.opacity = "0.7";
+            card.style.transform = "scale(0.95)";
+          }
+        });
+
+        // Update indicator dots (only for real cards, not clones)
+        const dots = foundersIndicators.children;
+        const realIndex = currentFounderIndex - 1; // Adjust for leading clone
+        Array.from(dots).forEach((dot, index) => {
+          if (index === realIndex % founders.length) {
+            dot.className =
+              "w-8 h-3 rounded-full bg-blue-500 transition-all duration-300";
+          } else {
+            dot.className =
+              "w-3 h-3 rounded-full bg-gray-500 transition-all duration-300";
+          }
+        });
+      }
+
+      // Handle infinite loop reset
+      foundersCarousel.addEventListener("transitionend", () => {
+        const totalCards = founders.length + 2; // Real cards + 2 clones
+
+        // If we're on the first clone (index 0), jump to the real last card
+        if (currentFounderIndex === 0) {
+          currentFounderIndex = founders.length;
+          updateFounderCarousel(false); // No animation
+        }
+        // If we're on the last clone, jump to the real first card
+        else if (currentFounderIndex === totalCards - 1) {
+          currentFounderIndex = 1;
+          updateFounderCarousel(false); // No animation
+        }
+
+        isTransitioning = false;
+      });
+
+      // Go to specific slide
+      function goToFounderSlide(index) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentFounderIndex = index;
+        updateFounderCarousel(true);
+      }
+
+      // Next button
+      nextBtn.addEventListener("click", () => {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        clearTimeout(autoAdvanceTimer);
+        currentFounderIndex++;
+        updateFounderCarousel(true);
+        startAutoAdvance();
+      });
+
+      // Previous button
+      prevBtn.addEventListener("click", () => {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        clearTimeout(autoAdvanceTimer);
+        currentFounderIndex--;
+        updateFounderCarousel(true);
+        startAutoAdvance();
+      });
+
+      // Auto-advance function
+      function startAutoAdvance() {
+        clearTimeout(autoAdvanceTimer);
+        autoAdvanceTimer = setTimeout(() => {
+          if (!isTransitioning) {
+            isTransitioning = true;
+            currentFounderIndex++;
+            updateFounderCarousel(true);
+          }
+          startAutoAdvance();
+        }, 5000);
+      }
+
+      // Initialize carousel position on page load
+      window.addEventListener("load", () => {
+        updateFounderCarousel(false);
+        startAutoAdvance();
+      });
+      window.addEventListener("resize", () => updateFounderCarousel(false));
+    </script>
+
+    <script>
+      // Vertical carousel for About section photos with blurred previews
+      document.addEventListener("DOMContentLoaded", () => {
+        const carousel = document.getElementById("photo-carousel");
+        const slides = Array.from(carousel.querySelectorAll(".photo-slide"));
+        let currentPhotoIndex = 0;
+        let shuffledIndices = [];
+
+        // Create shuffled array of indices
+        function createShuffledIndices() {
+          shuffledIndices = Array.from({length: slides.length}, (_, i) => i);
+          // Fisher-Yates shuffle algorithm
+          for (let i = shuffledIndices.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledIndices[i], shuffledIndices[j]] = [shuffledIndices[j], shuffledIndices[i]];
+          }
+          currentPhotoIndex = 0;
+        }
+
+        function updatePhotoCarousel() {
+          // Get the actual image index from the shuffled array
+          const actualImageIndex = shuffledIndices[currentPhotoIndex];
+          
+          // Center the current slide in the 600px container
+          // Container is 600px, slide is 400px, so we want 100px padding at top
+          // Offset to center: 100px (top padding) - (actualImageIndex * 400px)
+          const centerOffset = 100 - (actualImageIndex * 400);
+          carousel.style.transform = `translateY(${centerOffset}px)`;
+
+          // Update blur classes
+          slides.forEach((slide, index) => {
+            slide.classList.remove('active', 'blurred');
+            
+            if (index === actualImageIndex) {
+              slide.classList.add('active');
+            } else {
+              slide.classList.add('blurred');
+            }
+          });
+        }
+
+        function nextImage() {
+          currentPhotoIndex = (currentPhotoIndex + 1) % shuffledIndices.length;
+          
+          // If we've gone through all images, reshuffle for the next cycle
+          if (currentPhotoIndex === 0) {
+            createShuffledIndices();
+          }
+          
+          updatePhotoCarousel();
+        }
+
+        function prevImage() {
+          currentPhotoIndex = (currentPhotoIndex - 1 + shuffledIndices.length) % shuffledIndices.length;
+          updatePhotoCarousel();
+        }
+
+        // Initialize with shuffle
+        createShuffledIndices();
+        updatePhotoCarousel();
+
+        // Auto-advance every 5 seconds for smoother experience
+        setInterval(nextImage, 5000);
+      });
+    </script>
+
+    <script>
+      // About & Info Slideshow functionality
+      document.addEventListener("DOMContentLoaded", () => {
+        const slides = document.querySelectorAll('#about .slide');
+        const navButtons = document.querySelectorAll('.slide-nav-btn');
+        let currentSlide = 0;
+        let isTransitioning = false;
+
+        function showSlide(index) {
+          if (isTransitioning || index === currentSlide) return;
+          
+          isTransitioning = true;
+          
+          // Clear current auto-advance
+          clearTimeout(autoAdvanceInterval);
+          
+          const currentSlideElement = slides[currentSlide];
+          const nextSlideElement = slides[index];
+          
+          // Set up the next slide to enter from the right
+          nextSlideElement.classList.remove('prev');
+          nextSlideElement.classList.add('entering');
+          nextSlideElement.style.visibility = 'visible';
+          
+          // Update navigation buttons
+          navButtons[currentSlide].classList.remove('active');
+          navButtons[index].classList.add('active');
+          
+          // Trigger the animation with a small delay
+          setTimeout(() => {
+            // Move current slide out to the left
+            currentSlideElement.classList.remove('active');
+            currentSlideElement.classList.add('exiting');
+            
+            // Move next slide into center position
+            nextSlideElement.classList.remove('entering');
+            nextSlideElement.classList.add('active');
+            
+            currentSlide = index;
+            
+            // Clean up after animation completes
+            setTimeout(() => {
+              currentSlideElement.classList.remove('exiting');
+              currentSlideElement.classList.add('prev');
+              currentSlideElement.style.visibility = 'hidden';
+              
+              // Restart auto-advance
+              startAutoAdvance();
+              
+              // Reset transition flag
+              isTransitioning = false;
+            }, 2000);
+          }, 50);
+        }
+
+        // Add click listeners to navigation buttons
+        navButtons.forEach((button, index) => {
+          button.addEventListener('click', () => {
+            showSlide(index);
+          });
+        });
+
+        // Add click listener to side arrow
+        const nextArrow = document.getElementById('slide-next-arrow');
+        
+        nextArrow.addEventListener('click', () => {
+          const nextSlide = (currentSlide + 1) % slides.length;
+          showSlide(nextSlide);
+        });
+
+        // Auto-advance slides with different timing for each slide
+        function startAutoAdvance() {
+          const slideDurations = [10000, 10000]; // About: 10s, Work with Academic: 10s
+          const currentDuration = slideDurations[currentSlide];
+          
+          autoAdvanceInterval = setTimeout(() => {
+            const nextSlide = (currentSlide + 1) % slides.length;
+            showSlide(nextSlide);
+            startAutoAdvance(); // Restart with new timing
+          }, currentDuration);
+        }
+
+        let autoAdvanceInterval;
+        startAutoAdvance();
+
+        // Pause auto-advance when user hovers over the slideshow
+        const slideshowContainer = document.getElementById('about');
+        slideshowContainer.addEventListener('mouseenter', () => {
+          clearTimeout(autoAdvanceInterval);
+        });
+
+        slideshowContainer.addEventListener('mouseleave', () => {
+          startAutoAdvance();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft' && currentSlide > 0) {
+            showSlide(currentSlide - 1);
+          } else if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
+            showSlide(currentSlide + 1);
+          }
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = null;
+        let touchStartY = null;
+
+        slideshowContainer.addEventListener('touchstart', (e) => {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        slideshowContainer.addEventListener('touchend', (e) => {
+          if (!touchStartX || !touchStartY) return;
+
+          const touchEndX = e.changedTouches[0].clientX;
+          const touchEndY = e.changedTouches[0].clientY;
+          const deltaX = touchStartX - touchEndX;
+          const deltaY = touchStartY - touchEndY;
+
+          // Only trigger if horizontal swipe is more significant than vertical
+          if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+            if (deltaX > 0 && currentSlide < slides.length - 1) {
+              // Swipe left - next slide
+              showSlide(currentSlide + 1);
+            } else if (deltaX < 0 && currentSlide > 0) {
+              // Swipe right - previous slide
+              showSlide(currentSlide - 1);
+            }
+          }
+
+          touchStartX = null;
+          touchStartY = null;
+        }, { passive: true });
+      });
+    </script>
+
+    <script>
+      // White ember/bubble effect for gradient backgrounds
+      document.addEventListener("DOMContentLoaded", () => {
+        // Find all gradient background sections
+        const gradientSections = document.querySelectorAll(
+          '.animated-gradient, .animated-gradient-about, .animated-gradient-gray, .animated-gradient-blue-gray, .animated-gradient-footer'
+        );
+
+        gradientSections.forEach((section) => {
+          // Add ember-container class
+          section.classList.add('ember-container');
+
+          // Create embers periodically
+          function createEmber() {
+            const ember = document.createElement('div');
+            ember.classList.add('ember');
+
+            // Random size between 3px and 12px
+            const size = Math.random() * 9 + 3;
+            ember.style.width = `${size}px`;
+            ember.style.height = `${size}px`;
+
+            // Random horizontal position
+            const leftPosition = Math.random() * 100;
+            ember.style.left = `${leftPosition}%`;
+
+            // Start from bottom
+            ember.style.bottom = '-20px';
+
+            // Random drift (horizontal movement during float)
+            const drift = (Math.random() - 0.5) * 100;
+            ember.style.setProperty('--drift', `${drift}px`);
+
+            // Random animation duration between 8 and 15 seconds
+            const duration = Math.random() * 7 + 8;
+            ember.style.animationDuration = `${duration}s`;
+
+            // Random delay before starting
+            const delay = Math.random() * 2;
+            ember.style.animationDelay = `${delay}s`;
+
+            section.appendChild(ember);
+
+            // Remove ember after animation completes
+            setTimeout(() => {
+              ember.remove();
+            }, (duration + delay) * 1000);
+          }
+
+          // Create initial batch of embers
+          for (let i = 0; i < 15; i++) {
+            setTimeout(createEmber, Math.random() * 2000);
+          }
+
+          // Continuously create new embers
+          setInterval(createEmber, 800);
+        });
+      });
+    </script>
   </body>
 </html>
