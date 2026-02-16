@@ -318,148 +318,6 @@
         transition-delay: 0.5s;
       }
 
-      /* Slideshow styles */
-      .slideshow-container {
-        position: relative;
-        overflow: hidden;
-      }
-
-      .slide {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        opacity: 0;
-        transform: translateX(100%);
-        transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
-        visibility: hidden;
-      }
-
-      .slide.active {
-        opacity: 1;
-        transform: translateX(0);
-        visibility: visible;
-        position: relative;
-      }
-
-      .slide.prev {
-        transform: translateX(-100%);
-        opacity: 0;
-        visibility: hidden;
-      }
-
-      .slide.entering {
-        transform: translateX(100%);
-        opacity: 0;
-        visibility: visible;
-      }
-
-      .slide.exiting {
-        transform: translateX(-100%);
-        opacity: 0;
-        visibility: visible;
-      }
-
-      /* Slide navigation buttons */
-      .slide-nav-container {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 12px;
-        z-index: 10;
-      }
-
-      .slide-nav-btn {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.4);
-        border: 2px solid rgba(255, 255, 255, 0.6);
-        cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        position: relative;
-      }
-
-      .slide-nav-btn.active {
-        background: #3b82f6;
-        border-color: #3b82f6;
-        transform: scale(1.2);
-        box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
-      }
-
-      .slide-nav-btn:hover {
-        background: rgba(255, 255, 255, 0.6);
-        transform: scale(1.1);
-      }
-
-      /* Slide content positioning */
-      .slide-content {
-        min-height: 80vh;
-        display: flex;
-        align-items: center;
-      }
-
-      /* Side arrow for slide navigation */
-      .slide-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 50px;
-        height: 50px;
-        background: rgba(59, 130, 246, 0.8);
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        z-index: 20;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      }
-
-      .slide-arrow:hover {
-        background: rgba(59, 130, 246, 1);
-        transform: translateY(-50%) scale(1.15);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-      }
-
-      .slide-arrow:active {
-        transform: translateY(-50%) scale(1.05);
-      }
-
-      .slide-arrow.right {
-        right: 20px;
-      }
-
-      .slide-arrow svg {
-        width: 20px;
-        height: 20px;
-        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-      }
-
-      .slide-arrow:hover svg {
-        transform: translateX(2px);
-      }
-
-      /* Smooth scroll behavior for content within slides */
-      .slide .scroll-fade-in.visible {
-        animation: slideInUp 0.8s ease-out forwards;
-      }
-
-      @keyframes slideInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
     </style>
   </head>
   <body class="bg-gray-900 text-white font-sans">
@@ -531,8 +389,8 @@
           <a href="#" class="text-2xl font-bold">The <span class="gradient-text">Copula</span> Program</a>
           <ul class="flex space-x-6 text-lg">
             <li><a href="#about" class="hover:text-blue-400">About</a></li>
-            <li><a href="#apply" class="gradient-text">Apply</a></li>
-            <li><a href="alumni.html" class="hover:text-blue-400">Alumni Resources</a></li>
+            <li><a href="#faq" class="hover:text-blue-400">FAQs</a></li>
+            <li><a href="https://forms.gle/wCx1BJAEAgzEwCY48" class="gradient-text">Apply</a></li>
             <li>
               <a
                 href="mailto:info@copulaprogram.com"
@@ -575,7 +433,7 @@
         </div>
         <div class="mt-8 flex justify-center">
           <a
-            href="#apply"
+            href="https://forms.gle/wCx1BJAEAgzEwCY48"
             class="bg-gray-100 text-gray-900 px-8 py-4 rounded-lg shadow-2xl hover:bg-gray-200 hover:shadow-3xl transition-all duration-300 font-bold text-xl hover-float hover:scale-105"
             >Apply</a
           >
@@ -583,319 +441,207 @@
       </div>
     </header>
 
-    <!-- About & Info Slideshow Section -->
+    <!-- Application Deadline Banner -->
+    <section class="bg-white text-gray-900" style="background-color: #ffffff; color: #3b82f6;">
+      <div class="max-w-6xl mx-auto px-6 py-3 text-center">
+        <p class="text-lg md:text-xl font-bold">
+          Applications due April 15th! <a href="https://forms.gle/wCx1BJAEAgzEwCY48" class="text-blue-600 font-bold underline" style="font-weight: 800;">Apply now.</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- About Section -->
     <section
       id="about"
-      class="pt-48 pb-8 min-h-screen animated-gradient-about text-white slideshow-container"
+      class="py-20 min-h-screen animated-gradient text-white"
     >
-      <!-- Slide 1: About -->
-      <div class="slide active">
-        <div class="slide-content w-full px-6 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-          <!-- Text Content (Left Side) -->
-          <div class="lg:w-1/3 lg:pr-8">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6 mt-8 hover-float scroll-fade-in">
-              About The <span class="text-blue-400 gradient-text">Copula Program</span>
-            </h2>
-            <p class="text-lg md:text-xl leading-relaxed mb-6 hover-float scroll-fade-in">
-              The Copula Program is a six-week remote summer mentorship that
-              connects ambitious high school students from underrepresented
-              backgrounds with academic mentors. Since 2020, we've helped nearly 100
-              students explore new fields and create meaningful research projects.
-            </p>
-            <p class="text-lg md:text-xl leading-relaxed hover-float scroll-fade-in">
-              Our mission is simple: empower students to go beyond the high school
-              curriculum and discover their academic potential. With guidance from
-              experienced mentors, participants gain hands-on research experience
-              and the skills to pursue academic careers.
-            </p>
-          </div>
+      <div class="w-full px-6 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 min-h-[80vh]">
+        <!-- Text Content (Left Side) -->
+        <div class="lg:w-1/3 lg:pr-8">
+          <h2 class="text-4xl md:text-5xl font-bold mb-6 hover-float scroll-fade-in">
+            About The <span class="text-blue-400 gradient-text">Copula Program</span>
+          </h2>
+          <p class="text-lg md:text-xl leading-relaxed mb-6 hover-float scroll-fade-in">
+            The Copula Program is a six-week remote summer mentorship that
+            connects ambitious high school students from underrepresented
+            backgrounds with academic mentors. Since 2020, we've helped nearly 100
+            students explore new fields and create meaningful research projects.
+          </p>
+          <p class="text-lg md:text-xl leading-relaxed hover-float scroll-fade-in">
+            Our mission is simple: empower students to go beyond the high school
+            curriculum and discover their academic potential. With guidance from
+            experienced mentors, participants gain hands-on research experience
+            and the skills to pursue academic careers.
+          </p>
+        </div>
 
-          <!-- Image Carousel (Right Side) -->
-          <div class="lg:w-2/3 relative w-full flex justify-center">
-            <div class="relative w-full max-w-md lg:max-w-none mx-auto">
-              <!-- Carousel Container -->
-              <div class="overflow-hidden rounded-lg relative" style="height: 600px;">
-                <div class="absolute inset-0">
-                  <div
-                    id="photo-carousel"
-                    class="flex flex-col transition-transform duration-500 ease-in-out"
-                    style="position: absolute; top: 0; left: 0; right: 0; width: 100%;"
-                  >
+        <!-- Image Carousel (Right Side) -->
+        <div class="lg:w-2/3 relative w-full flex justify-center">
+          <div class="relative w-full max-w-md lg:max-w-none mx-auto">
+            <!-- Carousel Container -->
+            <div class="overflow-hidden rounded-lg relative" style="height: 600px;">
+              <div class="absolute inset-0">
+                <div
+                  id="photo-carousel"
+                  class="flex flex-col transition-transform duration-2000 ease-in-out"
+                  style="position: absolute; top: 0; left: 0; right: 0; width: 100%;"
+                >
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-1.png"
+                      src="./static/gallery/img-1.png"
                       alt="TCP Image 1"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-2.png"
+                      src="./static/gallery/img-2.png"
                       alt="TCP Image 2"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-3.png"
+                      src="./static/gallery/img-3.png"
                       alt="TCP Image 3"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-4.png"
+                      src="./static/gallery/img-4.png"
                       alt="TCP Image 4"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-5.png"
+                      src="./static/gallery/img-5.png"
                       alt="TCP Image 5"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-6.png"
+                      src="./static/gallery/img-6.png"
                       alt="TCP Image 6"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-7.png"
+                      src="./static/gallery/img-7.png"
                       alt="TCP Image 7"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-8.png"
+                      src="./static/gallery/img-8.png"
                       alt="TCP Image 8"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-9.png"
+                      src="./static/gallery/img-9.png"
                       alt="TCP Image 9"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-10.png"
+                      src="./static/gallery/img-10.png"
                       alt="TCP Image 10"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-11.png"
+                      src="./static/gallery/img-11.png"
                       alt="TCP Image 11"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-12.png"
+                      src="./static/gallery/img-12.png"
                       alt="TCP Image 12"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-13.png"
+                      src="./static/gallery/img-13.png"
                       alt="TCP Image 13"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-14.png"
+                      src="./static/gallery/img-14.png"
                       alt="TCP Image 14"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-15.png"
+                      src="./static/gallery/img-15.png"
                       alt="TCP Image 15"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-16.png"
+                      src="./static/gallery/img-16.png"
                       alt="TCP Image 16"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-17.png"
+                      src="./static/gallery/img-17.png"
                       alt="TCP Image 17"
                       class="w-full h-full object-cover"
                     />
                   </div>
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
                     <img
-                      src="./static/TCP image/img-18.png"
+                      src="./static/gallery/img-18.png"
                       alt="TCP Image 18"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-19.png"
-                      alt="TCP Image 19"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-20.png"
-                      alt="TCP Image 20"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-21.png"
-                      alt="TCP Image 21"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-22.png"
-                      alt="TCP Image 22"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-23.png"
-                      alt="TCP Image 23"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-24.png"
-                      alt="TCP Image 24"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-25.png"
-                      alt="TCP Image 25"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-26.png"
-                      alt="TCP Image 26"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-27.png"
-                      alt="TCP Image 27"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-28.png"
-                      alt="TCP Image 28"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-29.png"
-                      alt="TCP Image 29"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-30.png"
-                      alt="TCP Image 30"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-31.png"
-                      alt="TCP Image 31"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
-                    <img
-                      src="./static/TCP image/img-32.png"
-                      alt="TCP Image 32"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-                  </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Slide 2: Work with Academic Professional -->
-      <div class="slide">
-        <div class="slide-content w-full px-6 pt-20 py-20">
-          <div class="max-w-6xl mx-auto text-center fade-in">
-            <h2 class="text-4xl md:text-5xl font-extrabold mb-10 hover-float">
-              Work With an <span class="text-blue-400 gradient-text">Academic Professional</span>
-            </h2>
-            <p class="text-lg md:text-xl leading-relaxed mb-12 hover-float">
-              Over six weeks, students plan and create a capstone project alongside
-              seasoned academic mentors. Along the way, students enjoy guest
-              lectures, masterclasses from academic professionals, and
-              skill-building workshops.
-            </p>
-            <div class="relative">
-              <img
-                src="./static/timeline.svg"
-                alt="Copula Program Timeline"
-                class="rounded-lg shadow-lg mx-auto max-w-full"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Side Arrow -->
-      <button class="slide-arrow right" id="slide-next-arrow" aria-label="Next slide">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
-      </button>
-
-      <!-- Slide Navigation -->
-      <div class="slide-nav-container">
-        <div class="slide-nav-btn active" data-slide="0"></div>
-        <div class="slide-nav-btn" data-slide="1"></div>
       </div>
     </section>
 
-
-<a href="https://websitebeaver.com/how-to-make-an-interactive-and-responsive-svg-map-of-us-states-capitals" target="_blank" style="position: absolute; bottom: 0px; right: 0px; text-decoration: none; color: #8a8787">Tutorial is on Website Beaver</a>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script src="main.js"></script>
+    <!-- Info Section -->
+    <section
+      id="info"
+      class="pt-20 py-20 animated-gradient-gray text-white"
+    >
+      <div class="max-w-6xl mx-auto px-6 text-center fade-in">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-10">
+          Work With an <span class="text-blue-400 gradient-text">Academic Professional</span>
+        </h2>
+        <p class="text-lg md:text-xl leading-relaxed mb-12">
+          Over six weeks, students plan and create a capstone project alongside
+          seasoned academic mentors. Along the way, students enjoy guest
+          lectures, masterclasses from academic professionals, and
+          skill-building workshops.
+        </p>
+        <div class="relative">
+          <img
+            src="./static/timeline.svg"
+            alt="Copula Program Timeline"
+            class="rounded-lg shadow-lg mx-auto max-w-full"
+          />
+        </div>
       </div>
     </section>
 
@@ -933,22 +679,22 @@
     >
       <div class="max-w-4xl text-center">
         <h2 class="text-4xl md:text-5xl font-bold mb-6">
-          Application Opens <span class="text-blue-400 gradient-text">This February</span>
+          2026 Summer Application <span class="text-blue-400 gradient-text">Open Now</span>
         </h2>
         <p class="text-lg md:text-xl leading-relaxed mb-8">
-          Applications for the Summer 2026 cohort have not yet opened.
-          Applications open in February 2026 and decisions will be released in
+          Applications for the 2026 Cohort are now open. All applications are due April 15th.
+          Decisions will be released in
           June 2026.
         </p>
         <a
-          href="#apply"
+          href="https://forms.gle/wCx1BJAEAgzEwCY48"
           class="mb-8 inline-block bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600"
         >
-          Application Opening Soon
+          Apply Now
         </a>
         <p class="text-lg md:text-xl leading-relaxed mb-8">
           Applicants to the Copula Program should currently be enrolled in high
-          school. Priority will be given to current 10th and 11th grade
+          school and reside within the United States. Priority will be given to current 10th and 11th grade
           students, though we have previously accepted 9th and 12th grade
           students.
         </p>
@@ -958,6 +704,7 @@
         </p>
       </div>
     </section>
+
     <!-- Founders Carousel Section -->
     <section
       id="founders"
@@ -1025,6 +772,104 @@
         <!-- Indicator Dots -->
         <div id="founders-indicators" class="flex justify-center gap-2 mt-8">
           <!-- Dots will be dynamically injected here -->
+        </div>
+      </div>
+    </section>
+    <!-- FAQ Section -->
+    <section
+      id="faq"
+      class="py-20 animated-gradient-gray text-white"
+    >
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-10 fade-in">
+          <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Frequently Asked <span class="gradient-text">Questions</span></h2>
+      
+        </div>
+
+        <div class="flex gap-6 overflow-x-auto pb-4 scroll-smooth" style="scrollbar-width: thin; scrollbar-color: #3b82f6 #1f2937;">
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">Can I apply if I'm not yet in high school?</summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+              Applicants should be current high school students. Incoming high schoolers/8th graders will not be accepted.
+            </p>
+          </details>
+
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">Is U.S. citizenship status relevant the application?</summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+              Citizenship status will not be asked for and is not relevant to the application. Applicants must reside/live within the United States at the time of applying. International students will not be accepted.
+            </p>
+          </details>
+
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">What happens if the program doesn't have a mentor for my specific interest?</summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+              If you are accepted into the program, we will try our best to pair you with a mentor who specializes in a field that relates to your interest. If there are no mentors available for your specific field of interest, you will be paired with a mentor who works in an adjacent field.
+            </p>
+          </details>
+
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">What if I'm accepted into The Copula Program and another summer program/internship and want to participate in both? Am I allowed to?</summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+              In relation to summer programs, The Copula Program should be your priority, and you should dedicate your time to the mentorship over other summer programs. We advise against participating in other programs while participating in The Copula Program. On the application, it is mentioned that paid summer jobs are an exception. This is true for most summer jobs, but if you are participating in a paid summer internship, please communicate with the co-directors before confirming your participation in The Copula Program. We want our students to be 100% sure about their participation and devotion to the program.
+            </p>
+          </details>
+
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">Should I have previous research experience? If I have previous research experience, should I apply?</summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+             Our program is directed towards students who do not yet have any prior research experience. It is strongly encouraged that students that do have previous research experience refrain from applying. We aim to benefit students with no prior experience and are most determined to have their participation in the program.
+            </p>
+          </details>
+
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">Is this program legit? What will be done with my information?</summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+              Yes, The Copula Program is a real and legitimate summer mentorship that connects students with qualified university professors from esteemed institutions and experienced researchers. On your application, we ask questions about income, ethnicity, and other aspects of identity to develop an idea of which students might benefit the most from our program. Your information will not be shared with anyone nor will it be copied or distributed.
+            </p>
+          </details>
+
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">How selective is the program? What is the acceptance rate?</summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+             Our focus is on expanding educational opportunities to all students who apply that align with our mission. There is no set "acceptance rate"; we are determined to provide mentorships to as many academically driven students as possible.
+            </p>
+          </details>
+
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">What are the stages of the application process?</summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+             After submitting your application, we will review it and determine who out of the applicant pool is the most academically driven and will benefit the most from our program. After our initial assesment, semi-finalists will be interviewed as a group. From the interviews, finalists will be decided.
+            </p>
+          </details>
+
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">Why was I denied participation even though I had a strong application? </summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+             Sadly, we do not have enough mentors to accept every student who submits an application. We wish to help as many students as possible, but have a finite number of professors and researchers to help us out. 
+            </p>
+          </details>
+
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">Are reference letters/letters of recommendation needed for the application?</summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+                Reference letters or letters of recommendation are neither required nor requested on the application.
+            </p>
+          </details>
+
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">What should my writing sample be? How do I upload it?</summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+              Your writing sample should be an essay or writing sample that you have submitted for a class in school. Try your best to upload a sample which you believe is your best work. Please upload it on the application form as a PDF file. Links (https://...) to Google Docs or Microsoft Word documents will not be reviewed. 
+            </p>
+          </details>
+
+          <details class="bg-gray-800/80 border border-gray-700 rounded-lg p-6 flex-shrink-0" style="background-color: #1f2937; width: 320px;">
+            <summary class="cursor-pointer text-xl font-bold text-blue-400">Do I need to upload test scores on my application?</summary>
+            <p class="mt-4 text-gray-300 leading-relaxed text-lg font-normal whitespace-normal break-words" style="white-space: normal;">
+              Test scores such as SAT or ACT scores are not requested nor are required for the application.
+            </p>
+          </details>
         </div>
       </div>
     </section>
@@ -1312,7 +1157,7 @@
           year: "2025 Cohort",
           project: "U.S Involvement in Cuba and its Contribution to The Cuban Revolution",
           quote:
-            " I definitely think that the program built up my research skills, and it's made schoolwork and debate easier. I gained so much valuable insight into different fields and conducting research from the Copula Program, and participating has inspired me to actively pursue more opportunities moving forward.",
+            "The Copula Program inspired me to dig deeper into specific cultures that I am interested in, which led me to be interested in a future career in international relations or international law. During the program, I worked with a a professor of anthropology, which inspired me to learn more about other cultures and languages. My research in the program inspired me to apply to a Hispanic essay contest, where I won an Ipad!",
         },
         {
           name: "Thea Fletcher",
@@ -1335,14 +1180,8 @@
           quote:
             "Going into the Copula Program, my intrests lied specifically within high beam physics. However, after being paired with a mentor who specialized in medical imaging technology, I was able to open my eyes to the countless number of possibilities the fields of physics and engineering offered.",
         },
-        {
-          name: "Anonymous",
-          year: "2025 Cohort",
-          project: "The Use of Remote Sensing for Environmental Observation",
-          quote:
-            " I definitely think that the program built up my research skills, and it's made schoolwork and debate easier. I gained so much valuable insight into different fields and conducting research from the Copula Program, and participating has inspired me to actively pursue more opportunities moving forward.",
-        },
-       
+        
+      
       ];
 
       // Select the carousel container
@@ -1371,19 +1210,19 @@
           name: "Rebecca Monge",
           title: "Co-Founder",
           bio: "“My co-directors and I founded TCP as a way to make professional mentorship accessible to high school students across the US, a cause that I believe in profoundly.”",
-          image: "./static/founders/rebecca.jpg"
+          image: "./static/founders/becca.png"
         },
         {
           name: "Shruti Gautam",
           title: "Co-Founder",
           bio: "“We started TCP out of a desire to share our institutional knowledge, making more students aware of what academia can offer. But, it's also been an opportunity to introduce education in of itself, focusing not on an end product but the learning process itself.”",
-          image: "./static/founders/shruti.jpg"
+          image: "./static/founders/shruti.png"
         },
         {
           name: "Neil Mehta",
           title: "Co-Founder",
           bio: "“The Copula Program is the best way for students to gain real research experience and meet a community of like-minded students.”",
-          image: "./static/founders/neil.jpg"
+          image: "./static/founders/neil.png"
         },
       ];
 
@@ -1638,146 +1477,8 @@
         createShuffledIndices();
         updatePhotoCarousel();
 
-        // Auto-advance every 5 seconds for smoother experience
-        setInterval(nextImage, 5000);
-      });
-    </script>
-
-    <script>
-      // About & Info Slideshow functionality
-      document.addEventListener("DOMContentLoaded", () => {
-        const slides = document.querySelectorAll('#about .slide');
-        const navButtons = document.querySelectorAll('.slide-nav-btn');
-        let currentSlide = 0;
-        let isTransitioning = false;
-
-        function showSlide(index) {
-          if (isTransitioning || index === currentSlide) return;
-          
-          isTransitioning = true;
-          
-          // Clear current auto-advance
-          clearTimeout(autoAdvanceInterval);
-          
-          const currentSlideElement = slides[currentSlide];
-          const nextSlideElement = slides[index];
-          
-          // Set up the next slide to enter from the right
-          nextSlideElement.classList.remove('prev');
-          nextSlideElement.classList.add('entering');
-          nextSlideElement.style.visibility = 'visible';
-          
-          // Update navigation buttons
-          navButtons[currentSlide].classList.remove('active');
-          navButtons[index].classList.add('active');
-          
-          // Trigger the animation with a small delay
-          setTimeout(() => {
-            // Move current slide out to the left
-            currentSlideElement.classList.remove('active');
-            currentSlideElement.classList.add('exiting');
-            
-            // Move next slide into center position
-            nextSlideElement.classList.remove('entering');
-            nextSlideElement.classList.add('active');
-            
-            currentSlide = index;
-            
-            // Clean up after animation completes
-            setTimeout(() => {
-              currentSlideElement.classList.remove('exiting');
-              currentSlideElement.classList.add('prev');
-              currentSlideElement.style.visibility = 'hidden';
-              
-              // Restart auto-advance
-              startAutoAdvance();
-              
-              // Reset transition flag
-              isTransitioning = false;
-            }, 2000);
-          }, 50);
-        }
-
-        // Add click listeners to navigation buttons
-        navButtons.forEach((button, index) => {
-          button.addEventListener('click', () => {
-            showSlide(index);
-          });
-        });
-
-        // Add click listener to side arrow
-        const nextArrow = document.getElementById('slide-next-arrow');
-        
-        nextArrow.addEventListener('click', () => {
-          const nextSlide = (currentSlide + 1) % slides.length;
-          showSlide(nextSlide);
-        });
-
-        // Auto-advance slides with different timing for each slide
-        function startAutoAdvance() {
-          const slideDurations = [10000, 10000]; // About: 10s, Work with Academic: 10s
-          const currentDuration = slideDurations[currentSlide];
-          
-          autoAdvanceInterval = setTimeout(() => {
-            const nextSlide = (currentSlide + 1) % slides.length;
-            showSlide(nextSlide);
-            startAutoAdvance(); // Restart with new timing
-          }, currentDuration);
-        }
-
-        let autoAdvanceInterval;
-        startAutoAdvance();
-
-        // Pause auto-advance when user hovers over the slideshow
-        const slideshowContainer = document.getElementById('about');
-        slideshowContainer.addEventListener('mouseenter', () => {
-          clearTimeout(autoAdvanceInterval);
-        });
-
-        slideshowContainer.addEventListener('mouseleave', () => {
-          startAutoAdvance();
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft' && currentSlide > 0) {
-            showSlide(currentSlide - 1);
-          } else if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
-            showSlide(currentSlide + 1);
-          }
-        });
-
-        // Touch/swipe support for mobile
-        let touchStartX = null;
-        let touchStartY = null;
-
-        slideshowContainer.addEventListener('touchstart', (e) => {
-          touchStartX = e.touches[0].clientX;
-          touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-
-        slideshowContainer.addEventListener('touchend', (e) => {
-          if (!touchStartX || !touchStartY) return;
-
-          const touchEndX = e.changedTouches[0].clientX;
-          const touchEndY = e.changedTouches[0].clientY;
-          const deltaX = touchStartX - touchEndX;
-          const deltaY = touchStartY - touchEndY;
-
-          // Only trigger if horizontal swipe is more significant than vertical
-          if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-            if (deltaX > 0 && currentSlide < slides.length - 1) {
-              // Swipe left - next slide
-              showSlide(currentSlide + 1);
-            } else if (deltaX < 0 && currentSlide > 0) {
-              // Swipe right - previous slide
-              showSlide(currentSlide - 1);
-            }
-          }
-
-          touchStartX = null;
-          touchStartY = null;
-        }, { passive: true });
+        // Auto-advance every 4 seconds (shorter hold time)
+        setInterval(nextImage, 4000);
       });
     </script>
 
