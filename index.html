@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -332,30 +332,7 @@
         transition-delay: 0.5s;
       }
 
-      /* Focused mobile adjustments: wider testimonial cards and uncropped slideshow */
-      @media (max-width: 640px) {
-        /* Make mentee cards fill most of the viewport width for readability */
-        #mentee-carousel > div {
-          width: calc(100% - 48px) !important;
-          margin: 0 24px !important;
-        }
-
-        /* Reduce photo carousel height and show full images without cropping */
-        #photo-carousel { height: auto !important; }
-        .photo-slide { height: auto !important; display: flex; align-items: center; justify-content: center; }
-        .photo-slide img {
-          object-fit: contain !important;
-          width: auto !important;
-          max-width: 92% !important;
-          height: auto !important;
-          max-height: 220px !important;
-        }
-
-        /* Slightly reduce hero sizing on small screens to prevent overflow */
-        header.h-screen { min-height: 60vh; }
-        header .logo-hover { width: 4.25rem !important; height: 4.25rem !important; }
-        header h1 { font-size: 1.75rem !important; }
-      }
+      
       
 
     </style>
