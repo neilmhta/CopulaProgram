@@ -168,6 +168,39 @@
         }
       }
 
+      /* Mobile: ensure founder & co-director cards fit and stack vertically when space is limited */
+      @media (max-width: 640px) {
+        #founders .flex,
+        #codirectors .flex {
+          flex-direction: column !important;
+          align-items: center !important;
+        }
+
+        #founders article,
+        #codirectors article {
+          width: 92vw !important;
+          max-width: 520px !important;
+          margin: 0 0 1rem 0 !important;
+        }
+
+        /* Slightly reduce portrait sizes so cards fit comfortably */
+        #founders .w-64, #codirectors .w-64 {
+          width: 10rem !important;
+          height: 10rem !important;
+        }
+
+        /* Improve touch scrolling behavior for horizontal carousels on mobile */
+        #mentee-carousel, #photo-carousel {
+          -webkit-overflow-scrolling: touch;
+          touch-action: pan-x;
+        }
+
+        /* Prevent scroll chaining and overscroll glitches */
+        html, body {
+          overscroll-behavior-y: contain;
+        }
+      }
+
 
 
       /* US Map Styles */
