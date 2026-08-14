@@ -168,36 +168,41 @@
         }
       }
 
-      /* Mobile: ensure founder & co-director cards fit and stack vertically when space is limited */
+      /* Mobile: make founder & co-director cards wrap into two columns, fall back to single column on very small screens */
       @media (max-width: 640px) {
         #founders .flex,
         #codirectors .flex {
-          flex-direction: column !important;
-          align-items: center !important;
+          flex-direction: row !important;
+          flex-wrap: wrap !important;
+          justify-content: center !important;
         }
 
         #founders article,
         #codirectors article {
-          width: 92vw !important;
-          max-width: 520px !important;
-          margin: 0 0 1rem 0 !important;
+          width: 46% !important;
+          max-width: 360px !important;
+          margin: 0.5rem !important;
         }
 
         /* Slightly reduce portrait sizes so cards fit comfortably */
         #founders .w-64, #codirectors .w-64 {
-          width: 10rem !important;
-          height: 10rem !important;
+          width: 9rem !important;
+          height: 9rem !important;
         }
 
         /* Improve touch scrolling behavior for horizontal carousels on mobile */
         #mentee-carousel, #photo-carousel {
           -webkit-overflow-scrolling: touch;
-          touch-action: pan-x;
         }
+      }
 
-        /* Prevent scroll chaining and overscroll glitches */
-        html, body {
-          overscroll-behavior-y: contain;
+      /* Very small phones: use single column stacking for readability */
+      @media (max-width: 420px) {
+        #founders article,
+        #codirectors article {
+          width: 92% !important;
+          max-width: 520px !important;
+          margin: 0.5rem auto !important;
         }
       }
 
