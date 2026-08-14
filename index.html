@@ -33,7 +33,7 @@
             carousel.innerHTML = files
               .map(
                 (f, i) => `
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img src="./static/gallery/${encodeURI(f)}" alt="TCP Image ${i + 1}" class="w-full h-full object-cover" />
                   </div>
                 `
@@ -158,7 +158,16 @@
         animation: gradient-text-shift 3s ease infinite;
       }
 
-      /* Photo slide images: crop top/bottom (cover) so slides fill container */
+      /* Carousel container and slide sizing */
+      .photo-carousel-container {
+        height: 400px;
+      }
+
+      .photo-slide {
+        height: 100%;
+      }
+
+      /* Photo slide images: crop top/bottom (cover) so slides fill container by default */
       .photo-slide img {
         object-fit: cover;
         object-position: center;
@@ -169,11 +178,24 @@
 
       /* Mobile: keep cover but cap height so slides don't dominate the viewport */
       @media (max-width: 640px) {
+        .photo-carousel-container { height: 220px; }
         .photo-slide img {
           object-fit: cover !important;
           object-position: center !important;
           height: 220px !important;
           width: 100% !important;
+        }
+      }
+
+      /* Wide screens: show a larger portion of the image (contain) */
+      @media (min-width: 1024px) {
+        .photo-carousel-container { height: 560px; }
+        .photo-slide img {
+          object-fit: contain !important;
+          object-position: center !important;
+          height: 100% !important;
+          width: auto !important;
+          max-width: 100%;
         }
       }
 
@@ -588,119 +610,119 @@
         <div class="lg:w-2/3 relative w-full flex justify-center">
           <div class="relative w-full max-w-md lg:max-w-none mx-auto">
             <!-- Carousel Container -->
-            <div class="overflow-hidden rounded-lg relative" style="height: 400px;">
+            <div class="overflow-hidden rounded-lg relative photo-carousel-container">
               <div class="absolute inset-0">
                 <div
                   id="photo-carousel"
                   class="flex flex-col"
                   style="position: absolute; top: 0; left: 0; right: 0; width: 100%;"
                 >
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-1.png"
                       alt="TCP Image 1"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-2.png"
                       alt="TCP Image 2"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-3.png"
                       alt="TCP Image 3"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-4.png"
                       alt="TCP Image 4"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-5.png"
                       alt="TCP Image 5"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-6.png"
                       alt="TCP Image 6"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-7.png"
                       alt="TCP Image 7"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-8.png"
                       alt="TCP Image 8"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-9.png"
                       alt="TCP Image 9"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-10.png"
                       alt="TCP Image 10"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-11.png"
                       alt="TCP Image 11"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-12.png"
                       alt="TCP Image 12"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-13.png"
                       alt="TCP Image 13"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-14.png"
                       alt="TCP Image 14"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-15.png"
                       alt="TCP Image 15"
                       class="w-full h-full object-cover"
                     />
                   </div>
-                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                  <div class="flex-shrink-0 w-full photo-slide">
                     <img
                       src="./static/gallery/img-16.png"
                       alt="TCP Image 16"
