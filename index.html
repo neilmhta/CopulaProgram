@@ -319,11 +319,24 @@
       #mentee-carousel > div {
         transition: border-color 0.3s ease !important;
         transform: none !important;
+        flex: 0 0 auto;
+        width: 360px; /* reasonable card width */
+        max-width: 95%;
       }
 
       #mentee-carousel > div:hover {
         transform: none !important;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      /* Smaller screens: make cards narrower and fit viewport */
+      @media (max-width: 480px) {
+        #mentee-carousel > div {
+          width: calc(100% - 32px) !important;
+          max-width: 92% !important;
+          margin-left: 16px !important;
+          margin-right: 16px !important;
+        }
       }
 
       /* Exclude founder cards from lift effect */
