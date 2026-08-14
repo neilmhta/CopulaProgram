@@ -332,15 +332,7 @@
         transition-delay: 0.5s;
       }
 
-      /* Make mentee testimonial cards a bit wider on small screens */
-      @media (max-width: 640px) {
-        #mentee-carousel > div {
-          width: calc(100% - 32px) !important;
-          max-width: 520px !important;
-          margin-left: 16px !important;
-          margin-right: 16px !important;
-        }
-      }
+      
 
       
       
@@ -1357,8 +1349,6 @@
         const menteeCard = document.createElement("div");
         menteeCard.className =
           "bg-gray-800 p-8 rounded-lg shadow-lg flex-shrink-0 border border-gray-700 hover:border-blue-500 transition-all duration-300 fade-in";
-        // make cards uniformly narrower and fixed width for consistency
-        menteeCard.style.width = "480px";
         menteeCard.style.transitionDelay = `${index * 0.1}s`;
 
         const nameParts = mentee.name.split(" ");
