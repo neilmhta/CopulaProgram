@@ -168,26 +168,48 @@
         }
       }
 
-      /* Mobile: make founder & co-director cards wrap into two columns, fall back to single column on very small screens */
+      /* Make mentee cards a bit wider on small screens */
       @media (max-width: 640px) {
-        #founders .flex,
-        #codirectors .flex {
+        #mentee-carousel > div {
+          width: 420px !important;
+          max-width: 94% !important;
+        }
+      }
+
+      /* Mobile: founders use two-column wrap; co-directors stack vertically for readability */
+      @media (max-width: 640px) {
+        #founders .flex {
           flex-direction: row !important;
           flex-wrap: wrap !important;
           justify-content: center !important;
         }
 
-        #founders article,
-        #codirectors article {
+        #codirectors .flex {
+          flex-direction: column !important;
+          align-items: center !important;
+        }
+
+        #founders article {
           width: 46% !important;
           max-width: 360px !important;
           margin: 0.5rem !important;
         }
 
+        #codirectors article {
+          width: 92% !important;
+          max-width: 520px !important;
+          margin: 0.5rem auto !important;
+        }
+
         /* Slightly reduce portrait sizes so cards fit comfortably */
-        #founders .w-64, #codirectors .w-64 {
+        #founders .w-64 {
           width: 9rem !important;
           height: 9rem !important;
+        }
+
+        #codirectors .w-64 {
+          width: 10rem !important;
+          height: 10rem !important;
         }
 
         /* Improve touch scrolling behavior for horizontal carousels on mobile */
@@ -280,9 +302,8 @@
 
       /* Prevent horizontal cropping on mobile and ensure media scale */
       html, body {
-        width: 100% !important;
-        min-width: 0 !important;
-        overflow-x: hidden !important;
+        width: 100%;
+        min-width: 0;
       }
 
       img, video, svg {
