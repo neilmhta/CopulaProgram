@@ -18,68 +18,80 @@
 
     <title>The Copula Program</title>
 
-    <meta charset="UTF-8" />
-    <meta property="og:title" content="The Copula Program" />
-    <meta
-      property="og:description"
-      content="A free, virtual research program for high schoolers."
-    />
-    <meta
-      name="description"
-      content="A free, virtual research program for high schoolers."
-    />
-    <meta property="og:image" content="./static/og-image.png" />
-    <meta property="og:url" content="https://copulaprogram.org" />
-    <meta property="og:type" content="website" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="https://copulaprogram.org" />
-    <meta name="robots" content="index, follow" />
-    <meta name="author" content="The Copula Program" />
-    <meta name="language" content="en" />
-    <link href="./output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/output.css">
 
-    <link
-      rel="icon"
-      type="image/png"
-      href="./static/favicon/favicon-96x96.png"
-      sizes="96x96"
-    />
-    <link rel="icon" type="image/svg+xml" href="./static/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="./static/favicon/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="./static/favicon/apple-touch-icon.png"
-    />
-    <meta name="apple-mobile-web-app-title" content="TCP" />
-    <link rel="manifest" href="./static/favicon/site.webmanifest" />
+    <script>
+      // Vertical carousel for About section photos with blurred previews
+      document.addEventListener("DOMContentLoaded", () => {
+        const carousel = document.getElementById("photo-carousel");
+        // Load manifest of gallery files and build slides dynamically
+        fetch('./static/gallery/manifest.json')
+          .then((res) => res.json())
+          .then((files) => {
+            carousel.innerHTML = files
+              .map(
+                (f, i) => `
+                  <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
+                    <img src="./static/gallery/${encodeURI(f)}" alt="TCP Image ${i + 1}" class="w-full h-full object-cover" />
+                  </div>
+                `
+              )
+              .join('');
 
+            const slides = Array.from(carousel.querySelectorAll('.photo-slide'));
+            let currentPhotoIndex = 0;
+            let shuffledIndices = [];
+
+            function createShuffledIndices() {
+              shuffledIndices = Array.from({ length: slides.length }, (_, i) => i);
+              for (let i = shuffledIndices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledIndices[i], shuffledIndices[j]] = [shuffledIndices[j], shuffledIndices[i]];
+              }
+              currentPhotoIndex = 0;
+            }
+
+            function updatePhotoCarousel() {
+              const actualImageIndex = shuffledIndices[currentPhotoIndex];
+              slides.forEach((slide, index) => {
+                slide.style.display = index === actualImageIndex ? 'block' : 'none';
+                slide.classList.remove('active', 'blurred');
+                if (index === actualImageIndex) slide.classList.add('active');
+                else slide.classList.add('blurred');
+              });
+            }
+
+            function nextImage() {
+              currentPhotoIndex = (currentPhotoIndex + 1) % shuffledIndices.length;
+              if (currentPhotoIndex === 0) createShuffledIndices();
+              updatePhotoCarousel();
+            }
+
+            function prevImage() {
+              currentPhotoIndex = (currentPhotoIndex - 1 + shuffledIndices.length) % shuffledIndices.length;
+              updatePhotoCarousel();
+            }
+
+            createShuffledIndices();
+            updatePhotoCarousel();
+            setInterval(nextImage, 6000);
+          })
+          .catch((err) => console.error('Failed to load gallery manifest', err));
+      });
+    </script>
     <style>
-      /* Smooth scrolling for anchor links */
-      html {
-        scroll-behavior: smooth;
-      }
-
-      /* Gradient animation keyframes used by multiple sections */
-      @keyframes gradient-shift {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
+      /* Base animated gradient and keyframes */
       .animated-gradient {
-        background: linear-gradient(-45deg, #0f172a, #1e3a8a, #1e40af, #172554, #0f172a);
+        background: linear-gradient(-45deg, #0b1220, #1e40af, #0f172a, #172554);
         background-size: 500% 500%;
         animation: gradient-shift 15s ease infinite;
-        animation-delay: 0s; /* Synchronized start */
       }
 
+      @keyframes gradient-shift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
       /* Slightly different gradient for about section to create visual separation */
       .animated-gradient-about {
         background: linear-gradient(-45deg, #172554, #1e40af, #1e3a8a, #0f172a, #172554);
@@ -199,7 +211,7 @@
         border-top-color: #374151;
       }
 
-      /* Ember/sparkle effect removed to disable background sparkles */
+   
 
       /* Global text shadow for all text, buttons, and frames */
       h1,
@@ -449,7 +461,7 @@
           <p class="text-lg md:text-xl leading-relaxed mb-6 hover-float scroll-fade-in">
             The Copula Program is a six-week remote summer mentorship that
             connects ambitious high school students from underrepresented
-            backgrounds with academic mentors. Since 2020, we've helped nearly 100
+            backgrounds with academic mentors. Since 2020, we've helped over 100
             students explore new fields and create meaningful research projects.
           </p>
           <p class="text-lg md:text-xl leading-relaxed hover-float scroll-fade-in">
@@ -464,11 +476,11 @@
         <div class="lg:w-2/3 relative w-full flex justify-center">
           <div class="relative w-full max-w-md lg:max-w-none mx-auto">
             <!-- Carousel Container -->
-            <div class="overflow-hidden rounded-lg relative" style="height: 600px;">
+            <div class="overflow-hidden rounded-lg relative" style="height: 400px;">
               <div class="absolute inset-0">
                 <div
                   id="photo-carousel"
-                  class="flex flex-col transition-transform duration-2000 ease-in-out"
+                  class="flex flex-col"
                   style="position: absolute; top: 0; left: 0; right: 0; width: 100%;"
                 >
                   <div class="flex-shrink-0 w-full photo-slide" style="height: 400px;">
@@ -721,7 +733,19 @@
       </div>
     </section>
 
-    <!-- Founders Carousel Section -->
+    <!-- Founders Section -->
+    <style>
+      .animated-gradient-blue {
+        background: linear-gradient(270deg, #071630, #0b3560, #082543);
+        background-size: 600% 600%;
+        animation: gradientShift 8s ease infinite;
+      }
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+    </style>
     <section
       id="founders"
       class="py-20 animated-gradient-gray text-white"
@@ -732,65 +756,42 @@
         </h2>
       </div>
 
-      <div class="relative max-w-5xl mx-auto px-12 fade-in">
-        <!-- Carousel Container with Peek -->
-        <div class="overflow-hidden relative px-4">
-          <div
-            id="founders-carousel"
-            class="flex transition-transform duration-500 ease-in-out gap-6"
-          >
-            <!-- Founder cards will be dynamically injected here -->
-          </div>
-        </div>
+      <div class="max-w-5xl mx-auto px-6 fade-in">
+        <div class="flex flex-row gap-8 items-stretch justify-center flex-wrap">
+          <article class="bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg border border-gray-700">
+            <div class="w-64 h-64 bg-gray-700 rounded-lg mb-6 flex items-center justify-center overflow-hidden mx-auto">
+              <img src="./static/founders/becca.png" alt="Rebecca Monge" class="w-full h-full object-cover rounded-lg" />
+            </div>
+            <h4 class="font-bold text-2xl text-blue-400 mb-3 text-center">Rebecca Monge</h4>
+              <p class="text-base italic text-blue-300 mb-1 text-center">Co-Founder</p>
+              <p class="text-sm italic text-blue-200 mb-4 text-center">Stanford Graduate</p>
+            <p class="text-gray-300 leading-relaxed text-sm text-center">"My co-directors and I founded TCP as a way to make professional mentorship accessible to high school students across the US, a cause that I believe in profoundly."</p>
+          </article>
 
-        <!-- Previous Button -->
-        <button
-          id="founders-prev"
-          class="absolute left-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-10"
-          aria-label="Previous founder"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 19l-7-7 7-7"
-            ></path>
-          </svg>
-        </button>
-
-        <!-- Next Button -->
-        <button
-          id="founders-next"
-          class="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-10"
-          aria-label="Next founder"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5l7 7-7 7"
-            ></path>
-          </svg>
-        </button>
-
-        <!-- Indicator Dots -->
-        <div id="founders-indicators" class="flex justify-center gap-2 mt-8">
-          <!-- Dots will be dynamically injected here -->
+          <article class="bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg border border-gray-700">
+            <div class="w-64 h-64 bg-gray-700 rounded-lg mb-6 flex items-center justify-center overflow-hidden mx-auto">
+              <img src="./static/founders/shruti.png" alt="Shruti Gautam" class="w-full h-full object-cover rounded-lg" />
+            </div>
+            <h4 class="font-bold text-2xl text-blue-400 mb-3 text-center">Shruti Gautam</h4>
+              <p class="text-base italic text-blue-300 mb-1 text-center">Co-Founder</p>
+              <p class="text-sm italic text-blue-200 mb-4 text-center">Harvard Graduate</p>
+            <p class="text-gray-300 leading-relaxed text-sm text-center">"We started TCP out of a desire to share our institutional knowledge, making more students aware of what academia can offer. But, it's also been an opportunity to introduce education in of itself, focusing not on an end product but the learning process itself."</p>
+          </article>
+          
+          <article class="bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg border border-gray-700">
+            <div class="w-64 h-64 bg-gray-700 rounded-lg mb-6 flex items-center justify-center overflow-hidden mx-auto">
+              <img src="./static/founders/neil.png" alt="Neil Mehta" class="w-full h-full object-cover rounded-lg" />
+            </div>
+            <h4 class="font-bold text-2xl text-blue-400 mb-3 text-center">Neil Mehta</h4>
+              <p class="text-base italic text-blue-300 mb-1 text-center">Co-Founder</p>
+              <p class="text-sm italic text-blue-200 mb-4 text-center">Brown Graduate</p>
+            <p class="text-gray-300 leading-relaxed text-sm text-center">"The Copula Program is the best way for students to gain real research experience and meet a community of like-minded students."</p>
+          </article>
         </div>
       </div>
     </section>
+    
+
     <!-- FAQ Section -->
     <section
       id="faq"
@@ -889,6 +890,56 @@
         </div>
       </div>
     </section>
+    <!-- Program Co-Directors Section -->
+    <section
+      id="codirectors"
+      class="py-20 animated-gradient-blue-gray text-white"
+    >
+      <div class="max-w-6xl mx-auto px-6 text-center mb-10 fade-in">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-3">Program Co-Directors</h2>
+        <p class="text-base md:text-lg text-blue-100/80">Our co-directors are previous Copula mentees and interns working to expand student research opportunities!</p>
+      </div>
+
+      <div class="max-w-5xl mx-auto px-6 fade-in">
+        <div class="flex flex-row gap-6 items-stretch justify-center flex-wrap">
+          <!-- Co-Director Card 1 -->
+          <article class="bg-gray-800 bg-opacity-90 p-6 rounded-lg shadow-lg border border-gray-700 w-64">
+            <div class="bg-blue-900/80 rounded-lg mb-4 flex items-center justify-center overflow-hidden mx-auto" style="width: 12rem; height: 12rem;">
+              <img src="./static/codirectors/tina-website.png" alt="Tina Osman" class="rounded-lg" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+            </div>
+            <h4 class="font-bold text-lg text-blue-400 mb-1 text-center">Tina Osman</h4>
+            <p class="text-gray-300 text-sm text-center italic">Mentored by Ms. Keziah Anderson, studied women's activism and media portrayal in Sudan</p>
+          </article>
+
+          <!-- Co-Director Card 2 -->
+          <article class="bg-gray-800 bg-opacity-90 p-6 rounded-lg shadow-lg border border-gray-700 w-64">
+            <div class="bg-blue-900/80 rounded-lg mb-4 flex items-center justify-center overflow-hidden mx-auto" style="width: 12rem; height: 12rem;">
+              <img src="./static/codirectors/thea-website.jpg" alt="Thea Fletcher" class="rounded-lg" style="width: 100%; height: 100%; object-fit: cover; object-position: center 24%;" />
+            </div>
+            <h4 class="font-bold text-lg text-blue-400 mb-1 text-center">Thea Fletcher</h4>
+            <p class="text-gray-300 text-sm text-center italic">Mentored by Ms. Keziah Anderson, studied the effects of U.S. infrastucture on indigenous communities</p>
+          </article>
+
+          <!-- Co-Director Card 3 -->
+          <article class="bg-gray-800 bg-opacity-90 p-6 rounded-lg shadow-lg border border-gray-700 w-64">
+            <div class="bg-blue-900/80 rounded-lg mb-4 flex items-center justify-center overflow-hidden mx-auto" style="width: 12rem; height: 12rem;">
+              <img src="./static/codirectors/sofia-website.jpg" alt="Sofia Zambrano" class="rounded-lg" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+            </div>
+            <h4 class="font-bold text-lg text-blue-400 mb-1 text-center">Sofia Zambrano</h4>
+            <p class="text-gray-300 text-sm text-center italic">Mentored by Dr. Chelsea Dyer, studied Ecuadorian oil industry, Amazonian indigenous policy</p>
+          </article>
+
+          <!-- Co-Director Card 4 -->
+          <article class="bg-gray-800 bg-opacity-90 p-6 rounded-lg shadow-lg border border-gray-700 w-64">
+            <div class="bg-blue-900/80 rounded-lg mb-4 flex items-center justify-center overflow-hidden mx-auto" style="width: 12rem; height: 12rem;">
+              <img src="./static/codirectors/cemantha-website.jpg" alt="Cemantha Hearing" class="rounded-lg" style="width: 100%; height: 100%; object-fit: cover; object-position: center;" />
+            </div>
+            <h4 class="font-bold text-lg text-blue-400 mb-1 text-center">Cemantha Hearing</h4>
+            <p class="text-gray-300 text-sm text-center italic">Mentored by Dr. Fei Xia, studied photonics, applied physics, medical imaging technology</p>
+          </article>
+        </div>
+      </div>
+    </section>
     <!-- Mentor Grid Section -->
     <section
       id="mentors"
@@ -963,6 +1014,11 @@
           name: "Ms. Fazena Bacchus",
           organization: "Mott MacDonald",
           field: "Engineering",
+        },
+        {
+          name: "Dr. Janine Bijsterbosch",
+          organization: "Washington University in St. Louis",
+          field: "Institute of Radiology",
         },
         {
           name: "Dr. Leila Brammer",
@@ -1054,6 +1110,11 @@
           organization: "Stanford University",
           field: "Earth Systems and Sustainability",
         },
+         {
+          name: "Dr. Vera Matarese",
+          organization: "Univerity of Perugia",
+          field: "Philosophy of Physics",
+        },
         {
           name: "Dr. Timothy Moore",
           organization: "Washington University in St. Louis",
@@ -1073,6 +1134,11 @@
           name: "Dr. Linda Patton",
           organization: "Virginia Tech",
           field: "Dept. of Philosophy",
+        },
+        {
+          name: "Dr. Ilana Redstone",
+          organization: "University of Illinois Urbana-Champaign",
+          field: "Department of Sociology",
         },
         {
           name: "Dr. Adriana Reyes",
@@ -1147,7 +1213,7 @@
       // Dynamically inject mentor cards
       mentors.forEach((mentor, index) => {
         const mentorCard = document.createElement("div");
-        mentorCard.className = "bg-gray-800 p-6 rounded-lg shadow-lg fade-in";
+        mentorCard.className = "bg-gray-800 p-6 rounded-lg shadow-lg";
         mentorCard.style.transitionDelay = `${index * 0.05}s`;
         mentorCard.innerHTML = `
         <h4 class="font-bold text-xl text-blue-400">${mentor.name}</h4>
@@ -1162,40 +1228,113 @@
       // JSON list of mentees
       const mentees = [
         {
-          name: "Tina Osman",
-          year: "2025 Cohort",
-          project: "Women's Activism and Resistance in Sudan",
+          name: "Melany Mikaeli",
+          year: "2026 Cohort",
+          project: "Relationship Between Age amd the Stability of Depression Scores Over Time",
           quote:
-            "The Copula Program was an incredible experience in which I was able to dive into a deeply personal research project. Through the program, I learned to channel my questioning nature into creating a tangible impact and articulate my ideas into action. The environment of passionate peers and organizers pushed me to practive a level of critical thinking and evaluation I had not yet engaged with.",
+            "Going into The Copula Program (with no research experience), I was super nervous, but as time passed, it quickly became genuinely one of the best experiences I've ever had. I was paired with Dr. Janine Bijsterbosch, a PhD professor at WashU, who continued to support me throughout my entire research process, and even when learning how to code with Python seemed impossible, she always had my back! Outside of research, Copula hosted so many events and meetings that created such a supportive and calming environment, along with always giving us constant reassurance. In just 6 weeks, I gained real friendships, confidence, and obviously, research experience!",
         },
         {
-          name: "Olivia H.",
-          year: "2025 Cohort",
-          project: "U.S Involvement in Cuba and its Contribution to The Cuban Revolution",
+          name: "Solianna Melaku",
+          year: "2026 Cohort",
+          project: "From Protest to Uprising: Analysis of the Cillie Commission Report",
           quote:
-            "The Copula Program inspired me to dig deeper into specific cultures that I am interested in, which led me to be interested in a future career in international relations or international law. During the program, I worked with a a professor of anthropology, which inspired me to learn more about other cultures and languages. My research in the program inspired me to apply to a Hispanic essay contest, where I won an Ipad!",
+            "The Copula Program has most definitely helped me in many ways but most of all helped me get out of my comfort zone. During my sophomore year of highschool I was very set on going only into accounting for college but this experience has definitely opened a lot more doors for me. At the beginning of this program, I was scared I would be held under a very tight schedule but fortunately, the mentor I was matched with was very considerate of my schedule and worked his best to work around it. Even though it seemed like a lot of work, I enjoyed every single bit of it because of how passionate I was about the topic I researched.",
         },
         {
-          name: "Thea Fletcher",
-          year: "2025 Cohort",
-          project: "The Effects of U.S Infastructure on Indigenous Lands and Communities",
+          name: "Ava Locklear",
+          year: "2026 Cohort",
+          project: "Maintaining Political Inclusion in Califonian Schools",
           quote:
-            "During the Copula program, I worked with Ms. Keziah Anderson, a PhD student at Harvard! She gave me copious academic resources on indigenous tribes and how they have been affected by U.S. infastructure throughout history. I gained more insight on how to conduct humanities research, and I absolutely loved my time in the program!",
+            "Working with The Copula Program was truly an experience I will treasure forever. Having an abundance of ambition to learn as a high schooler is difficult to employ, as there are not many research opportunities for teenagers. However, The Copula Program is the perfect program for gaining valuable research skills and a memorable experience with other fellow driven teenagers. I had the amazing chance to work with Professor Ilana Redstone from the University of Illinois, and combine my interests in psychology with sociology, introducing me to a new field of study.",
         },
         {
-          name: "Sofia Zambrano",
-          year: "2025 Cohort",
-          project: "The Oil Industry and The Ecuadorian State's Subversive Relationship with Amazonian Indigeonous Policy",
+          name: "Marleigh Frantz",
+          year: "2026 Cohort",
+          project: "Chaotic Compiling: Exploring Missing Returns in C++",
           quote:
-            "My time at TCP allowed me to learn about the people and places I care most about. I was given access to information and support I never would have gotten before, and I used it to create a project I was proud to share. I had fun learning about and researching my interests, and expanded my world view in the process.",
+            "This program is one of a kind. No other experience has left me with more knowledge and passion to pursue higher education in the field of my choice. The community and staff really make everything as accessible and enjoyable as possible. The mentors are some of the most compassionate and kind people I have ever met. I've never done anything like this before, and this program was the absolute perfect opportunity. My academic life has changed forever and I could not be more excited to apply all I've learned in higher academia. I'm so grateful!",
         },
         {
-          name: "Cemantha Hearing",
-          year: "2025 Cohort",
-          project: "Optical Coherence Tomography and Photon Interaction",
+          name: "Alyssa Lan",
+          year: "2026 Cohort",
+          project: "E. Coli O157: H7 Presence in the California Central Valley",
           quote:
-            "Going into the Copula Program, my intrests lied specifically within high beam physics. However, after being paired with a mentor who specialized in medical imaging technology, I was able to open my eyes to the countless number of possibilities the fields of physics and engineering offered.",
+            "The Copula Program was truly an amazing experience! My mentor, Dr. Moanga, and I worked together to create a project that implemented GIS to analyze environmental susceptibility for bacterial contamination in the Central Valley. I originally did not know anything about GIS, but through her mentorship and guidance, I gradually became more proficient in it. It was a really fulfilling experience, especially since I learned such a useful skill while further exploring a topic that I am really passionate about.",
         },
+        {
+          name: "Ayush Bharath",
+          year: "2026 Cohort",
+          project: "The African Lion's Vocalization Range",
+          quote:
+            "The Copula Program allowed me to combine my interests of sound and math and conduct bioacoustics research with my mentor Bobbi Estabrook from Cornell. She gave me many resources on lions, sound analysis, coding development and how to build a predictive math model for conservational efforts. I gained more insight on how to conduct sound and applied math research which I plan to use for the rest of my life. I loved and recommend the program to any high school students interested in conducting research!",
+        },
+        {
+          name: "Joshua Silvestre",
+          year: "2026 Cohort",
+          project: "Exploring AI For Mental Health Applications",
+          quote:
+            "Copula allowed me to explore and dig deeper on a certain topic specific to my intended major to learn more about it with the help of an college professor. This program helped increase my certainty in what I want to major in the future and gave me a small outline on what to expect. Not only that, it allowed me to build a good relationship with a mentor who has gotten their masters in the field I'm interested in and is willing to help me work and improve on my project after the program.",
+        },
+        {
+          name: "Camila Ramirez",
+          year: "2026 Cohort",
+          project: "Care Work in Nature & War: When Does Care Work Become Resistance",
+          quote:
+            "The Copula Program is a great summer program for anybody wanting to work remotely and make great connections! Their pairings with mentors (in my experience) are spot on and they offer a variety of opportunities. They're very organized, and they helped me understand how to research, and that research can look like a lot of things! I would recommend this to anybody wanting to build their presentation and research skills, as it definitely tested mine!",
+        },
+        {
+          name: "Gabrielle Matthews",
+          year: "2026 Cohort",
+          project: "Pediatric Radiology in Africa",
+          quote:
+            "Copula is such a unique program, not only does it encourage beginner student research, it allows for students to interact and collaborate with like minded peers in a convenient environment. I’ve enjoyed my time learning from my mentor, working with feedback, and engaging with my peers. Copula was an outstanding opportunity to learn all sorts of important knowledge and I think this program is a must for almost every type of student.",
+        },
+        {
+          name: "Isabel Hidalgo",
+          year: "2026 Cohort",
+          project: "Compound Risk Assessment of Polar Vortex Disruptions and Wildfire in the Florida Everglades Using Spatial Analysis of the Florida Panther ",
+          quote:
+            "This program has made me unbelievably more confident in my academic abilities. When I came in, I was unsure of how I would do such a large research project without being in a structured classroom. But having a mentor, the interns, and the program directors to reach out to made all the differences. Finishing the program is bittersweet, but I know it changed me in all the best ways.",
+        },
+        {
+          name: "Adrianna Cruz",
+          year: "2026 Cohort",
+          project: "Hidden in Plain Sight: Geographic Isolation and Healthcare Access in Environmentally Contaminated Communities in Athens, Georgia",
+          quote:
+            "The Copula Program truly Inspired me as I worked on my project alongside Dr. Moanga from Stanford University. Throughout all the different types of zoom meetings, I learned a new perspective of education as a whole and I learned more about where I wanna take my own educational journey! Copula truly impact me so much, and I had an amazing experience!",
+        },
+        {
+          name: "Jeremias Branger",
+          year: "2026 Cohort",
+          project: "The ACDM Model and the Hubble Constant",
+          quote:
+            "Participating in the Copula Program introduced me to researching the field I would like to be a part of in the future, and receiving one-on-one mentorship from a professional is incredible. The Copula Program has been an amazing opportunity and I couldn't recommend it enough to anybody looking to delve into research.",
+        },
+        {
+          name: "Selah Layne",
+          year: "2026 Cohort",
+          project: "The Barbados-South Carolina Corridor",
+          quote:
+            "The Copula Program gave me the rare chance to conduct genuine historical research while being supported by a mentor and program leaders who truley invested in my growth. I learned how to analyze sources, organize complex ideas, and think critically about the past, all while exploring a topic I'm passionate about.",
+        },
+        {
+          name: "Valerie Morana",
+          year: "2026 Cohort",
+          project: "Knot Theory & Applications",
+          quote:
+            "The Copula Program gave me the opportunity to explore mathematical research while working closely with a mentor. I learned more about research and presenting my work, while also receiving helpful guidance about college.",
+        },
+        {
+          name: "Zeina Badran",
+          year: "2026 Cohort",
+          project: "Depression in Female and Male Patients",
+          quote:
+            "Copula was a very knowledgeable experience! I got to work with a mentor 1-on-1, which allowed me to join her research lab! The community is also very friendly and open to helping with any questions about the future.",
+        },
+
+
+
         
       
       ];
@@ -1207,7 +1346,9 @@
       mentees.forEach((mentee, index) => {
         const menteeCard = document.createElement("div");
         menteeCard.className =
-          "bg-gray-800 p-8 rounded-lg shadow-lg flex-shrink-0 w-96 border border-gray-700 hover:border-blue-500 transition-all duration-300 fade-in";
+          "bg-gray-800 p-8 rounded-lg shadow-lg flex-shrink-0 border border-gray-700 hover:border-blue-500 transition-all duration-300 fade-in";
+        // make cards uniformly narrower and fixed width for consistency
+        menteeCard.style.width = "480px";
         menteeCard.style.transitionDelay = `${index * 0.1}s`;
         menteeCard.innerHTML = `
           <h4 class="font-bold text-2xl text-blue-400 mb-2">${mentee.name}</h4>
@@ -1219,218 +1360,6 @@
       });
     </script>
 
-    <script>
-      // JSON list of founders
-      const founders = [
-        {
-          name: "Rebecca Monge",
-          title: "Co-Founder",
-          bio: "“My co-directors and I founded TCP as a way to make professional mentorship accessible to high school students across the US, a cause that I believe in profoundly.”",
-          image: "./static/founders/becca.png"
-        },
-        {
-          name: "Shruti Gautam",
-          title: "Co-Founder",
-          bio: "“We started TCP out of a desire to share our institutional knowledge, making more students aware of what academia can offer. But, it's also been an opportunity to introduce education in of itself, focusing not on an end product but the learning process itself.”",
-          image: "./static/founders/shruti.png"
-        },
-        {
-          name: "Neil Mehta",
-          title: "Co-Founder",
-          bio: "“The Copula Program is the best way for students to gain real research experience and meet a community of like-minded students.”",
-          image: "./static/founders/neil.png"
-        },
-      ];
-
-      // Select the carousel container and controls
-      const foundersCarousel = document.getElementById("founders-carousel");
-      const foundersIndicators = document.getElementById("founders-indicators");
-      const prevBtn = document.getElementById("founders-prev");
-      const nextBtn = document.getElementById("founders-next");
-
-      let currentFounderIndex = 1; // Start at 1 because we'll add a clone before
-      let isTransitioning = false;
-      let autoAdvanceTimer;
-
-      // Helper function to create a founder card
-      function createFounderCard(founder, isClone = false) {
-        const founderCard = document.createElement("div");
-        founderCard.className =
-          "founder-card bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-lg flex-shrink-0 border border-gray-700";
-        founderCard.style.width = "420px";
-        founderCard.style.minHeight = "550px";
-        if (isClone) {
-          founderCard.setAttribute("data-clone", "true");
-        }
-        founderCard.innerHTML = `
-          <div class="w-64 h-64 bg-gray-700 rounded-lg mb-6 flex items-center justify-center overflow-hidden mx-auto">
-            ${founder.image ? 
-              `<img src="${founder.image}" alt="${founder.name}" class="w-full h-full object-cover rounded-lg">` :
-              `<svg class="w-24 h-24 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-              </svg>`
-            }
-          </div>
-          <h4 class="font-bold text-2xl text-blue-400 mb-3 text-center">${founder.name}</h4>
-          <p class="text-md italic text-blue-300 mb-4 text-center">${founder.title}</p>
-          <p class="text-gray-300 leading-relaxed text-sm text-center">${founder.bio}</p>
-        `;
-        return founderCard;
-      }
-
-      // Inject founder cards with clones for infinite loop
-      // Add clone of last card at beginning
-      foundersCarousel.appendChild(
-        createFounderCard(founders[founders.length - 1], true),
-      );
-
-      // Add all real cards
-      founders.forEach((founder, index) => {
-        const card = createFounderCard(founder);
-        foundersCarousel.appendChild(card);
-
-        // Create indicator dot
-        const dot = document.createElement("button");
-        dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${
-          index === 0 ? "bg-blue-500 w-8" : "bg-gray-500"
-        }`;
-        dot.setAttribute("aria-label", `Go to founder ${index + 1}`);
-        dot.addEventListener("click", () => {
-          clearTimeout(autoAdvanceTimer);
-          goToFounderSlide(index + 1); // +1 because of leading clone
-          startAutoAdvance();
-        });
-        foundersIndicators.appendChild(dot);
-      });
-
-      // Add clone of first card at end
-      foundersCarousel.appendChild(createFounderCard(founders[0], true));
-
-      // Function to update carousel position and blur effects
-      function updateFounderCarousel(animate = true) {
-        // Responsive card width based on screen size
-        const isMobile = window.innerWidth <= 768;
-        const isSmallMobile = window.innerWidth <= 480;
-        
-        let cardWidth;
-        if (isSmallMobile) {
-          cardWidth = Math.min(320, window.innerWidth * 0.95);
-        } else if (isMobile) {
-          cardWidth = Math.min(350, window.innerWidth * 0.9);
-        } else {
-          cardWidth = 420;
-        }
-        
-        const gap = isMobile ? 16 : 24;
-        const containerWidth = foundersCarousel.parentElement.offsetWidth;
-        const centerOffset = (containerWidth - cardWidth) / 2;
-        const offset = centerOffset - currentFounderIndex * (cardWidth + gap);
-
-        // Enable or disable transition
-        if (animate) {
-          foundersCarousel.style.transition = "transform 0.5s ease-in-out";
-        } else {
-          foundersCarousel.style.transition = "none";
-        }
-
-        foundersCarousel.style.transform = `translateX(${offset}px)`;
-
-        // Update blur effects on cards - always show preview cards with blur
-        const allCards = foundersCarousel.querySelectorAll(".founder-card");
-        allCards.forEach((card, index) => {
-          if (index === currentFounderIndex) {
-            // Active card: sharp and full opacity
-            card.style.filter = "blur(0px)";
-            card.style.opacity = "1";
-            card.style.transform = "scale(1)";
-          } else {
-            // Peripheral cards: blurred and semi-transparent - show as previews
-            card.style.filter = "blur(3px)";
-            card.style.opacity = "0.7";
-            card.style.transform = "scale(0.95)";
-          }
-        });
-
-        // Update indicator dots (only for real cards, not clones)
-        const dots = foundersIndicators.children;
-        const realIndex = currentFounderIndex - 1; // Adjust for leading clone
-        Array.from(dots).forEach((dot, index) => {
-          if (index === realIndex % founders.length) {
-            dot.className =
-              "w-8 h-3 rounded-full bg-blue-500 transition-all duration-300";
-          } else {
-            dot.className =
-              "w-3 h-3 rounded-full bg-gray-500 transition-all duration-300";
-          }
-        });
-      }
-
-      // Handle infinite loop reset
-      foundersCarousel.addEventListener("transitionend", () => {
-        const totalCards = founders.length + 2; // Real cards + 2 clones
-
-        // If we're on the first clone (index 0), jump to the real last card
-        if (currentFounderIndex === 0) {
-          currentFounderIndex = founders.length;
-          updateFounderCarousel(false); // No animation
-        }
-        // If we're on the last clone, jump to the real first card
-        else if (currentFounderIndex === totalCards - 1) {
-          currentFounderIndex = 1;
-          updateFounderCarousel(false); // No animation
-        }
-
-        isTransitioning = false;
-      });
-
-      // Go to specific slide
-      function goToFounderSlide(index) {
-        if (isTransitioning) return;
-        isTransitioning = true;
-        currentFounderIndex = index;
-        updateFounderCarousel(true);
-      }
-
-      // Next button
-      nextBtn.addEventListener("click", () => {
-        if (isTransitioning) return;
-        isTransitioning = true;
-        clearTimeout(autoAdvanceTimer);
-        currentFounderIndex++;
-        updateFounderCarousel(true);
-        startAutoAdvance();
-      });
-
-      // Previous button
-      prevBtn.addEventListener("click", () => {
-        if (isTransitioning) return;
-        isTransitioning = true;
-        clearTimeout(autoAdvanceTimer);
-        currentFounderIndex--;
-        updateFounderCarousel(true);
-        startAutoAdvance();
-      });
-
-      // Auto-advance function
-      function startAutoAdvance() {
-        clearTimeout(autoAdvanceTimer);
-        autoAdvanceTimer = setTimeout(() => {
-          if (!isTransitioning) {
-            isTransitioning = true;
-            currentFounderIndex++;
-            updateFounderCarousel(true);
-          }
-          startAutoAdvance();
-        }, 5000);
-      }
-
-      // Initialize carousel position on page load
-      window.addEventListener("load", () => {
-        updateFounderCarousel(false);
-        startAutoAdvance();
-      });
-      window.addEventListener("resize", () => updateFounderCarousel(false));
-    </script>
 
     <script>
       // Vertical carousel for About section photos with blurred previews
@@ -1452,19 +1381,12 @@
         }
 
         function updatePhotoCarousel() {
-          // Get the actual image index from the shuffled array
           const actualImageIndex = shuffledIndices[currentPhotoIndex];
-          
-          // Center the current slide in the 600px container
-          // Container is 600px, slide is 400px, so we want 100px padding at top
-          // Offset to center: 100px (top padding) - (actualImageIndex * 400px)
-          const centerOffset = 100 - (actualImageIndex * 400);
-          carousel.style.transform = `translateY(${centerOffset}px)`;
 
-          // Update blur classes
           slides.forEach((slide, index) => {
+            slide.style.display = index === actualImageIndex ? 'block' : 'none';
             slide.classList.remove('active', 'blurred');
-            
+
             if (index === actualImageIndex) {
               slide.classList.add('active');
             } else {
@@ -1493,8 +1415,8 @@
         createShuffledIndices();
         updatePhotoCarousel();
 
-        // Auto-advance every 4 seconds (shorter hold time)
-        setInterval(nextImage, 4000);
+        // Auto-advance every 6 seconds for a slower, single-image carousel
+        setInterval(nextImage, 6000);
       });
     </script>
 
